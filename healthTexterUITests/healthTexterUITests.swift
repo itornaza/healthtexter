@@ -33,4 +33,17 @@ class healthTexterUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testWrite() {
+        
+        // TODO: Can create assertions to check the state of UI Elements during the recorded test
+        
+        // Recording code:
+        let app = XCUIApplication()
+        app.buttons["Write"].tap()
+        
+        let textView = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.TextView).element
+        textView.tap()
+        textView.typeText("Writing something and I am done with this entry!")
+        app.navigationBars["Sun, 13/03/2016"].buttons["Done"].tap()
+    }
 }

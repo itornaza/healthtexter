@@ -11,9 +11,16 @@ import XCTest
 
 class healthTexterTests: XCTestCase {
     
+    // Controllers to test
+    var textVC = healthTexter.TextViewController()
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        self.textVC = storyboard.instantiateViewControllerWithIdentifier("TextViewController")
+            as! healthTexter.TextViewController
     }
     
     override func tearDown() {

@@ -51,8 +51,9 @@ class TextViewController:   UIViewController,
         self.subscribeToKeyboardNotifications()
         
         // Promt used to record instead of typing
-        if (Date.appHasLaunchedMoreThanOnce() == false) {
+        if (Theme.hasIntroducedMic() == false) {
             Theme.alertView(self, title: Constants.voiceTitle, message: Constants.voiceMessage)
+            Theme.configureMicIntro()
         }
     }
     
@@ -230,7 +231,6 @@ class TextViewController:   UIViewController,
         // Calculate the remaining chars after presenting the default text
         self.setRemainingCharacters()
     }
-
     
     // MARK: - Segues
     

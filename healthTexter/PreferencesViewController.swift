@@ -56,12 +56,12 @@ class PreferencesViewController:    UIViewController,
     
     /// Update the notification preference in user defaults
     @IBAction func datePickerChange(sender: UIDatePicker) {
-        Date.setTimePreference(Date.timeFromPickerInSeconds(sender))
+        Date.setTimePreference(Date.getTimeFromPickerInSeconds(sender))
     }
     
     /// Update the day change time in user defaults
     @IBAction func switchDayPickerChange(sender: UIDatePicker) {
-        Date.setDaySwitchPreference(Date.timeFromPickerInSeconds(sender))
+        Date.setDaySwitchPreference(Date.getTimeFromPickerInSeconds(sender))
     }
     
     /// Restore purchases to this device

@@ -86,6 +86,7 @@ class Constants {
     static let notificationTimePreference: String = "time_preference"
     static let daySwitchTimePreference: String =    "day_switch_preference"
     static let hasLaunchedOnce: String =            "HasLaunchedOnce"
+    static let hasIntroducedMic: String =           "HasIntroducedMic"
     
     // Default time preference in hours
     static let ninteenHudredHours: NSTimeInterval = 19.0

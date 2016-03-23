@@ -91,7 +91,7 @@ class Date {
     }
     
     /// Get the time in seconds from a date picker
-    class func timeFromPickerInSeconds(sender: UIDatePicker) -> NSTimeInterval {
+    class func getTimeFromPickerInSeconds(sender: UIDatePicker) -> NSTimeInterval {
     
         // Get the time components
         var hour: NSTimeInterval = 0.0
@@ -105,8 +105,35 @@ class Date {
         return timeInSeconds
     }
     
-    // MARK: - NSUserDefaults
-
+    // MARK: - NSUserDefaults Getters
+    
+    class func getTimePreference() -> NSTimeInterval? {
+        return NSUserDefaults.standardUserDefaults().doubleForKey(Constants.notificationTimePreference) as NSTimeInterval
+    }
+    
+    class func getDaySwitchPreference() -> NSTimeInterval? {
+        return NSUserDefaults.standardUserDefaults().doubleForKey(Constants.daySwitchTimePreference) as NSTimeInterval
+    }
+    
+    // MARK: - NSUserDefaults Setters
+    
+    /// Get the notification time preference in seconds and update the user defaults
+    class func setTimePreference(ti: NSTimeInterval) {
+        NSUserDefaults.standardUserDefaults().setDouble(ti, forKey: Constants.notificationTimePreference)
+    }
+    
+    /// Get the day switch time preference in seconds and update the user defaults
+    class func setDaySwitchPreference(ti: NSTimeInterval) {
+        NSUserDefaults.standardUserDefaults().setDouble(ti, forKey: Constants.daySwitchTimePreference)
+    }
+    
+    // MARK: - Methods
+    
+    /// Is this the first app launch or not?
+    class func appHasLaunchedMoreThanOnce() -> Bool {
+        return NSUserDefaults.standardUserDefaults().boolForKey(Constants.hasLaunchedOnce)
+    }
+    
     /// Set the user defaults on the first launch ever
     class func configureDefaults() {
         if self.appHasLaunchedMoreThanOnce() {
@@ -115,28 +142,5 @@ class Date {
             self.setTimePreference(Constants.ninteenHudredHours * self.secondsInHour)
             self.setDaySwitchPreference(Constants.fourHudredHours * self.secondsInHour)
         }
-    }
-    
-    /// Is this the first app launch or not?
-    class func appHasLaunchedMoreThanOnce() -> Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(Constants.hasLaunchedOnce)
-    }
-    
-    class func getTimePreference() -> NSTimeInterval? {
-        return NSUserDefaults.standardUserDefaults().doubleForKey(Constants.notificationTimePreference) as NSTimeInterval
-    }
-    
-    /// Get the notification time preference in seconds and update the user defaults
-    class func setTimePreference(ti: NSTimeInterval) {
-        NSUserDefaults.standardUserDefaults().setDouble(ti, forKey: Constants.notificationTimePreference)
-    }
-    
-    class func getDaySwitchPreference() -> NSTimeInterval? {
-        return NSUserDefaults.standardUserDefaults().doubleForKey(Constants.daySwitchTimePreference) as NSTimeInterval
-    }
-    
-    /// Get the day switch time preference in seconds and update the user defaults
-    class func setDaySwitchPreference(ti: NSTimeInterval) {
-        NSUserDefaults.standardUserDefaults().setDouble(ti, forKey: Constants.daySwitchTimePreference)
     }
 }

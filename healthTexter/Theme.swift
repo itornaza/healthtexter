@@ -95,6 +95,17 @@ class Theme {
         }
     }
     
+    // MARK: - NSUserDefaults Utility Methods
+    
+    class func hasIntroducedMic() -> Bool {
+        return NSUserDefaults.standardUserDefaults().boolForKey(Constants.hasIntroducedMic)
+    }
+    
+    class func configureMicIntro() {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.hasIntroducedMic)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
     // MARK: - Alerts and activities
     
     /// Alert

@@ -75,7 +75,7 @@ class PreferencesViewController:    UIViewController,
     func subscribeToIAPNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "productPurchased:",
+            selector: #selector(PreferencesViewController.productPurchased(_:)),
             name: IAPHelperProductPurchasedNotification,
             object: nil
         )
@@ -180,7 +180,9 @@ class PreferencesViewController:    UIViewController,
         button.setTitleColor(view.tintColor, forState: .Normal)
         button.setTitle("Buy", forState: .Normal)
         button.tag = buttonTag
-        button.addTarget(self, action: "buyButtonTapped:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(
+            PreferencesViewController.buyButtonTapped(_:)), forControlEvents: .TouchUpInside
+        )
         return button
     }
     
@@ -194,7 +196,9 @@ class PreferencesViewController:    UIViewController,
         self.iapTableView.addSubview(self.refreshControl)
         
         // Configure the refreshControl
-        self.refreshControl?.addTarget(self, action: "reloadIAP", forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(
+            PreferencesViewController.reloadIAP), forControlEvents: .ValueChanged
+        )
         self.reloadIAP()
         self.refreshControl?.beginRefreshing()  // endRefreshing in the reloadIAP method
     }

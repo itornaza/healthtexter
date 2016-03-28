@@ -176,7 +176,7 @@ class ProgressViewController:   UIViewController,
     func subscribeToOrientationChangeNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "orientationDidChange:",
+            selector: #selector(ProgressViewController.orientationDidChange(_:)),
             name: UIDeviceOrientationDidChangeNotification,
             object: nil
         )

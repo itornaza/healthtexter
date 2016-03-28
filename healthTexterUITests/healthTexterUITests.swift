@@ -35,7 +35,7 @@ class healthTexterUITests: XCTestCase {
     
     func testWrite() {
         
-        // TODO: Can create assertions to check the state of UI Elements during the recorded test
+        // Can create assertions to check the state of UI Elements during the recorded test
         
         // Recording code:
         let app = XCUIApplication()

@@ -74,7 +74,7 @@ class HistoryEntryViewController: UIViewController {
         let action = UIBarButtonItem(
             barButtonSystemItem: .Action,
             target: self,
-            action: Selector("shareHistoryEntry")
+            action: #selector(HistoryEntryViewController.shareHistoryEntry)
         )
         self.navigationItem.rightBarButtonItem = action
     }

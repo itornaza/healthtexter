@@ -89,14 +89,14 @@ class TextViewController:   UIViewController,
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "keyboardWillShow:",
+            selector: #selector(TextViewController.keyboardWillShow(_:)),
             name: UIKeyboardWillShowNotification,
             object: nil
         )
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "keyboardWillHide:",
+            selector: #selector(TextViewController.keyboardWillHide(_:)),
             name: UIKeyboardWillHideNotification,
             object: nil
         )

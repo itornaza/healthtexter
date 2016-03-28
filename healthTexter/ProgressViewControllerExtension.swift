@@ -27,7 +27,7 @@ extension ProgressViewController {
             } else {
                 break
             }
-            ++ix
+            ix += 1
         }
         
         // Same with the desired rank, keep the 7 most recent from index 0 to 6
@@ -38,7 +38,7 @@ extension ProgressViewController {
             } else {
                 break
             }
-            ++ix
+            ix += 1
         }
         
         return (lastDatesArray, lastRanksArray)
@@ -47,7 +47,7 @@ extension ProgressViewController {
     func configurePainView(numberOfDays: Int) {
         
         // Make sure the date labels are hidden ix is the index for the x-axis labels
-        for (var ix = 1; ix <= 7; ++ix) {
+        for ix in 1...7 {
             if let labelView = self.painView.viewWithTag(ix) as? UILabel {
                 labelView.hidden = true
             }
@@ -65,7 +65,7 @@ extension ProgressViewController {
         
         // If the arrays are empty, fill them with zeros
         if datesArray.count == 0 {
-            for(var ix = 0; ix < numberOfDays; ++ix) {
+            for _ in 0..<numberOfDays {
                 datesArray.append("")
                 painRankArray.append(0)
             }
@@ -105,7 +105,7 @@ extension ProgressViewController {
                         labelView.hidden = false
                     }
                 }
-                ++ix
+                ix += 1
             }
         } else {
             var ix = 1
@@ -126,7 +126,7 @@ extension ProgressViewController {
                         }
                     }
                 }
-                ++iy
+                iy += 1
             }
         }
     }
@@ -134,7 +134,7 @@ extension ProgressViewController {
     func configureSleepView(numberOfDays: Int) {
         
         // Make sure the date labels are hidden ix is the index for the x-axis labels
-        for (var ix = 1; ix <= 7; ++ix) {
+        for ix in 1...7 {
             if let labelView = self.sleepView.viewWithTag(ix) as? UILabel {
                 labelView.hidden = true
             }
@@ -152,7 +152,7 @@ extension ProgressViewController {
         
         // If the arrays are empty, fill them with zeros
         if datesArray.count == 0 {
-            for(var ix = 0; ix < numberOfDays; ++ix) {
+            for _ in 0..<numberOfDays {
                 datesArray.append("")
                 sleepRankArray.append(0)
             }
@@ -192,7 +192,7 @@ extension ProgressViewController {
                         labelView.hidden = false
                     }
                 }
-                ++ix
+                ix += 1
             }
         } else {
             var ix = 1
@@ -213,7 +213,7 @@ extension ProgressViewController {
                         }
                     }
                 }
-                ++iy
+                iy += 1
             }
         }
     }
@@ -221,7 +221,7 @@ extension ProgressViewController {
     func configureFunctionalityView(numberOfDays: Int) {
         
         // Make sure the date labels are hidden ix is the index for the x-axis labels
-        for (var ix = 1; ix <= 7; ++ix) {
+        for ix in 1...7 {
             if let labelView = self.functionalityView.viewWithTag(ix) as? UILabel {
                 labelView.hidden = true
             }
@@ -239,7 +239,7 @@ extension ProgressViewController {
         
         // If the arrays are empty, fill them with zeros
         if datesArray.count == 0 {
-            for(var ix = 0; ix < numberOfDays; ++ix) {
+            for _ in 0..<numberOfDays {
                 datesArray.append("")
                 functionalityRankArray.append(0)
             }
@@ -279,7 +279,7 @@ extension ProgressViewController {
                         labelView.hidden = false
                     }
                 }
-                ++ix
+                ix += 1
             }
         } else {
             var ix = 1
@@ -300,7 +300,7 @@ extension ProgressViewController {
                         }
                     }
                 }
-                ++iy
+                iy += 1
             }
         }
     }
@@ -308,7 +308,7 @@ extension ProgressViewController {
     func configureProgressView(numberOfDays: Int) {
 
         // Make sure the date labels are hidden ix is the index for the x-axis labels
-        for (var ix = 1; ix <= 7; ++ix) {
+        for ix in 1...7 {
             if let labelView = self.progressView.viewWithTag(ix) as? UILabel {
                 labelView.hidden = true
             }
@@ -338,7 +338,7 @@ extension ProgressViewController {
         
         // If the arrays are empty, fill them with zeros
         if datesArray.count == 0 {
-            for(var ix = 0; ix < numberOfDays; ++ix) {
+            for _ in 0..<numberOfDays {
                 datesArray.append("")
                 progressRankArray.append(0)
             }
@@ -378,7 +378,7 @@ extension ProgressViewController {
                         labelView.hidden = false
                     }
                 }
-                ++ix
+                ix += 1
             }
         } else {
             var ix = 1
@@ -399,7 +399,7 @@ extension ProgressViewController {
                         }
                     }
                 }
-                ++iy
+                iy += 1
             }
         }
     }

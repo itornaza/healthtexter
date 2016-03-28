@@ -81,7 +81,7 @@ class Notification {
         // The list here represents the number of days after today that the notifications will fire
         var tiArray: [NSTimeInterval] = [1, 2, 3, 4, 5, 6, 7, 14, 30]
         
-        for (var ix = 0; ix < 9; ++ix) {
+        for ix in 0..<9 { 
             let numberOfDaysToShift: NSTimeInterval = tiArray[ix] - 1
             
             // Check if the user has ever set the defaults

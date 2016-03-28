@@ -91,7 +91,7 @@ class RanksViewController:  UIViewController,
             title: "Done",
             style: UIBarButtonItemStyle.Done,
             target: self,
-            action: "segueToNextVC:"
+            action: #selector(RanksViewController.segueToNextVC(_:))
         )
         self.navigationItem.rightBarButtonItem = rightButton
     }

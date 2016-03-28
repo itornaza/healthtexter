@@ -180,7 +180,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
     
     private func failedTransaction(transaction: SKPaymentTransaction) {
         if debugIAP { print(self.failedTx) }
-        if transaction.error!.code != SKErrorPaymentCancelled {
+        if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue /*SKErrorPaymentCancelled*/  {
             if debugIAP { print( self.errorTx + "\(transaction.error!.localizedDescription)") }
         }
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)

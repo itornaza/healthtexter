@@ -92,8 +92,10 @@ public class PainView: UIView {
         let topBorder: CGFloat = 60
         let bottomBorder: CGFloat = 50
         let graphHeight = rect.height - topBorder - bottomBorder
-        let maxValue = graphPoints.maxElement()
+        var maxValue = graphPoints.maxElement()
+        
         let columnYPoint = { (graphPoint: Int) -> CGFloat in
+            if maxValue == 0 { maxValue = 1 } // Avoid devision by zero
             var y: CGFloat = CGFloat(graphPoint) / CGFloat(maxValue!) * graphHeight
 
             // Flip the graph

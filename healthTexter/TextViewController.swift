@@ -205,7 +205,7 @@ class TextViewController:   UIViewController,
     }
     
     func configureUI() {
-        Theme.navigationBar(self)
+        Theme.navigationBar(self, backgroundColor: Theme.writeColor)
         Theme.setDateToNavigationTitle(vc: self, date: Date.get())
         Theme.hideTabBar(self)
         self.configureTextArea()

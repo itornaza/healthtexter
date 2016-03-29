@@ -212,13 +212,13 @@ class PreferencesViewController:    UIViewController,
     
     /// Configure Navigation and DatePickers
     func configureUI() {
-        Theme.navigationBar(self)
-        Theme.tabBarColor(self)
+        Theme.navigationBar(self, backgroundColor: Theme.preferencesColor)
+        Theme.tabBarColor(self, color: Theme.preferencesColor)
         Theme.configureHookLabels(self.datePickerLabel)
         Theme.configureHookLabels(self.switchDayPickerLabel)
-        self.timePreferencesTitleLabel.textColor = Theme.htDarkGreen
-        self.inAppPurchasesTitleLabel.textColor = Theme.htDarkGreen
-        self.restoreLabel.tintColor = Theme.htDarkGreen
+        self.timePreferencesTitleLabel.textColor = Theme.preferencesColor
+        self.inAppPurchasesTitleLabel.textColor = Theme.preferencesColor
+        self.restoreLabel.tintColor = Theme.preferencesColor
         self.configureDatePicker()
         self.configureSwitchDayPicker()
     }

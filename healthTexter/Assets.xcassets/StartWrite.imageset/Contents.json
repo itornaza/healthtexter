@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "startWrite@170.png",
+      "filename" : "write_icon_170.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "startWrite@256-1.png",
+      "filename" : "write_icon_256.png",
       "scale" : "3x"
     }
   ],

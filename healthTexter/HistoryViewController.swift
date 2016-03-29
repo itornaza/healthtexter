@@ -173,10 +173,10 @@ class HistoryViewController:    UIViewController,
     }
     
     func configureUI(){
-        Theme.navigationBar(self)
+        Theme.navigationBar(self, backgroundColor: Theme.historyColor)
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         self.navigationItem.leftBarButtonItem?.title = "Select"
-        Theme.tabBarColor(self)
+        Theme.tabBarColor(self, color: Theme.historyColor)
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.reloadData()
     }

@@ -107,8 +107,8 @@ public class ProgressView: UIView {
         // Draw the line graph
         //------------------------
         
-        UIColor.blackColor().setFill()
-        UIColor.blackColor().setStroke()
+        UIColor.whiteColor().setFill()
+        UIColor.whiteColor().setStroke()
         
         // Set up the points line
         let graphPath = UIBezierPath()

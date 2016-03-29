@@ -61,9 +61,9 @@ class StartViewController: UIViewController {
     
     func configure() {
         self.configureImages()
-        self.configureTopLabels()
         self.configureButtonLabels()
         self.configureHookLabels()
+        self.configureButtonsBorders()
     }
     
     /// Do not display the start images in devices smaller that iPhone5
@@ -75,11 +75,6 @@ class StartViewController: UIViewController {
             self.historyImage.hidden = true
             self.preferencesImage.hidden = true
         }
-    }
-    
-    func configureTopLabels() {
-        self.topLabel.backgroundColor = Theme.htGreen
-        self.banner.backgroundColor = Theme.htGreen
     }
     
     func configureButtonLabels() {
@@ -94,5 +89,18 @@ class StartViewController: UIViewController {
         Theme.configureHookLabels(self.monitorHookLabel)
         Theme.configureHookLabels(self.historyHookLabel)
         Theme.configureHookLabels(self.preferencesHookLabel)
+    }
+    
+    func configureButtonsBorders() {
+        self.configureButton(self.writeButton)
+        self.configureButton(self.monitorButton)
+        self.configureButton(self.historyButton)
+        self.configureButton(self.preferencesButton)
+    }
+    
+    func configureButton(button: UIButton) {
+        button.layer.cornerRadius = 8
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.whiteColor().CGColor
     }
 }

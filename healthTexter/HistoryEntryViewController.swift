@@ -61,7 +61,7 @@ class HistoryEntryViewController: UIViewController {
         self.sleepRank.text = "\((self.entry?.sleepRank)!)"
         self.functionalityRank.text = "\((self.entry?.functionalityRank)!)"
         self.textArea.text = self.entry?.text
-        Theme.tabBarColor(self)
+        Theme.tabBarColor(self, color: Theme.historyColor)
 
     }
     

@@ -203,10 +203,10 @@ class ProgressViewController:   UIViewController,
     }
     
     func configureUI() {
-        Theme.navigationBar(self)
-        Theme.tabBarColor(self)
-        self.segmentedWeekMonth.tintColor = Theme.htSomon
-        self.segmentedOptions.tintColor = Theme.htDarkGreen
+        Theme.navigationBar(self, backgroundColor: Theme.monitorColor)
+        Theme.tabBarColor(self, color: Theme.monitorColor)
+        self.segmentedWeekMonth.tintColor = Theme.monitorColor
+        self.segmentedOptions.tintColor = Theme.monitorColor
         self.segmentedOptions.selectedSegmentIndex = Constants.painSelector
         self.configurePlots(Constants.daysInWeek)
     }

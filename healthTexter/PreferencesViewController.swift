@@ -67,7 +67,7 @@ class PreferencesViewController: UIViewController {
         IAPProducts.store.restoreCompletedTransactions()
     }
     
-    // MARK: - In-App Purchases
+    // MARK: - In-App Purchases Notifications
     
     /// Subscribe to a notification that fires when a product is purchased. Removed on the deinit
     func subscribeToIAPNotifications() {
@@ -81,40 +81,6 @@ class PreferencesViewController: UIViewController {
     
     func unsubscribeFromIAPNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    /// Reload the Inn-App Purchase table with the available app products
-    func reloadIAP() {
-        
-        // Flush any current products from the iapTableView
-        self.products = []
-        self.iapTableView.reloadData()
-        
-        // Fetch the current products from iTunes Connect
-        IAPProducts.store.requestProductsWithCompletionHandler { success, products in
-            if success {
-                self.products = products
-                self.iapTableView.reloadData()
-            }
-            self.refreshControl.endRefreshing()
-        }
-    }
-    
-    /// Purchase the product
-    func buyButtonTapped(button: UIButton) {
-        let product = products[button.tag]
-        IAPProducts.store.purchaseProduct(product)
-    }
-    
-    /// When a product is purchased, this notification fires, redraw the correct row
-    func productPurchased(notification: NSNotification) {
-        let productIdentifier = notification.object as! String
-        for (index, product) in products.enumerate() {
-            if product.productIdentifier == productIdentifier {
-                iapTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
-                break
-            }
-        }
     }
     
     // MARK: - Configuration
@@ -218,6 +184,40 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
             PreferencesViewController.buyButtonTapped(_:)), forControlEvents: .TouchUpInside
         )
         return button
+    }
+    
+    /// Reload the Inn-App Purchase table with the available app products
+    func reloadIAP() {
+        
+        // Flush any current products from the iapTableView
+        self.products = []
+        self.iapTableView.reloadData()
+        
+        // Fetch the current products from iTunes Connect
+        IAPProducts.store.requestProductsWithCompletionHandler { success, products in
+            if success {
+                self.products = products
+                self.iapTableView.reloadData()
+            }
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    /// Purchase the product
+    func buyButtonTapped(button: UIButton) {
+        let product = products[button.tag]
+        IAPProducts.store.purchaseProduct(product)
+    }
+    
+    /// When a product is purchased, this notification fires, redraw the correct row
+    func productPurchased(notification: NSNotification) {
+        let productIdentifier = notification.object as! String
+        for (index, product) in products.enumerate() {
+            if product.productIdentifier == productIdentifier {
+                iapTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+                break
+            }
+        }
     }
     
     /// Add refresh control for the iapTableView

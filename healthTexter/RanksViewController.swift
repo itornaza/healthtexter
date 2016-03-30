@@ -21,10 +21,12 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "Entry")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Entry.Keys.date, ascending: false)]
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
             sectionNameKeyPath: nil,
-            cacheName: nil)
+            cacheName: nil
+        )
         return fetchedResultsController
     }()
     

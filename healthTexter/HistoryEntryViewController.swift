@@ -67,7 +67,7 @@ class HistoryEntryViewController: UIViewController {
     
     func configureReadSwitch() {
         self.readSwitch.setOn(false, animated: false)
-        self.readSwitch.onTintColor = Theme.htGreen
+        self.readSwitch.onTintColor = Theme.historyColor
     }
     
     func configureActionButton() {

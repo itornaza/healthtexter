@@ -39,8 +39,8 @@ class Constants {
     static let voiceMessage: String =   "Tap the mic icon on the keyboard to dictate!"
     static let text: String =           ""
     static let initialText: String =    "Write about your day \n\n" +
-                                        "- Where you able to do your activities? \n\n" +
-                                        "- Where you in pain? \n\n" +
+                                        "- Were you able to do your activities? \n\n" +
+                                        "- Were you in pain? \n\n" +
                                         "- Did you sleep well? \n\n" +
                                         "- Any events worth noting?"
     

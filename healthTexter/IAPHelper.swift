@@ -209,24 +209,30 @@ extension IAPHelper {
     }
     
     /// If the user reaches the maximum entries and have not purchased the Unlimited entries take her to the Preferences View Controller
-    class func unlimitedEntriesGuard(vc: UIViewController, entries: Int) {
+    /// Returns true if granted access, false otherwise
+    class func unlimitedEntriesGuard(vc: UIViewController, entries: Int) -> Bool {
         let grantAccess: Bool = IAPProducts.store.isProductPurchased(IAPProducts.UnlimitedEnties)
         let reachedEntriesLimit: Bool = entries >= Constants.maxFreeEntries ? true : false
         if !grantAccess && reachedEntriesLimit {
             let title: String = Constants.IAPtitle
             let message: String = Constants.unlimitedEntriesMsg
             self.IAPAlertController(vc, title: title, message: message)
+            return false
         }
+        return true
     }
     
     /// If the sharing option is not yet purchased segue to the Preferences View Controller
-    class func sharingOptionGuard(vc: UIViewController) {
+    /// Returns true if granted access, false otherwise
+    class func sharingOptionGuard(vc: UIViewController) -> Bool {
         let grantAccess = IAPProducts.store.isProductPurchased(IAPProducts.SharingOption)
         if self.debugIAPStatic { print(IAPProducts.SharingOption) }
         if !grantAccess {
             let title: String = Constants.IAPtitle
             let message: String = Constants.sharingOptionMsg
             self.IAPAlertController(vc, title: title, message: message)
+            return false
         }
+        return true
     }
 }

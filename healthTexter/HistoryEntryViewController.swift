@@ -85,7 +85,9 @@ class HistoryEntryViewController: UIViewController {
     func shareHistoryEntry() {
         
         // Check if the user have purchased the sharing option
-        IAPHelper.sharingOptionGuard(self)
+        if IAPHelper.sharingOptionGuard(self) == false {
+            return
+        }
         
         if self.entry != nil {
             let dataToSend = Entry.prepareDataToShare(self.entry!)
@@ -97,5 +99,6 @@ class HistoryEntryViewController: UIViewController {
                 message: Constants.dataDoesNotExist
             )
         }
+        
     }
 }

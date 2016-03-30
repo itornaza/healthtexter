@@ -25,7 +25,7 @@ class Theme {
     static let htRankSleep = UIColor(red: 16.0/255.0, green: 63.0/255.0, blue: 251.0/255.0, alpha: 1.0)
     static let htRankFunctionality = UIColor(red: 1.0/255.0, green: 145.0/255.0, blue: 146.0/255.0, alpha: 1.0)
     
-    // Designer Palette
+    // Designer's Palette
     static let writeColor = UIColor(red: 88.0/255.0, green: 187.0/255.0, blue: 184.0/255.0, alpha: 1.0)
     static let monitorColor = UIColor(red: 207.0/255.0, green: 81.0/255.0, blue: 82.0/255.0, alpha: 1.0)
     static let historyColor = UIColor(red: 237.0/255.0, green: 146.0/255.0, blue: 73.0/255.0, alpha: 1.0)

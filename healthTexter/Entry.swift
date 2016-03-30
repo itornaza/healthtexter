@@ -112,7 +112,7 @@ class Entry: NSManagedObject {
     
     /// Format data of an entry in a string for the user to share
     class func prepareDataToShare(entry: Entry) -> String {
-        return  "Date: \(Date.getFormatted(entry.date, formatString: Date.dateFormat) )\n" +
+        return  "Date: \(Date.getFormatted(entry.date, formatString: Date.dateFormat4All) )\n" +
                 "Pain: \(entry.painRank)\n" +
                 "Sleep: \(entry.sleepRank)\n" +
                 "Functionality: \(entry.functionalityRank)\n\n" +

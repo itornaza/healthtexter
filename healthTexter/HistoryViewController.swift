@@ -9,11 +9,7 @@
 import UIKit
 import CoreData
 
-class HistoryViewController:    UIViewController,
-                                UITableViewDelegate,
-                                UITableViewDataSource,
-                                NSFetchedResultsControllerDelegate
-{
+class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
     // MARK: - Properties
     
@@ -59,30 +55,6 @@ class HistoryViewController:    UIViewController,
         self.tableView.reloadData()
     }
     
-    /// Enables the checkboxes on the left of the table cells
-    override func setEditing(editing: Bool, animated: Bool) {
-        super.setEditing(true, animated: true)
-        
-        // Branch on editing state
-        if self.tableView.editing {
-            
-            // Switch to not editing mode
-            self.tableView.setEditing(false, animated: true)
-            self.tableView.editing = false
-            self.editButtonItem().title = "Select"
-            
-            // Empty the selected entries
-            self.selectedIndicesArray = []
-            
-        } else {
-            
-            // Switch to editing mode
-            self.tableView.setEditing(true, animated: true)
-            self.tableView.editing = true
-            self.editButtonItem().title = "Done"
-        }
-    }
-    
     override func viewWillDisappear(animated: Bool) {
         self.fetchedResultsController.delegate = nil
     }
@@ -93,7 +65,9 @@ class HistoryViewController:    UIViewController,
     @IBAction func action(sender: UIBarButtonItem) {
         
         // Check if the user have purchased the sharing option
-        IAPHelper.sharingOptionGuard(self)
+        if IAPHelper.sharingOptionGuard(self) == false {
+            return
+        }
         
         // Local variables
         var entriesToShare = [Entry]()
@@ -116,47 +90,6 @@ class HistoryViewController:    UIViewController,
                 textToSend = textToSend + (Entry.prepareDataToShare(entry))
             }
             Theme.activityView(self, textToSend: textToSend)
-        }
-    }
-    
-    // MARK: - Table View Delegate
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        // Dequeue a reusable cell from the table, using the reuse identifier
-        let cell = tableView.dequeueReusableCellWithIdentifier("historyCell") as! HistoryViewCell
-        
-        // Show the little arrow on the right hand side of the row
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        
-        // Find the model object that corresponds to that row
-        let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
-        
-        // Set the cell custom labels
-        cell.date.text = Date.getFormatted(entry.date, formatString: Date.dateFormat4AllShort)
-        cell.weekDay.text = Date.getFormatted(entry.date, formatString: Date.dateFormatDay)
-        cell.painRank.text = "\(entry.painRank)"
-        cell.functionalityRank.text = "\(entry.functionalityRank)"
-        cell.sleepRank.text = "\(entry.sleepRank)"
-        
-        // Set the color of the left checkboxes in editing mode
-        cell.tintColor = Theme.htGreen
-        
-        // return the cell
-        return cell
-    }
-    
-    /// If the table is in edit mode, do not segue. If in edit mode, get the selected entries indices
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing == false {
-            self.navigateToHistoryEntryViewController(indexPath)
-        } else {
-            self.selectedIndicesArray.append(indexPath)
         }
     }
     
@@ -186,7 +119,6 @@ class HistoryViewController:    UIViewController,
     func navigateToHistoryEntryViewController(indexPath: NSIndexPath) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             Theme.configureBackButtonForNextVC(self, label: "History")
-            
             let progressVC = self.storyboard!.instantiateViewControllerWithIdentifier("HistoryEntryViewController")
                 as! HistoryEntryViewController
             
@@ -195,6 +127,72 @@ class HistoryViewController:    UIViewController,
             
             // Retain the tab bar in the detail view
             self.navigationController?.pushViewController(progressVC, animated: false)
+        }
+    }
+}
+
+extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // Dequeue a reusable cell from the table, using the reuse identifier
+        let cell = tableView.dequeueReusableCellWithIdentifier("historyCell") as! HistoryViewCell
+        
+        // Show the little arrow on the right hand side of the row
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
+        // Find the model object that corresponds to that row
+        let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
+        
+        // Set the cell custom labels
+        cell.date.text = Date.getFormatted(entry.date, formatString: Date.dateFormat4AllShort)
+        cell.weekDay.text = Date.getFormatted(entry.date, formatString: Date.dateFormatDay)
+        cell.painRank.text = "\(entry.painRank)"
+        cell.functionalityRank.text = "\(entry.functionalityRank)"
+        cell.sleepRank.text = "\(entry.sleepRank)"
+        
+        // Set the color of the left checkboxes in editing mode
+        cell.tintColor = Theme.historyColor
+        
+        // return the cell
+        return cell
+    }
+    
+    /// If the table is in edit mode, do not segue. If in edit mode, get the selected entries indices
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.editing == false {
+            self.navigateToHistoryEntryViewController(indexPath)
+        } else {
+            self.selectedIndicesArray.append(indexPath)
+        }
+    }
+    
+    /// Enables the checkboxes on the left of the table cells
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(true, animated: true)
+        
+        // Branch on editing state
+        if self.tableView.editing {
+            
+            // Switch to not editing mode
+            self.tableView.setEditing(false, animated: true)
+            self.tableView.editing = false
+            self.editButtonItem().title = "Select"
+            
+            // Empty the selected entries
+            self.selectedIndicesArray = []
+            
+        } else {
+            
+            // Switch to editing mode
+            self.tableView.setEditing(true, animated: true)
+            self.tableView.editing = true
+            self.editButtonItem().title = "Done"
         }
     }
 }

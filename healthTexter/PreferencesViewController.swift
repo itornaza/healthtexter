@@ -9,10 +9,8 @@
 import UIKit
 import StoreKit
 
-class PreferencesViewController:    UIViewController,
-                                    UITableViewDelegate,
-                                    UITableViewDataSource
-{
+class PreferencesViewController: UIViewController {
+    
     // MARK: - Properties
     
     // IAP products
@@ -47,7 +45,7 @@ class PreferencesViewController:    UIViewController,
         self.subscribeToIAPNotifications()
     }
     
-    /// Distructor
+    /// Destructor
     deinit {
         self.unsubscribeFromIAPNotifications()
     }
@@ -69,7 +67,7 @@ class PreferencesViewController:    UIViewController,
         IAPProducts.store.restoreCompletedTransactions()
     }
     
-    // MARK: - In-App Purchases Methods
+    // MARK: - In-App Purchases
     
     /// Subscribe to a notification that fires when a product is purchased. Removed on the deinit
     func subscribeToIAPNotifications() {
@@ -119,7 +117,43 @@ class PreferencesViewController:    UIViewController,
         }
     }
     
-    // MARK: - Table View Delegate
+    // MARK: - Configuration
+    
+    func configure() {
+        self.configureRefreshControl()
+        self.configureUI()
+    }
+    
+    /// Configure Navigation and DatePickers
+    func configureUI() {
+        Theme.navigationBar(self, backgroundColor: Theme.preferencesColor)
+        Theme.tabBarColor(self, color: Theme.preferencesColor)
+        Theme.configureHookLabels(self.datePickerLabel)
+        Theme.configureHookLabels(self.switchDayPickerLabel)
+        self.timePreferencesTitleLabel.textColor = Theme.preferencesColor
+        self.inAppPurchasesTitleLabel.textColor = Theme.preferencesColor
+        self.restoreLabel.tintColor = Theme.preferencesColor
+        self.configureDatePicker()
+        self.configureSwitchDayPicker()
+    }
+    
+    func configureDatePicker() {
+        if let preference = Date.getTimePreference() {
+            self.datePicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight())
+        }
+    }
+    
+    func configureSwitchDayPicker() {
+        if let preference = Date.getDaySwitchPreference() {
+            self.switchDayPicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight())
+            self.switchDayPicker.maximumDate = NSDate(
+                timeInterval: Constants.maxSwitchDayDelay, sinceDate: Date.getTodayMidnight()
+            )
+        }
+    }
+}
+
+extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.products.count
@@ -135,7 +169,7 @@ class PreferencesViewController:    UIViewController,
         
         // Branch on the purchase status of the product
         if IAPProducts.store.isProductPurchased(product.productIdentifier) {
-        
+            
             // Item is purchased, show a checkmark
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             cell.accessoryView = nil
@@ -201,40 +235,5 @@ class PreferencesViewController:    UIViewController,
         )
         self.reloadIAP()
         self.refreshControl?.beginRefreshing()  // endRefreshing in the reloadIAP method
-    }
-    
-    // MARK: - Configuration
-    
-    func configure() {
-        self.configureRefreshControl()
-        self.configureUI()
-    }
-    
-    /// Configure Navigation and DatePickers
-    func configureUI() {
-        Theme.navigationBar(self, backgroundColor: Theme.preferencesColor)
-        Theme.tabBarColor(self, color: Theme.preferencesColor)
-        Theme.configureHookLabels(self.datePickerLabel)
-        Theme.configureHookLabels(self.switchDayPickerLabel)
-        self.timePreferencesTitleLabel.textColor = Theme.preferencesColor
-        self.inAppPurchasesTitleLabel.textColor = Theme.preferencesColor
-        self.restoreLabel.tintColor = Theme.preferencesColor
-        self.configureDatePicker()
-        self.configureSwitchDayPicker()
-    }
-    
-    func configureDatePicker() {
-        if let preference = Date.getTimePreference() {
-            self.datePicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight())
-        }
-    }
-    
-    func configureSwitchDayPicker() {
-        if let preference = Date.getDaySwitchPreference() {
-            self.switchDayPicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight())
-            self.switchDayPicker.maximumDate = NSDate(
-                timeInterval: Constants.maxSwitchDayDelay, sinceDate: Date.getTodayMidnight()
-            )
-        }
     }
 }

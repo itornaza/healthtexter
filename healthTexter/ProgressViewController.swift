@@ -9,9 +9,7 @@
 import UIKit
 import CoreData
 
-class ProgressViewController:   UIViewController,
-                                NSFetchedResultsControllerDelegate
-{
+class ProgressViewController:   UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Core Data Properties
     
@@ -83,8 +81,10 @@ class ProgressViewController:   UIViewController,
     @IBAction func action(sender: UIBarButtonItem) {
         
         // Check if the user have purchased the sharing option
-        IAPHelper.sharingOptionGuard(self)
-        
+        if IAPHelper.sharingOptionGuard(self) == false {
+            return
+        }
+            
         // Send the entry if it exists, alert the user otherwise
         if let entry = Entry.getEntryIfExists(frc: self.fetchedResultsController) {
             let dataToSend = Entry.prepareDataToShare(entry)
@@ -162,15 +162,6 @@ class ProgressViewController:   UIViewController,
         self.plotForWeekOrMonth(sender.selectedSegmentIndex)
     }
     
-    // MARK: - Orientation Change Handling
-    
-    /// Handle orientation changes to reconfigure plot appearance
-    func orientationDidChange(notification: NSNotification) {
-        
-        // Redraw the plot on any orientation change to avoid compression of the plot view from landscape to portrait
-        self.plotForWeekOrMonth(self.segmentedWeekMonth.selectedSegmentIndex)
-    }
-    
     // MARK: - Notification subscriptions
     
     func subscribeToOrientationChangeNotifications() {
@@ -187,6 +178,38 @@ class ProgressViewController:   UIViewController,
             self,
             name: UIDeviceOrientationDidChangeNotification,
             object: nil
+        )
+    }
+    
+    // MARK: - Orientation Change Handling
+    
+    /// Handle orientation changes to reconfigure plot appearance
+    func orientationDidChange(notification: NSNotification) {
+        
+        // Redraw the plot on any orientation change to avoid compression of the plot view from landscape to portrait
+        self.plotForWeekOrMonth(self.segmentedWeekMonth.selectedSegmentIndex)
+    }
+    
+    // MARK: - Helpers
+    
+    /// Plot for week or month depending on user selection
+    func plotForWeekOrMonth(selector: Int) {
+        switch selector {
+        case Constants.plotMonth:
+            self.configurePlots(Constants.daysInMonth)
+        default:
+            self.configurePlots(Constants.daysInWeek)
+        }
+    }
+    
+    /// Control transition between plots
+    func transition(fromView fromView: UIView, toView: UIView) {
+        UIView.transitionFromView(
+            fromView,
+            toView: toView,
+            duration: 1.0,
+            options: [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.ShowHideTransitionViews],
+            completion: nil
         )
     }
     
@@ -216,28 +239,5 @@ class ProgressViewController:   UIViewController,
         self.configureSleepView(daysToShow)
         self.configureFunctionalityView(daysToShow)
         self.configureProgressView(daysToShow)
-    }
-    
-    // MARK: - Helpers
-    
-    /// Plot for week or month depending on user selection
-    func plotForWeekOrMonth(selector: Int) {
-        switch selector {
-        case Constants.plotMonth:
-            self.configurePlots(Constants.daysInMonth)
-        default:
-            self.configurePlots(Constants.daysInWeek)
-        }
-    }
-    
-    /// Control transition between plots
-    func transition(fromView fromView: UIView, toView: UIView) {
-        UIView.transitionFromView(fromView,
-            toView: toView,
-            duration: 1.0,
-            options: [UIViewAnimationOptions.TransitionFlipFromLeft,
-                UIViewAnimationOptions.ShowHideTransitionViews],
-            completion: nil
-        )
     }
 }

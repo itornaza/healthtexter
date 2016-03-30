@@ -9,9 +9,7 @@
 import UIKit
 import CoreData
 
-class RanksViewController:  UIViewController,
-                            NSFetchedResultsControllerDelegate
-{
+class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Core Data Properties
     
@@ -67,6 +65,44 @@ class RanksViewController:  UIViewController,
         Theme.setSliderThumbImage(sender)
     }
     
+    // MARK: - Helpers
+    
+    func getPainRanks(completion: (Int, Int, Int) -> Void) {
+        let painRank: Int = Int(self.painSlider.value)
+        let sleepRank: Int = Int(self.sleepSlider.value)
+        let functionalityRank = Int(functionalitySlider.value)
+        completion(painRank, sleepRank, functionalityRank)
+    }
+    
+    /// Saves the ranks either on an existing or a new entry
+    func saveRanks() {
+        self.getPainRanks() { painRank, sleepRank, functionalityRank in
+            
+            let entry = Entry.getEntryIfExists(frc: self.fetchedResultsController)
+            if entry != nil {
+                
+                // If entry exists update with the rank values
+                entry?.painRank = painRank
+                entry?.sleepRank = sleepRank
+                entry?.functionalityRank = functionalityRank
+                
+            } else {
+                
+                // If there is no entry, create a new one
+                let dictionary = [
+                    Entry.Keys.text : "",
+                    Entry.Keys.painRank : painRank as AnyObject,
+                    Entry.Keys.sleepRank : sleepRank as AnyObject,
+                    Entry.Keys.functionalityRank : functionalityRank as AnyObject
+                ]
+                _ = Entry(dictionary: dictionary, context: self.sharedContext)
+            }
+            
+            // Save the context
+            CoreDataStackManager.sharedInstance().saveContext()
+        }
+    }
+    
     // MARK: - Configuration
     
     func configure() {
@@ -119,44 +155,6 @@ class RanksViewController:  UIViewController,
         Theme.setSliderThumbImageReversed(self.painSlider)
         Theme.setSliderThumbImage(self.functionalitySlider)
         Theme.setSliderThumbImage(self.sleepSlider)
-    }
-    
-    // MARK: - Helpers
-
-    func getPainRanks(completion: (Int, Int, Int) -> Void) {
-        let painRank: Int = Int(self.painSlider.value)
-        let sleepRank: Int = Int(self.sleepSlider.value)
-        let functionalityRank = Int(functionalitySlider.value)
-        completion(painRank, sleepRank, functionalityRank)
-    }
-    
-    /// Saves the ranks either on an existing or a new entry
-    func saveRanks() {
-        self.getPainRanks() { painRank, sleepRank, functionalityRank in
-            
-            let entry = Entry.getEntryIfExists(frc: self.fetchedResultsController)
-            if entry != nil {
-                
-                // If entry exists update with the rank values
-                entry?.painRank = painRank
-                entry?.sleepRank = sleepRank
-                entry?.functionalityRank = functionalityRank
-                
-            } else {
-                
-                // If there is no entry, create a new one
-                let dictionary = [
-                    Entry.Keys.text : "",
-                    Entry.Keys.painRank : painRank as AnyObject,
-                    Entry.Keys.sleepRank : sleepRank as AnyObject,
-                    Entry.Keys.functionalityRank : functionalityRank as AnyObject
-                ]
-                _ = Entry(dictionary: dictionary, context: self.sharedContext)
-            }
-            
-            // Save the context
-            CoreDataStackManager.sharedInstance().saveContext()
-        }
     }
     
     // MARK: - Segues

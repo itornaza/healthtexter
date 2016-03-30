@@ -11,10 +11,7 @@ import Foundation
 import CoreData
 import AVFoundation
 
-class TextViewController:   UIViewController,
-                            NSFetchedResultsControllerDelegate,
-                            UITextViewDelegate
-{
+class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Core Data Properties
     
@@ -46,12 +43,14 @@ class TextViewController:   UIViewController,
         
         // Get the current number of entries and check against the unlimited entries In-App Purchase rules
         let numberOfEntries = Entry.getStoredEntriesCount(self.fetchedResultsController)
-        IAPHelper.unlimitedEntriesGuard(self, entries: numberOfEntries)
+        if IAPHelper.unlimitedEntriesGuard(self, entries: numberOfEntries) == false {
+            return
+        }
         
         self.subscribeToKeyboardNotifications()
         
         // Promt used to record instead of typing
-        if (Theme.hasIntroducedMic() == false) {
+        if Theme.hasIntroducedMic() == false {
             Theme.alertView(self, title: Constants.voiceTitle, message: Constants.voiceMessage)
             Theme.configureMicIntro()
         }
@@ -113,37 +112,6 @@ class TextViewController:   UIViewController,
             name: UIKeyboardWillHideNotification,
             object: nil
         )
-    }
-    
-    // MARK: - Text View delegate
-    
-    func textViewDidChange(textView: UITextView) {
-        self.setRemainingCharacters()
-    }
-    
-    /// Limit to a maximum number of characters
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        let currentCharacterCount = textView.text?.characters.count ?? 0
-        if (range.length + range.location > currentCharacterCount){
-            return false
-        }
-        let newLength = currentCharacterCount + text.characters.count - range.length
-        return newLength <= Constants.maxChars
-    }
-    
-    /// Clear the default text on tap in odrer to let the user write immediately
-    func textViewDidBeginEditing(textView: UITextView) {
-        if textView.text == Constants.initialText {
-            textView.text = nil
-            self.setRemainingCharacters()
-        }
-    }
-    
-    /// If the user has left the textView empty, store the default text
-    func textViewDidEndEditing(textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = Constants.initialText
-        }
     }
     
     // MARK: - Helpers
@@ -245,5 +213,36 @@ class TextViewController:   UIViewController,
         // Get the new Core Data for next use
         Entry.getStoredEntries(vc: self, frc: fetchedResultsController)
     }
+}
+
+extension TextViewController: UITextViewDelegate {
     
+    func textViewDidChange(textView: UITextView) {
+        self.setRemainingCharacters()
+    }
+    
+    /// Limit to a maximum number of characters
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        let currentCharacterCount = textView.text?.characters.count ?? 0
+        if (range.length + range.location > currentCharacterCount){
+            return false
+        }
+        let newLength = currentCharacterCount + text.characters.count - range.length
+        return newLength <= Constants.maxChars
+    }
+    
+    /// Clear the default text on tap in odrer to let the user write immediately
+    func textViewDidBeginEditing(textView: UITextView) {
+        if textView.text == Constants.initialText {
+            textView.text = nil
+            self.setRemainingCharacters()
+        }
+    }
+    
+    /// If the user has left the textView empty, store the default text
+    func textViewDidEndEditing(textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = Constants.initialText
+        }
+    }
 }

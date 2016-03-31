@@ -136,7 +136,7 @@ class Date {
     
     /// Set the user defaults on the first launch ever
     class func configureDefaults() {
-        if self.appHasLaunchedMoreThanOnce() {
+        if self.appHasLaunchedMoreThanOnce() == false {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.hasLaunchedOnce)
             NSUserDefaults.standardUserDefaults().synchronize()
             self.setTimePreference(Constants.ninteenHudredHours * self.secondsInHour)

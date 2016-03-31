@@ -45,6 +45,11 @@ class PreferencesViewController: UIViewController {
         self.subscribeToIAPNotifications()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        Theme.tabBarColor(self, color: Theme.preferencesColor)
+    }
+    
     /// Destructor
     deinit {
         self.unsubscribeFromIAPNotifications()
@@ -93,7 +98,6 @@ class PreferencesViewController: UIViewController {
     /// Configure Navigation and DatePickers
     func configureUI() {
         Theme.navigationBar(self, backgroundColor: Theme.preferencesColor)
-        Theme.tabBarColor(self, color: Theme.preferencesColor)
         Theme.configureHookLabels(self.datePickerLabel)
         Theme.configureHookLabels(self.switchDayPickerLabel)
         self.timePreferencesTitleLabel.textColor = Theme.preferencesColor
@@ -168,7 +172,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.text = product.localizedTitle
         
         // Set the color of the left checkboxes in editing mode
-        cell.tintColor = Theme.htGreen
+        cell.tintColor = Theme.preferencesColor
         
         // return the cell
         return cell

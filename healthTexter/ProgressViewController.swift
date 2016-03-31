@@ -72,6 +72,11 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
         self.subscribeToOrientationChangeNotifications()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        Theme.tabBarColor(self, color: Theme.monitorColor)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         self.fetchedResultsController.delegate = nil
         self.unsubscribeToOrientationChangeNotifications()
@@ -229,7 +234,6 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     func configureUI() {
         Theme.navigationBar(self, backgroundColor: Theme.monitorColor)
-        Theme.tabBarColor(self, color: Theme.monitorColor)
         self.segmentedWeekMonth.tintColor = Theme.monitorColor
         self.segmentedOptions.tintColor = Theme.monitorColor
         self.segmentedOptions.selectedSegmentIndex = Constants.painSelector

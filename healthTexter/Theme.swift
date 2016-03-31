@@ -18,9 +18,7 @@ class Theme {
     static let tabBarId: String = "TabBarController"
     
     // Colors
-    static let htGreen = UIColor(red: 152.0/255.0, green: 218.0/255.0, blue: 105.0/255.0, alpha: 1.0)
     static let htDarkGreen = UIColor(red: 0.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
-    static let htSomon = UIColor(red: 255.0/255.0, green: 102.0/255.0, blue: 102.0/255.0, alpha: 1.0)
     static let htRankPain = UIColor(red: 255.0/255.0, green: 42.0/255.0, blue: 26.0/255.0, alpha: 1.0)
     static let htRankSleep = UIColor(red: 16.0/255.0, green: 63.0/255.0, blue: 251.0/255.0, alpha: 1.0)
     static let htRankFunctionality = UIColor(red: 1.0/255.0, green: 145.0/255.0, blue: 146.0/255.0, alpha: 1.0)
@@ -30,6 +28,10 @@ class Theme {
     static let monitorColor = UIColor(red: 207.0/255.0, green: 81.0/255.0, blue: 82.0/255.0, alpha: 1.0)
     static let historyColor = UIColor(red: 237.0/255.0, green: 146.0/255.0, blue: 73.0/255.0, alpha: 1.0)
     static let preferencesColor = UIColor(red: 123.0/255.0, green: 102.0/255.0, blue: 190.0/255.0, alpha: 1.0)
+    
+    // Colors Used for prototyping
+    static let htGreen = UIColor(red: 152.0/255.0, green: 218.0/255.0, blue: 105.0/255.0, alpha: 1.0)
+    static let htSomon = UIColor(red: 255.0/255.0, green: 102.0/255.0, blue: 102.0/255.0, alpha: 1.0)
     
     // MARK: - Labels
     

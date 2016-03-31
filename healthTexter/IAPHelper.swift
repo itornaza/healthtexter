@@ -203,7 +203,7 @@ extension IAPHelper {
             }
             
             alertController.addAction(okAction)
-            alertController.view.tintColor = Theme.htSomon
+            alertController.view.tintColor = Theme.htDarkGreen
             vc.presentViewController(alertController, animated: true, completion: nil)
         }
     }

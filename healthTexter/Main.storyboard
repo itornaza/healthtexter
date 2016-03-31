@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Q7n-CA-tEc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Q7n-CA-tEc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -209,13 +209,13 @@
                                 <rect key="frame" x="0.0" y="325" width="297" height="275"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View your diary history!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMU-XD-kwd">
-                                        <rect key="frame" x="15" y="25" width="266" height="20"/>
+                                        <rect key="frame" x="15" y="8" width="266" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8M-1b-xgK">
-                                        <rect key="frame" x="20" y="206" width="256" height="55"/>
+                                        <rect key="frame" x="20" y="198" width="256" height="55"/>
                                         <color key="backgroundColor" red="0.92941176469999998" green="0.57254901960000004" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" identifier="historyButtonHeight" id="Q8t-yg-uLW"/>
@@ -250,10 +250,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.92941176470588238" green="0.5725490196078431" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="DMU-XD-kwd" firstAttribute="top" secondItem="oeH-To-YUs" secondAttribute="top" constant="25" identifier="historyHookLabelTop" id="0Q5-lG-bSZ"/>
+                                    <constraint firstItem="DMU-XD-kwd" firstAttribute="top" secondItem="oeH-To-YUs" secondAttribute="top" constant="8" identifier="historyHookLabelTop" id="0Q5-lG-bSZ"/>
                                     <constraint firstItem="DMU-XD-kwd" firstAttribute="leading" secondItem="oeH-To-YUs" secondAttribute="leading" constant="15" identifier="historyHookLabelLead" id="BJU-T2-eqw"/>
                                     <constraint firstItem="md2-fA-kgx" firstAttribute="centerY" secondItem="oeH-To-YUs" secondAttribute="centerY" identifier="historyImageCenterY" id="FZO-l3-Q7C"/>
-                                    <constraint firstAttribute="bottom" secondItem="z8M-1b-xgK" secondAttribute="bottom" constant="14" identifier="historyButtonBottom" id="d4H-vu-o06"/>
+                                    <constraint firstAttribute="bottom" secondItem="z8M-1b-xgK" secondAttribute="bottom" constant="22" identifier="historyButtonBottom" id="d4H-vu-o06"/>
                                     <constraint firstAttribute="trailing" secondItem="DMU-XD-kwd" secondAttribute="trailing" constant="16" identifier="historyHookLabelTrail" id="db8-XT-DBl"/>
                                     <constraint firstItem="md2-fA-kgx" firstAttribute="centerX" secondItem="oeH-To-YUs" secondAttribute="centerX" identifier="historyImageCenterX" id="hBR-GX-zHM"/>
                                     <constraint firstItem="z8M-1b-xgK" firstAttribute="leading" secondItem="oeH-To-YUs" secondAttribute="leading" constant="20" identifier="historyButtonLead" id="jDf-d9-4xE"/>
@@ -281,14 +281,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Tg-4t-Nzb" userLabel="Preferences View">
                                 <rect key="frame" x="296" y="325" width="304" height="275"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get notifications when it matters!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHk-oh-f1R">
-                                        <rect key="frame" x="19" y="25" width="266" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Get notifications when it matters!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHk-oh-f1R">
+                                        <rect key="frame" x="18" y="8" width="266" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C58-Ee-GTa">
-                                        <rect key="frame" x="24" y="205" width="256" height="56"/>
+                                        <rect key="frame" x="24" y="197" width="256" height="56"/>
                                         <color key="backgroundColor" red="0.4823529412" green="0.40000000000000002" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" identifier="preferencesButtonHeight" id="Xlc-R4-xWj"/>
@@ -324,13 +324,13 @@
                                 <color key="backgroundColor" red="0.4823529411764706" green="0.40000000000000002" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="UMa-Hf-xuz" firstAttribute="centerX" secondItem="5Tg-4t-Nzb" secondAttribute="centerX" identifier="preferencesImageCenterX" id="Emy-1o-xBO"/>
-                                    <constraint firstItem="FHk-oh-f1R" firstAttribute="top" secondItem="5Tg-4t-Nzb" secondAttribute="top" constant="25" identifier="preferencesHookLabelTop" id="IgW-Bi-TgD"/>
+                                    <constraint firstItem="FHk-oh-f1R" firstAttribute="top" secondItem="5Tg-4t-Nzb" secondAttribute="top" constant="8" identifier="preferencesHookLabelTop" id="IgW-Bi-TgD"/>
                                     <constraint firstItem="FHk-oh-f1R" firstAttribute="leading" secondItem="5Tg-4t-Nzb" secondAttribute="leading" constant="19" identifier="preferencesHookLabelLead" id="LFt-kN-tV8"/>
                                     <constraint firstItem="C58-Ee-GTa" firstAttribute="leading" secondItem="5Tg-4t-Nzb" secondAttribute="leading" constant="24" identifier="preferencesButtonLead" id="OJC-RP-Ny0"/>
                                     <constraint firstAttribute="trailing" secondItem="C58-Ee-GTa" secondAttribute="trailing" constant="24" identifier="preferencesButtonTrail" id="PQi-Ei-TyJ"/>
                                     <constraint firstAttribute="trailing" secondItem="FHk-oh-f1R" secondAttribute="trailing" constant="19" identifier="preferencesHookLabelTrail" id="Qpr-23-qmG"/>
                                     <constraint firstItem="UMa-Hf-xuz" firstAttribute="centerY" secondItem="5Tg-4t-Nzb" secondAttribute="centerY" identifier="preferencesImageCenterY" id="Wws-04-8Js"/>
-                                    <constraint firstAttribute="bottom" secondItem="C58-Ee-GTa" secondAttribute="bottom" constant="14" identifier="preferencesButtonBottom" id="ssr-GV-VTe"/>
+                                    <constraint firstAttribute="bottom" secondItem="C58-Ee-GTa" secondAttribute="bottom" constant="22" identifier="preferencesButtonBottom" id="ssr-GV-VTe"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -1188,7 +1188,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UN6-ru-mSc" id="Z4u-lo-WG5">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gS-0M-ZUI">
@@ -1300,13 +1300,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16u-4Q-SWA">
                                         <rect key="frame" x="8" y="0.0" width="584" height="519"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What time would you like to switch day?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkG-Cq-idA">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What time would you like to switch day?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkG-Cq-idA">
                                                 <rect key="frame" x="14" y="159" width="517" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVB-dF-5sk">
+                                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVB-dF-5sk">
                                                 <rect key="frame" x="12" y="187" width="282" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="QKz-kc-MUJ"/>
@@ -1319,7 +1319,7 @@
                                                     <action selector="switchDayPickerChange:" destination="bTQ-kv-3ek" eventType="valueChanged" id="tAY-zt-S0E"/>
                                                 </connections>
                                             </datePicker>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KU2-N3-l28">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KU2-N3-l28">
                                                 <rect key="frame" x="0.0" y="285" width="584" height="140"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1332,7 +1332,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="584" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tdP-TS-yaN" id="aVH-nv-3CR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="584" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="584" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -1354,13 +1354,13 @@
                                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In-App Purchases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7h-SM-a0m">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="In-App Purchases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7h-SM-a0m">
                                                 <rect key="frame" x="14" y="256" width="143" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-ur-qRQ">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-ur-qRQ">
                                                 <rect key="frame" x="517" y="250" width="59" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Restore"/>

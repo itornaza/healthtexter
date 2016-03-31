@@ -50,8 +50,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-
-        // Any actions to be performed when we land here from the next vc
+        Theme.tabBarColor(self, color: Theme.historyColor)
         
         // Reload data to avoid the last selected cell to be highlighted
         self.tableView.reloadData()
@@ -111,7 +110,6 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         Theme.navigationBar(self, backgroundColor: Theme.historyColor)
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         self.navigationItem.leftBarButtonItem?.title = "Select"
-        Theme.tabBarColor(self, color: Theme.historyColor)
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.reloadData()
     }

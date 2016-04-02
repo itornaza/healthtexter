@@ -28,22 +28,56 @@ class healthTexterUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testWrite() {
-        
-        // Can create assertions to check the state of UI Elements during the recorded test
-        
-        // Recording code:
+    func test_write() {
         let app = XCUIApplication()
         app.buttons["Write"].tap()
         
-        let textView = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.TextView).element
-        textView.tap()
-        textView.typeText("Writing something and I am done with this entry!")
-        app.navigationBars["Sun, 13/03/2016"].buttons["Done"].tap()
+        let element = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
+        element.childrenMatchingType(.TextView).element.tap()
+        element.childrenMatchingType(.TextView).element
+        
+        let doneButton = app.navigationBars.element.buttons["Done"]
+        doneButton.tap()
+        
+        doneButton.tap()
+        app.navigationBars.element.buttons["Home"].tap()
     }
+    
+    func test_monitor() {
+        let app = XCUIApplication()
+        app.buttons["Monitor"].tap()
+        
+        let sleepButton = app.buttons["Sleep"]
+        sleepButton.tap()
+        
+        let functionalityButton = app.buttons["Functionality"]
+        functionalityButton.tap()
+        
+        let progressButton = app.buttons["Progress"]
+        progressButton.tap()
+        
+        app.buttons["Pain"].tap()
+        app.buttons["Last month"].tap()
+        sleepButton.tap()
+        functionalityButton.tap()
+        progressButton.tap()
+        app.navigationBars["Share today's entry"].buttons["Home"].tap()
+    }
+    
+    func test_history() {
+        let app = XCUIApplication()
+        app.buttons["History"].tap()
+        app.tables.cells.element.tap()
+        
+        app.switches["0"].tap()
+        app.navigationBars.element.buttons["History"].tap()
+        app.navigationBars["History"].buttons["Select"].tap()
+    }
+    
+    func test_preferences() {
+        let app = XCUIApplication()
+        app.buttons["Preferences"].tap()
+        app.navigationBars["Preferences"].buttons["Home"].tap()
+    }
+    
 }

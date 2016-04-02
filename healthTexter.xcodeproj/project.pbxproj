@@ -33,6 +33,10 @@
 		724667241C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724667231C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift */; };
 		724667251C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724667231C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift */; };
 		724667261C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724667231C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift */; };
+		724D2E6E1CB032C40004864E /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D2E6C1CB032C40004864E /* DateTests.swift */; };
+		724D2E711CB034CF0004864E /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 724D2E701CB034CF0004864E /* Readme */; };
+		724D2E721CB034CF0004864E /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 724D2E701CB034CF0004864E /* Readme */; };
+		724D2E731CB034CF0004864E /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 724D2E701CB034CF0004864E /* Readme */; };
 		725783F71C40FD320098F5BD /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725783F61C40FD320098F5BD /* Entry.swift */; };
 		725783F81C40FD320098F5BD /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725783F61C40FD320098F5BD /* Entry.swift */; };
 		725783F91C40FD320098F5BD /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725783F61C40FD320098F5BD /* Entry.swift */; };
@@ -119,6 +123,8 @@
 		723573E91BEE984D008F8DF0 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		72460E071C38352D00AAD584 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		724667231C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewControllerExtension.swift; sourceTree = "<group>"; };
+		724D2E6C1CB032C40004864E /* DateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		724D2E701CB034CF0004864E /* Readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
 		725783F61C40FD320098F5BD /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		725783FA1C40FF760098F5BD /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		726370811C44223600CA037E /* PainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PainView.swift; sourceTree = "<group>"; };
@@ -194,8 +200,10 @@
 		721847CB1BD7B60D004CAC70 /* healthTexterTests */ = {
 			isa = PBXGroup;
 			children = (
-				721847CC1BD7B60D004CAC70 /* healthTexterTests.swift */,
+				724D2E701CB034CF0004864E /* Readme */,
 				721847CE1BD7B60D004CAC70 /* Info.plist */,
+				721847CC1BD7B60D004CAC70 /* healthTexterTests.swift */,
+				724D2E6C1CB032C40004864E /* DateTests.swift */,
 			);
 			path = healthTexterTests;
 			sourceTree = "<group>";
@@ -203,8 +211,8 @@
 		721847D61BD7B60D004CAC70 /* healthTexterUITests */ = {
 			isa = PBXGroup;
 			children = (
-				721847D71BD7B60D004CAC70 /* healthTexterUITests.swift */,
 				721847D91BD7B60D004CAC70 /* Info.plist */,
+				721847D71BD7B60D004CAC70 /* healthTexterUITests.swift */,
 			);
 			path = healthTexterUITests;
 			sourceTree = "<group>";
@@ -365,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724D2E711CB034CF0004864E /* Readme in Resources */,
 				721847C21BD7B60D004CAC70 /* LaunchScreen.storyboard in Resources */,
 				723573E61BEE8883008F8DF0 /* Main.storyboard in Resources */,
 				721847BF1BD7B60D004CAC70 /* Assets.xcassets in Resources */,
@@ -375,6 +384,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724D2E721CB034CF0004864E /* Readme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724D2E731CB034CF0004864E /* Readme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +440,7 @@
 				727850AE1C402CDB00481031 /* RanksViewController.swift in Sources */,
 				72190F621C6DCF1900168C80 /* HistoryViewCell.swift in Sources */,
 				725783FC1C40FF760098F5BD /* CoreDataStackManager.swift in Sources */,
+				724D2E6E1CB032C40004864E /* DateTests.swift in Sources */,
 				72DD91201C4AAD8E00E35657 /* FunctionalityView.swift in Sources */,
 				72A239F31BD94750006F0436 /* HistoryEntryViewController.swift in Sources */,
 				724667251C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift in Sources */,

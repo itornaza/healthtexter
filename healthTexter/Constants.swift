@@ -35,13 +35,13 @@ class Constants {
     static let maxChars: Int = 500
     static let orangeCharsLimit: Int = 30
     static let redCharsLimit: Int = 10
-    static let voiceTitle: String =     "Voice Recording 🎙"
+    static let voiceTitle: String =     "Dictation 🎙"
     static let voiceMessage: String =   "Tap the mic icon on the keyboard to dictate!"
     static let text: String =           ""
     static let initialText: String =    "Write about your day \n\n" +
-                                        "- Were you able to do your activities? \n\n" +
                                         "- Were you in pain? \n\n" +
                                         "- Did you sleep well? \n\n" +
+                                        "- Were you able to do your activities? \n\n" +
                                         "- Any events worth noting?"
     
     // MARK: - Plotting
@@ -63,7 +63,7 @@ class Constants {
     // MARK: - Errors and Alerts
     
     static let dataError: String =          "Data error"
-    static let dataLoadingError: String =   "Could not load the stored data"
+    static let dataLoadingError: String =   "Could not load stored data"
     static let dataDoesNotExist: String =   "No data exist"
     static let oops: String =               "Oooops!"
     static let noDataToSend: String =       "You have not selected any entries to share.\n\n" +
@@ -72,13 +72,13 @@ class Constants {
     // MARK: - In-App Purchases
     
     static let maxFreeEntries: Int = 6
-    static let IAPtitle: String =           "In-App Purchases"
+    static let IAPtitle: String =           "In-app purchases"
     static let IAPbuttonTitle: String =     "Go to preferences"
-    static let sharingOptionMsg: String =   "In order to share your entries review the In-App Purchases " +
-                                            "in the Preferences menu"
-    static let unlimitedEntriesMsg: String = "You have reached your maximum entries limit. " +
-                                            "In order to have unlimited entries review the In-App Purchases " +
-                                            "in the Preferences menu"
+    static let sharingOptionMsg: String =   "In order to share your entries review the in-app purchases " +
+                                            "in the preferences menu"
+    static let unlimitedEntriesMsg: String = "You have reached your maximum free entries limit. " +
+                                            "In order to write unlimited entries review the in-app purchases " +
+                                            "in the preferences menu"
     
     // MARK: - Notifications
     
@@ -94,10 +94,10 @@ class Constants {
     static let maxSwitchDayDelay: NSTimeInterval = 4.0 * 3600
     
     // Messages
-    static let notificationMsg_1: String =  "It's about time to write in your patient diary! 🙄"
+    static let notificationMsg_1: String =  "It's about time to write in your diary! 🙄"
     static let notificationMsg_2: String =  "Write in your diary and keep up with your progress! 😏"
-    static let notificationMsg_3: String =  "Writing about your condition contributes to your health! 😇"
-    static let notificationMsg_14: String = "Hey there! either you are fine or you have forgotten to write " +
+    static let notificationMsg_3: String =  "Writing about your condition may contribute to your health! 😇"
+    static let notificationMsg_14: String = "Hey there! either you are doing good or you have forgotten to write " +
                                             "in your diary for a while! 😉"
     static let notificationMsg_30: String = "Long time no see! Check back with your notes! ✍️"
 }

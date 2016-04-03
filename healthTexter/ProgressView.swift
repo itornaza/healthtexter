@@ -11,7 +11,7 @@
 
 import UIKit
 
-public class ProgressView: UIView {
+final public class ProgressView: UIView {
     
     // MARK: - Properties
     

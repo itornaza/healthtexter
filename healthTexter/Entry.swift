@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class Entry: NSManagedObject {
+final class Entry: NSManagedObject {
 
     // MARK: - Properties
 

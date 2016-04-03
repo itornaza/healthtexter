@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class Date {
+final class Date {
     
     // MARK: - Properties
     

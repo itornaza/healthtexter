@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class Theme {
+final class Theme {
     
     // MARK: - Properties
     
@@ -143,8 +143,6 @@ class Theme {
             // Control flow when the activity controller exits
             activityViewController.completionWithItemsHandler = {
                 (s: String?, ok: Bool, items: [AnyObject]?, err:NSError?) -> Void in
-                
-                // Save the meme only if a valid action is selected, do not save if the user selects the Cancel option
                 if ok {
                     vc.dismissViewControllerAnimated(true, completion: nil)
                 }

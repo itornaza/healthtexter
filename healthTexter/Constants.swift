@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Constants {
+final class Constants {
     
     // MARK: - Device resolution
     

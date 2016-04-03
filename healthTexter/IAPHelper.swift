@@ -17,7 +17,7 @@ public typealias RequestProductsCompletionHandler = (success: Bool, products: [S
 // MARK: - IAPHelper Class
 
 /// A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased, purchase products, and restore purchases. Uses NSUserDefaults to cache if a product has been purchased.
-public class IAPHelper : NSObject  {
+final public class IAPHelper : NSObject  {
     
     // MARK: - Debug Properties
     
@@ -193,7 +193,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
 extension IAPHelper {
     
     /// Alert Controller used from the IAP Guard class methods
-    class func IAPAlertController(vc: UIViewController, title: String, message: String) {
+    public class func IAPAlertController(vc: UIViewController, title: String, message: String) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             
@@ -210,7 +210,7 @@ extension IAPHelper {
     
     /// If the user reaches the maximum entries and have not purchased the Unlimited entries take her to the Preferences View Controller
     /// Returns true if granted access, false otherwise
-    class func unlimitedEntriesGuard(vc: UIViewController, entries: Int) -> Bool {
+    public class func unlimitedEntriesGuard(vc: UIViewController, entries: Int) -> Bool {
         let grantAccess: Bool = IAPProducts.store.isProductPurchased(IAPProducts.UnlimitedEnties)
         let reachedEntriesLimit: Bool = entries >= Constants.maxFreeEntries ? true : false
         if !grantAccess && reachedEntriesLimit {
@@ -224,7 +224,7 @@ extension IAPHelper {
     
     /// If the sharing option is not yet purchased segue to the Preferences View Controller
     /// Returns true if granted access, false otherwise
-    class func sharingOptionGuard(vc: UIViewController) -> Bool {
+    public class func sharingOptionGuard(vc: UIViewController) -> Bool {
         let grantAccess = IAPProducts.store.isProductPurchased(IAPProducts.SharingOption)
         if self.debugIAPStatic { print(IAPProducts.SharingOption) }
         if !grantAccess {

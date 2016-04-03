@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Notification {
+final class Notification {
     
     // MARK: - Class Methods
     
@@ -26,12 +26,12 @@ class Notification {
     }
     
     /// Clean up previous notifications
-    class func cancelPrevious() {
+    private class func cancelPrevious() {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
     }
     
     /// Schedules the actual notifications
-    class func scheduleNew() {
+    private class func scheduleNew() {
         
         // Set up the new notifications
         let refDate: NSDate = Date.getTomorrowMidnigh()
@@ -63,7 +63,7 @@ class Notification {
     }
     
     /// Sets up the atributes of a notification
-    class func configure(notification: UILocalNotification, referenceDate: NSDate, ti: NSTimeInterval, msg: String) {
+    private class func configure(notification: UILocalNotification, referenceDate: NSDate, ti: NSTimeInterval, msg: String) {
 
         // Set up notification
         notification.alertBody = msg
@@ -76,7 +76,7 @@ class Notification {
     }
     
     /// Configure the time and dates that the notifications will show up
-    class func configureTimeIntervals() -> [NSTimeInterval] {
+    private class func configureTimeIntervals() -> [NSTimeInterval] {
         
         // The list here represents the number of days after today that the notifications will fire
         var tiArray: [NSTimeInterval] = [1, 2, 3, 4, 5, 6, 7, 14, 30]

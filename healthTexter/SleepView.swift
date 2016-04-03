@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SleepView: UIView {
+final public class SleepView: UIView {
     
     // MARK: - Properties
     

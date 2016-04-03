@@ -11,7 +11,7 @@
 
 import UIKit
 
-public class PainView: UIView {
+final public class PainView: UIView {
     
     // MARK: - Properties
     

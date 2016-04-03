@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FunctionalityView: UIView {
+final public class FunctionalityView: UIView {
     
     // MARK: - Properties
     

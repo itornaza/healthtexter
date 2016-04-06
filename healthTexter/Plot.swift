@@ -65,7 +65,6 @@ public class Plot: UIView {
         
         let margin: CGFloat = 20.0
         let columnXPoint = { (column: Int) -> CGFloat in
-
             // Set the number of points on the x-axis If you want to resize the x-axis to the available number of points, use self.graphPoints.count - 1 instead
             let numberOfWeekPoints = 7 - 1
             let numberOfMonthPoints = 30 - 1

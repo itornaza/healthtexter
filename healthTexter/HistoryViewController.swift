@@ -64,7 +64,6 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     /// Share the selected entries
     @IBAction func action(sender: UIBarButtonItem) {
-        
         // Check if the user have purchased the sharing option
         if IAPHelper.sharingOptionGuard(self) == false {
             return
@@ -139,7 +138,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         // Dequeue a reusable cell from the table, using the reuse identifier
         let cell = tableView.dequeueReusableCellWithIdentifier("historyCell") as! HistoryViewCell
         

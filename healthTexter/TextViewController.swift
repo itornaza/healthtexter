@@ -145,7 +145,6 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     
     /// Update the remaining characters
     func setRemainingCharacters() {
-        
         // Get the number of characters that remain until text area is full
         let numberOfChars: Int = Constants.maxChars - self.textArea.text.characters.count
         
@@ -183,8 +182,6 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     
     /// If the entry is new display the defaults if not display the users text
     func configureTextArea() {
-        
-        // Set the delegate
         self.textArea.delegate = self
         
         // Set the text inside the text area
@@ -205,7 +202,6 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     // MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         // Configure the back button for the next view controller to show
         Theme.configureBackButtonForNextVC(self, label: "Back")
         

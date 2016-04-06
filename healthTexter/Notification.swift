@@ -35,7 +35,6 @@ final class Notification {
     
     /// Schedules the actual notifications
     private class func scheduleNew() {
-        
         // Set up the new notifications
         let refDate: NSDate = Date.getTomorrowMidnigh()
         
@@ -67,7 +66,6 @@ final class Notification {
     
     /// Sets up the atributes of a notification
     private class func configure(notification: UILocalNotification, referenceDate: NSDate, ti: NSTimeInterval, msg: String) {
-
         // Set up notification
         notification.alertBody = msg
         notification.alertAction = "Open"
@@ -81,7 +79,6 @@ final class Notification {
     
     /// Configure the time and dates that the notifications will show up
     private class func configureTimeIntervals() -> [NSTimeInterval] {
-        
         // The list here represents the number of days after today that the notifications will fire
         var tiArray: [NSTimeInterval] = [2, 3, 4, 5, 6, 7, 8, 15, 31]
         

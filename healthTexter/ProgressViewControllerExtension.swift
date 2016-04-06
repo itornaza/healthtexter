@@ -14,7 +14,6 @@ extension ProgressViewController {
     
     /// Returns the last number of entries from the arrays indicated by the numberOfDays desired. The resulting arrays are a subset of their parents
     func getLastEntries(storedDatesArray: [String], storedRanksArray: [Int], numberOfDays: Int) -> ([String], [Int]) {
-        
         var lastDatesArray = [String]()
         var lastRanksArray = [Int]()
         
@@ -45,7 +44,6 @@ extension ProgressViewController {
     }
     
     func configurePainView(numberOfDays: Int) {
-        
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.painView.viewWithTag(ix) as? UILabel {
@@ -132,7 +130,6 @@ extension ProgressViewController {
     }
     
     func configureSleepView(numberOfDays: Int) {
-        
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.sleepView.viewWithTag(ix) as? UILabel {
@@ -219,7 +216,6 @@ extension ProgressViewController {
     }
     
     func configureFunctionalityView(numberOfDays: Int) {
-        
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.functionalityView.viewWithTag(ix) as? UILabel {
@@ -306,7 +302,6 @@ extension ProgressViewController {
     }
 
     func configureProgressView(numberOfDays: Int) {
-
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.progressView.viewWithTag(ix) as? UILabel {

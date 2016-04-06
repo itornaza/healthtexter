@@ -40,7 +40,6 @@ final class Entry: NSManagedObject {
     
     /// Default constructor if all of the properties are known beforehand
     init(dictionary: [String: AnyObject], context: NSManagedObjectContext) {
-        
         // Get the entity from the Virtual_Tourist.xcdatamodeld
         let entity = NSEntityDescription.entityForName("Entry", inManagedObjectContext: context)!
         
@@ -57,7 +56,6 @@ final class Entry: NSManagedObject {
     
     /// Default constructor with only requiring the text area
     init(text: String, context: NSManagedObjectContext) {
-        
         // Get the entity from the Virtual_Tourist.xcdatamodeld
         let entity = NSEntityDescription.entityForName("Entry", inManagedObjectContext: context)!
         

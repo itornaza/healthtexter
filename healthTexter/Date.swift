@@ -31,7 +31,6 @@ final class Date {
     
     /// Get the current date formatted
     class func getFormatted(formatString: String) -> String {
-        
         // Set up the dateformatter
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = formatString
@@ -43,7 +42,6 @@ final class Date {
     
     // Get a given date formated
     class func getFormatted(date: NSDate, formatString: String) -> String {
-        
         // Set up the dateformatter
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = formatString
@@ -54,7 +52,6 @@ final class Date {
     
     /// Get the current NSDate shifted on user preference
     class func get() -> NSDate {
-        
         // Get the preference of the user as a delay (negative shift)
         let shiftInSeconds: NSTimeInterval = (self.shiftDirection * self.getDaySwitchPreference()!)
 
@@ -92,7 +89,6 @@ final class Date {
     
     /// Get the time in seconds from a date picker
     class func getTimeFromPickerInSeconds(sender: UIDatePicker) -> NSTimeInterval {
-    
         // Get the time components
         var hour: NSTimeInterval = 0.0
         var min: NSTimeInterval = 0.0

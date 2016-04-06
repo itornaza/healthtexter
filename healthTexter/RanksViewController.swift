@@ -79,7 +79,6 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     /// Saves the ranks either on an existing or a new entry
     func saveRanks() {
         self.getPainRanks() { painRank, sleepRank, functionalityRank in
-            
             let entry = Entry.getEntryIfExists(frc: self.fetchedResultsController)
             if entry != nil {
                 
@@ -137,7 +136,6 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     /// If the ranks are already set, display the stored settings
     func configureSliderValues() {
         if let entry = Entry.getEntryIfExists(frc: fetchedResultsController) {
-            
             // Pain
             self.painSlider.value = Float((entry.painRank))
             self.painLevelValue.text = "\(Int(entry.painRank))"
@@ -162,7 +160,6 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     // MARK: - Segues
     
     func segueToNextVC(rightButton : UIBarButtonItem) {
-        
         // Update the ranks to Core Data
         self.saveRanks()
         

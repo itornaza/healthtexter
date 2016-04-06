@@ -73,7 +73,6 @@ final class Theme {
     
     /// Set the tab bar color scheme
     class func tabBarColor(vc: UIViewController, color: UIColor) {
-        
         // Tab bar color itself
         vc.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
         
@@ -122,15 +121,14 @@ final class Theme {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             let dismiss = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(dismiss)
-            alertController.view.tintColor = Theme.htDarkGreen
             vc.presentViewController(alertController, animated: true, completion: nil)
+            alertController.view.tintColor = Theme.htDarkGreen
         }
     }
     
     /// Activity View Controller to share entries
     class func activityView(vc: UIViewController, textToSend: String) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
-        
             // Get the activity view controller and pass it the text to send
             let activityViewController = UIActivityViewController(
                 activityItems: [textToSend],

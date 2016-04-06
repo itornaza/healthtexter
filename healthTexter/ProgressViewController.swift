@@ -86,7 +86,6 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     /// Launch the activity view to share the entry
     @IBAction func action(sender: UIBarButtonItem) {
-        
         // Check if the user have purchased the sharing option
         if IAPHelper.sharingOptionGuard(self) == false {
             return
@@ -107,12 +106,10 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     /// Transitions sequentialy between views by taping on the plot It also updates the segmented control accordingly
     @IBAction func tapTransition(sender: UITapGestureRecognizer) {
-        
         // For all transitions originating from any view:
         // 1. Perform the transition
         // 2. Update the plot selector
         // 3. Update the global that holds which view is showing
-        
         switch self.viewShowing {
         case Constants.painSelector:
             self.transition(fromView: self.painView, toView: self.sleepView)
@@ -135,11 +132,9 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     /// Manages transitions depending on the degment control selection
     @IBAction func segmentedControl(sender: UISegmentedControl) {
-        
         // For all plot views:
         // 1. Handle all possible transitions landing to the view
         // 2. Update the global that holds which view is showing
-        
         switch sender.selectedSegmentIndex {
         case Constants.painSelector:
             self.transition(fromView: self.functionalityView, toView: self.painView)
@@ -192,7 +187,6 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     /// Handle orientation changes to reconfigure plot appearance
     func orientationDidChange(notification: NSNotification) {
-        
         // Redraw the plot on any orientation change to avoid compression of the plot view from landscape to portrait
         self.plotForWeekOrMonth(self.segmentedWeekMonth.selectedSegmentIndex)
     }

@@ -22,8 +22,8 @@ final public class IAPHelper : NSObject  {
     // MARK: - Debug Properties
     
     // Debug Control
-    let debugIAP: Bool = false
-    static let debugIAPStatic: Bool = false
+    let DEBUG: Bool = false
+    static let DEBUG_STATIC: Bool = false
     
     // Debug String Literals
     let purchased: String       = "Already purchased: "
@@ -56,10 +56,10 @@ final public class IAPHelper : NSObject  {
         for productIdentifier in productIdentifiers {
             if NSUserDefaults.standardUserDefaults().boolForKey(productIdentifier) {
                 self.purchasedProductIdentifiers.insert(productIdentifier)
-                if self.debugIAP { print(self.purchased + "\(productIdentifier)") }
+                if self.DEBUG { print(self.purchased + "\(productIdentifier)") }
             }
             else {
-                if self.debugIAP { print(self.notPurchased + "\(productIdentifier)") }
+                if self.DEBUG { print(self.notPurchased + "\(productIdentifier)") }
             }
         }
         super.init()
@@ -73,21 +73,21 @@ final public class IAPHelper : NSObject  {
         self.completionHandler = handler
         
         // Keep a strong reference to the request
-        self.productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers)
+        self.productsRequest = SKProductsRequest(productIdentifiers: self.productIdentifiers)
         self.productsRequest?.delegate = self
         self.productsRequest?.start()
     }
     
     /// Initiates purchase of a product
     public func purchaseProduct(product: SKProduct) {
-        if debugIAP { print(self.buying + "\(product.productIdentifier)...") }
+        if self.DEBUG { print(self.buying + "\(product.productIdentifier)...") }
         let payment = SKPayment(product: product)
         SKPaymentQueue.defaultQueue().addPayment(payment)
     }
     
     /// Given the product identifier, returns true if that product has been purchased
     public func isProductPurchased(productIdentifier: String) -> Bool {
-        return purchasedProductIdentifiers.contains(productIdentifier)
+        return self.purchasedProductIdentifiers.contains(productIdentifier)
     }
     
     /// If the state of whether purchases have been made is lost  (e.g. the user deletes and reinstalls the app) this will recover the purchases
@@ -108,25 +108,25 @@ final public class IAPHelper : NSObject  {
 extension IAPHelper: SKProductsRequestDelegate {
     
     public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        if debugIAP { print(self.loadedProducts) }
+        if self.DEBUG { print(self.loadedProducts) }
         let products = response.products
-        completionHandler?(success: true, products: products)
-        clearRequest()
+        self.completionHandler?(success: true, products: products)
+        self.clearRequest()
         
         for p in products {
-            if debugIAP { print(self.foundProduct + "\(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue)") }
+            if self.DEBUG { print(self.foundProduct + "\(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue)") }
         }
     }
     
     public func request(request: SKRequest, didFailWithError error: NSError) {
-        if debugIAP { print(self.failed) }
-        if debugIAP { print(self.errorReport + "\(error)") }
-        clearRequest()
+        if self.DEBUG { print(self.failed) }
+        if self.DEBUG { print(self.errorReport + "\(error)") }
+        self.clearRequest()
     }
     
     private func clearRequest() {
-        productsRequest = nil
-        completionHandler = nil
+        self.productsRequest = nil
+        self.completionHandler = nil
     }
 }
 
@@ -138,13 +138,13 @@ extension IAPHelper: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch (transaction.transactionState) {
             case .Purchased:
-                completeTransaction(transaction)
+                self.completeTransaction(transaction)
                 break
             case .Failed:
-                failedTransaction(transaction)
+                self.failedTransaction(transaction)
                 break
             case .Restored:
-                restoreTransaction(transaction)
+                self.restoreTransaction(transaction)
                 break
             case .Deferred:
                 break
@@ -155,21 +155,21 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func completeTransaction(transaction: SKPaymentTransaction) {
-        if debugIAP { print(self.completeTx) }
-        provideContentForProductIdentifier(transaction.payment.productIdentifier)
+        if self.DEBUG { print(self.completeTx) }
+        self.provideContentForProductIdentifier(transaction.payment.productIdentifier)
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
     
     private func restoreTransaction(transaction: SKPaymentTransaction) {
         let productIdentifier = transaction.originalTransaction!.payment.productIdentifier
-        if debugIAP { print(self.restoreTx + "\(productIdentifier)") }
-        provideContentForProductIdentifier(productIdentifier)
+        if self.DEBUG { print(self.restoreTx + "\(productIdentifier)") }
+        self.provideContentForProductIdentifier(productIdentifier)
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
     
     // Helper: Saves the fact that the product has been purchased and posts a notification.
     private func provideContentForProductIdentifier(productIdentifier: String) {
-        purchasedProductIdentifiers.insert(productIdentifier)
+        self.purchasedProductIdentifiers.insert(productIdentifier)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: productIdentifier)
         NSUserDefaults.standardUserDefaults().synchronize()
         NSNotificationCenter.defaultCenter().postNotificationName(
@@ -179,9 +179,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func failedTransaction(transaction: SKPaymentTransaction) {
-        if debugIAP { print(self.failedTx) }
-        if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue /*SKErrorPaymentCancelled*/  {
-            if debugIAP { print( self.errorTx + "\(transaction.error!.localizedDescription)") }
+        if self.DEBUG { print(self.failedTx) }
+        if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue {
+            if self.DEBUG { print( self.errorTx + "\(transaction.error!.localizedDescription)") }
         }
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
     }
@@ -226,7 +226,7 @@ extension IAPHelper {
     /// Returns true if granted access, false otherwise
     public class func sharingOptionGuard(vc: UIViewController) -> Bool {
         let grantAccess = IAPProducts.store.isProductPurchased(IAPProducts.SharingOption)
-        if self.debugIAPStatic { print(IAPProducts.SharingOption) }
+        if self.DEBUG_STATIC { print(IAPProducts.SharingOption) }
         if !grantAccess {
             let title: String = Constants.IAPtitle
             let message: String = Constants.sharingOptionMsg

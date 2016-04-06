@@ -42,7 +42,8 @@ final class Constants {
                                         "- Were you in pain? \n\n" +
                                         "- Did you sleep well? \n\n" +
                                         "- Were you able to do your activities? \n\n" +
-                                        "- Any events worth noting?"
+                                        "- Any events worth noting? \n\n" +
+                                        "... Tap to start writing ..."
     
     // MARK: - Plotting
     

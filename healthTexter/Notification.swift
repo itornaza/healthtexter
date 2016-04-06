@@ -9,7 +9,10 @@
 import Foundation
 import UIKit
 
+/// The notification scheduler shall calculate notifications when the app resigns active state. The scheduler sets up notifications to fire the second day after the app has resigned the active state. In this way if a user uses the app every day will never get a notification and will not be annoyed. Daily notifications follow for every day for a week one at the 2 week mark and a last one at the month mark
 final class Notification {
+    
+    private static let DEBUG: Bool = false
     
     // MARK: - Class Methods
     
@@ -73,13 +76,14 @@ final class Notification {
         
         // Schedule notification
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        if self.DEBUG { print(notification.fireDate) }
     }
     
     /// Configure the time and dates that the notifications will show up
     private class func configureTimeIntervals() -> [NSTimeInterval] {
         
         // The list here represents the number of days after today that the notifications will fire
-        var tiArray: [NSTimeInterval] = [1, 2, 3, 4, 5, 6, 7, 14, 30]
+        var tiArray: [NSTimeInterval] = [2, 3, 4, 5, 6, 7, 8, 15, 31]
         
         for ix in 0..<9 { 
             let numberOfDaysToShift: NSTimeInterval = tiArray[ix] - 1

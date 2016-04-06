@@ -78,6 +78,9 @@
 		72DD911F1C4AAD8E00E35657 /* FunctionalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DD911E1C4AAD8E00E35657 /* FunctionalityView.swift */; };
 		72DD91201C4AAD8E00E35657 /* FunctionalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DD911E1C4AAD8E00E35657 /* FunctionalityView.swift */; };
 		72DD91211C4AAD8E00E35657 /* FunctionalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DD911E1C4AAD8E00E35657 /* FunctionalityView.swift */; };
+		72F30F321CB2D61B00709C57 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F30F311CB2D61B00709C57 /* Plot.swift */; };
+		72F30F331CB2D61B00709C57 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F30F311CB2D61B00709C57 /* Plot.swift */; };
+		72F30F341CB2D61B00709C57 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F30F311CB2D61B00709C57 /* Plot.swift */; };
 		72F5C9E11C52AA17003B5EEF /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5C9E01C52AA17003B5EEF /* PreferencesViewController.swift */; };
 		72F5C9E21C52AA17003B5EEF /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5C9E01C52AA17003B5EEF /* PreferencesViewController.swift */; };
 		72F5C9E31C52AA17003B5EEF /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F5C9E01C52AA17003B5EEF /* PreferencesViewController.swift */; };
@@ -136,6 +139,7 @@
 		72B195B21C3EDBB9005DC5D1 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		72DD911A1C4AACF500E35657 /* SleepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		72DD911E1C4AAD8E00E35657 /* FunctionalityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionalityView.swift; sourceTree = "<group>"; };
+		72F30F311CB2D61B00709C57 /* Plot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plot.swift; sourceTree = "<group>"; };
 		72F5C9E01C52AA17003B5EEF /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +270,7 @@
 				72DD911A1C4AACF500E35657 /* SleepView.swift */,
 				72DD911E1C4AAD8E00E35657 /* FunctionalityView.swift */,
 				72241C291C78B50A00345B20 /* ProgressView.swift */,
+				72F30F311CB2D61B00709C57 /* Plot.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				721847B71BD7B60D004CAC70 /* TextViewController.swift in Sources */,
 				721847B51BD7B60D004CAC70 /* AppDelegate.swift in Sources */,
 				72DD911B1C4AACF500E35657 /* SleepView.swift in Sources */,
+				72F30F321CB2D61B00709C57 /* Plot.swift in Sources */,
 				72B195B31C3EDBB9005DC5D1 /* Theme.swift in Sources */,
 				72190F611C6DCF1900168C80 /* HistoryViewCell.swift in Sources */,
 				726370821C44223600CA037E /* PainView.swift in Sources */,
@@ -443,6 +449,7 @@
 				724D2E6E1CB032C40004864E /* DateTests.swift in Sources */,
 				72DD91201C4AAD8E00E35657 /* FunctionalityView.swift in Sources */,
 				72A239F31BD94750006F0436 /* HistoryEntryViewController.swift in Sources */,
+				72F30F331CB2D61B00709C57 /* Plot.swift in Sources */,
 				724667251C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift in Sources */,
 				726370851C44246400CA037E /* PainView.swift in Sources */,
 				725783F81C40FD320098F5BD /* Entry.swift in Sources */,
@@ -471,6 +478,7 @@
 				72190F631C6DCF1900168C80 /* HistoryViewCell.swift in Sources */,
 				725783FD1C40FF760098F5BD /* CoreDataStackManager.swift in Sources */,
 				72DD91211C4AAD8E00E35657 /* FunctionalityView.swift in Sources */,
+				72F30F341CB2D61B00709C57 /* Plot.swift in Sources */,
 				72A239F41BD94750006F0436 /* HistoryEntryViewController.swift in Sources */,
 				724667261C4A90D0002BB6F9 /* ProgressViewControllerExtension.swift in Sources */,
 				726370861C44246500CA037E /* PainView.swift in Sources */,

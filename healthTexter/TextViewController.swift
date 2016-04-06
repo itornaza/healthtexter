@@ -209,11 +209,26 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         // Configure the back button for the next view controller to show
         Theme.configureBackButtonForNextVC(self, label: "Back")
         
-        // Update Core Data
-        self.saveEntry()
+        // Check if the text is empty or default
+        let isEmptyText: Bool = (self.textArea.text == "" || self.textArea.text == Constants.initialText)
         
-        // Get the new Core Data for next use
-        Entry.getStoredEntries(vc: self, frc: fetchedResultsController)
+        // Check if the user selected the home button
+        let navigationButton = sender as! UIBarButtonItem
+        let homeButtonTouched = navigationButton.tag == 0 ? true : false
+        
+        // If the text is empty or default and the user opts for Home, and there is no saved entry: do not save an entry, otherwise do!
+        // The getEntryIfExists is computationaly expensive this is why it is done inline as the final check. If any of the previous tests is false, then this check does not need to be performed at all
+        if (isEmptyText == true &&
+            homeButtonTouched == true &&
+            Entry.getEntryIfExists(frc: self.fetchedResultsController) == nil
+        ) == false {
+            
+            // Update Core Data
+            self.saveEntry()
+            
+            // Get the new Core Data for next use
+            Entry.getStoredEntries(vc: self, frc: fetchedResultsController)
+        }
     }
 }
 

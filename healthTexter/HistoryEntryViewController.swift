@@ -83,7 +83,6 @@ class HistoryEntryViewController: UIViewController {
     
     /// If an entry exists get entry to send, prepare data and launch the activity view otherwise report the error
     func shareHistoryEntry() {
-        
         // Check if the user have purchased the sharing option
         if IAPHelper.sharingOptionGuard(self) == false {
             return
@@ -99,6 +98,5 @@ class HistoryEntryViewController: UIViewController {
                 message: Constants.dataDoesNotExist
             )
         }
-        
     }
 }

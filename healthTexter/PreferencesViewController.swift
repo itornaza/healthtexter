@@ -130,7 +130,6 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         // Dequeue a reusable cell from the table, using the reuse identifier
         let cell = tableView.dequeueReusableCellWithIdentifier("iapCell")! as UITableViewCell
         
@@ -192,7 +191,6 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     
     /// Reload the Inn-App Purchase table with the available app products
     func reloadIAP() {
-        
         // Flush any current products from the iapTableView
         self.products = []
         self.iapTableView.reloadData()
@@ -226,7 +224,6 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     
     /// Add refresh control for the iapTableView
     func configureRefreshControl() {
-        
         // Set up a refresh control, call reload to start things up
         self.refreshControl = UIRefreshControl()
         

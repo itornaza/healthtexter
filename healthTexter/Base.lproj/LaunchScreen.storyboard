@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,16 +17,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="0Op-4C-uBG">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2w-dF-TDN">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="healthTexter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pb8-rX-13t">
+                                        <rect key="frame" x="187" y="272" width="226" height="55"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="40"/>
+                                        <color key="textColor" red="0.6588235294" green="0.81960784310000001" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.2666666667" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="pb8-rX-13t" firstAttribute="centerX" secondItem="T2w-dF-TDN" secondAttribute="centerX" id="EQz-MH-0Ip"/>
+                                    <constraint firstItem="pb8-rX-13t" firstAttribute="centerY" secondItem="T2w-dF-TDN" secondAttribute="centerY" id="c1Z-4W-KsV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="0Op-4C-uBG" secondAttribute="bottom" id="ObH-jN-cy6"/>
-                            <constraint firstItem="0Op-4C-uBG" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="cUZ-9z-Rz3"/>
-                            <constraint firstItem="0Op-4C-uBG" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="frL-Sg-Aip"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0Op-4C-uBG" secondAttribute="trailing" constant="-20" id="lVT-p3-ZFl"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="T2w-dF-TDN" secondAttribute="bottom" id="8fS-UR-Zd4"/>
+                            <constraint firstItem="T2w-dF-TDN" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="HAG-06-cNJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="T2w-dF-TDN" secondAttribute="trailing" constant="-20" id="dnc-Wp-LTD"/>
+                            <constraint firstItem="T2w-dF-TDN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="sXX-N4-3jy"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -35,7 +48,4 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="SplashScreen" width="320" height="480"/>
-    </resources>
 </document>

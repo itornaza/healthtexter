@@ -97,7 +97,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
             Theme.activityView(self, textToSend: dataToSend)
         } else {
             Theme.alertView(
-                self,
+                vc: self,
                 title: Constants.dataError,
                 message: Constants.dataDoesNotExist
             )

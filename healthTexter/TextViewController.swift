@@ -53,16 +53,16 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         
         // Promt used to record instead of typing
         if Theme.hasIntroducedMic() == false {
-            Theme.alertView(self, title: Constants.voiceTitle, message: Constants.voiceMessage)
+            Theme.alertView(vc: self, title: Constants.voiceTitle, message: Constants.voiceMessage)
             Theme.configureMicIntro()
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.fetchedResultsController.delegate = nil
         self.unsubscribeFromKeyboardNotifications()
     }
@@ -70,7 +70,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     // MARK: - Keyboard functions
     
     func keyboardWillShow(notification: NSNotification) {
-        self.textArea.contentInset.bottom = getKeyboardHeight(notification)
+        self.textArea.contentInset.bottom = getKeyboardHeight(notification: notification)
     }
     
     /// Reset the text area to it's original state
@@ -174,9 +174,9 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     }
     
     func configureUI() {
-        Theme.navigationBar(self, backgroundColor: Theme.writeColor)
+        Theme.navigationBar(vc: self, backgroundColor: Theme.writeColor)
         Theme.setDateToNavigationTitle(vc: self, date: Date.get())
-        Theme.hideTabBar(self)
+        Theme.hideTabBar(vc: self)
         self.configureTextArea()
     }
     
@@ -203,7 +203,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Configure the back button for the next view controller to show
-        Theme.configureBackButtonForNextVC(self, label: "Back")
+        Theme.configureBackButtonForNextVC(vc: self, label: "Back")
         
         // Check if the text is empty or default
         let isEmptyText: Bool = (self.textArea.text == "" || self.textArea.text == Constants.initialText)
@@ -230,12 +230,12 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
 
 extension TextViewController: UITextViewDelegate {
     
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         self.setRemainingCharacters()
     }
     
     /// Limit to a maximum number of characters
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentCharacterCount = textView.text?.characters.count ?? 0
         if (range.length + range.location > currentCharacterCount){
             return false
@@ -245,7 +245,7 @@ extension TextViewController: UITextViewDelegate {
     }
     
     /// Clear the default text on tap in odrer to let the user write immediately
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == Constants.initialText {
             textView.text = nil
             self.setRemainingCharacters()
@@ -253,7 +253,7 @@ extension TextViewController: UITextViewDelegate {
     }
     
     /// If the user has left the textView empty, store the default text
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = Constants.initialText
         }

@@ -48,7 +48,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         self.selectedIndicesArray = []
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         Theme.tabBarColor(self, color: Theme.historyColor)
         
@@ -56,7 +56,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         self.tableView.reloadData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.fetchedResultsController.delegate = nil
     }
     
@@ -81,7 +81,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         // If no entries are selected alert the user. Otherwise send the data
         if entriesToShare.count == 0 {
             Theme.alertView(
-                self,
+                vc: self,
                 title: Constants.oops,
                 message: Constants.noDataToSend
             )

@@ -42,19 +42,19 @@ class StartViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func write(sender: UIButton) {
-        Theme.segueToTabBarController(self, tabItemIndex: Constants.textTab)
+        Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.textTab)
     }
     
     @IBAction func monitor(sender: UIButton) {
-        Theme.segueToTabBarController(self, tabItemIndex: Constants.monitorTab)
+        Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.monitorTab)
     }
     
     @IBAction func history(sender: UIButton) {
-        Theme.segueToTabBarController(self, tabItemIndex: Constants.historyTab)
+        Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.historyTab)
     }
     
     @IBAction func preferences(sender: UIButton) {
-        Theme.segueToTabBarController(self, tabItemIndex: Constants.preferencesTab)
+        Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.preferencesTab)
     }
     
     // MARK: - Configuration
@@ -85,17 +85,17 @@ class StartViewController: UIViewController {
     }
     
     func configureHookLabels() {
-        Theme.configureHookLabels(self.writeHookText)
-        Theme.configureHookLabels(self.monitorHookLabel)
-        Theme.configureHookLabels(self.historyHookLabel)
-        Theme.configureHookLabels(self.preferencesHookLabel)
+        Theme.configureHookLabels(label: self.writeHookText)
+        Theme.configureHookLabels(label: self.monitorHookLabel)
+        Theme.configureHookLabels(label: self.historyHookLabel)
+        Theme.configureHookLabels(label: self.preferencesHookLabel)
     }
     
     func configureButtonsBorders() {
-        self.configureButton(self.writeButton)
-        self.configureButton(self.monitorButton)
-        self.configureButton(self.historyButton)
-        self.configureButton(self.preferencesButton)
+        self.configureButton(button: self.writeButton)
+        self.configureButton(button: self.monitorButton)
+        self.configureButton(button: self.historyButton)
+        self.configureButton(button: self.preferencesButton)
     }
     
     func configureButton(button: UIButton) {

@@ -34,8 +34,8 @@ final class Entry: NSManagedObject {
     
     // MARK: - Constructors
     
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     
     /// Default constructor if all of the properties are known beforehand
@@ -44,7 +44,7 @@ final class Entry: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: "Entry", in: context)!
         
         // Insert the new Entry into the Core Data Stack
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        super.init(entity: entity, insertInto: context)
         
         // Initialize the properties from a dictionary
         self.date = Date.get()
@@ -60,7 +60,7 @@ final class Entry: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: "Entry", in: context)!
         
         // Insert the new Entry into the Core Data Stack
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        super.init(entity: entity, insertInto: context)
 
         // Initialize the Entity with the date and text
         self.date = Date.get()
@@ -77,7 +77,7 @@ final class Entry: NSManagedObject {
     /// Check if there is already an entry for today and return it
     class func getEntryIfExists(frc: NSFetchedResultsController<AnyObject>) -> Entry? {
         let storedEntries = frc.fetchedObjects as! [Entry]
-        let date_1 = Date.getFormatted(Date.get(), formatString: Date.dateFormatISO)
+        let date_1 = Date.getFormatted(date: Date.get(), formatString: Date.dateFormatISO)
         for entry in storedEntries {
             let date_2 = Date.getFormatted(entry.date, formatString: Date.dateFormatISO)
             if  date_1 == date_2 {
@@ -94,7 +94,7 @@ final class Entry: NSManagedObject {
             try frc.performFetch()
         } catch {
             Theme.alertView(
-                vc,
+                vc: vc,
                 title: Constants.dataError,
                 message: Constants.dataLoadingError
             )
@@ -110,7 +110,7 @@ final class Entry: NSManagedObject {
     
     /// Format data of an entry in a string for the user to share
     class func prepareDataToShare(entry: Entry) -> String {
-        return  "Date: \(Date.getFormatted(entry.date, formatString: Date.dateFormat4All) )\n" +
+        return  "Date: \(Date.getFormatted(date: entry.date, formatString: Date.dateFormat4All) )\n" +
                 "Pain: \(entry.painRank)\n" +
                 "Sleep: \(entry.sleepRank)\n" +
                 "Functionality: \(entry.functionalityRank)\n\n" +

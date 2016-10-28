@@ -53,15 +53,15 @@ final class Notification {
         let tiArray: [TimeInterval] = Notification.configureTimeIntervals()
         
         // Configure the notifications
-        self.configure(notification_1,  referenceDate: refDate, ti: tiArray[0], msg: Constants.notificationMsg_1)
-        self.configure(notification_2,  referenceDate: refDate, ti: tiArray[1], msg: Constants.notificationMsg_2)
-        self.configure(notification_3,  referenceDate: refDate, ti: tiArray[2], msg: Constants.notificationMsg_3)
-        self.configure(notification_4,  referenceDate: refDate, ti: tiArray[3], msg: Constants.notificationMsg_1)
-        self.configure(notification_5,  referenceDate: refDate, ti: tiArray[4], msg: Constants.notificationMsg_2)
-        self.configure(notification_6,  referenceDate: refDate, ti: tiArray[5], msg: Constants.notificationMsg_3)
-        self.configure(notification_7,  referenceDate: refDate, ti: tiArray[6], msg: Constants.notificationMsg_1)
-        self.configure(notification_14, referenceDate: refDate, ti: tiArray[7], msg: Constants.notificationMsg_14)
-        self.configure(notification_30, referenceDate: refDate, ti: tiArray[8], msg: Constants.notificationMsg_30)
+        self.configure(notification: notification_1,  referenceDate: refDate, ti: tiArray[0], msg: Constants.notificationMsg_1)
+        self.configure(notification: notification_2,  referenceDate: refDate, ti: tiArray[1], msg: Constants.notificationMsg_2)
+        self.configure(notification: notification_3,  referenceDate: refDate, ti: tiArray[2], msg: Constants.notificationMsg_3)
+        self.configure(notification: notification_4,  referenceDate: refDate, ti: tiArray[3], msg: Constants.notificationMsg_1)
+        self.configure(notification: notification_5,  referenceDate: refDate, ti: tiArray[4], msg: Constants.notificationMsg_2)
+        self.configure(notification: notification_6,  referenceDate: refDate, ti: tiArray[5], msg: Constants.notificationMsg_3)
+        self.configure(notification: notification_7,  referenceDate: refDate, ti: tiArray[6], msg: Constants.notificationMsg_1)
+        self.configure(notification: notification_14, referenceDate: refDate, ti: tiArray[7], msg: Constants.notificationMsg_14)
+        self.configure(notification: notification_30, referenceDate: refDate, ti: tiArray[8], msg: Constants.notificationMsg_30)
     }
     
     /// Sets up the atributes of a notification

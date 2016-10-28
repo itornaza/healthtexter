@@ -107,7 +107,7 @@ final public class IAPHelper : NSObject  {
 /// Get a list of products, their titles, descriptions, and prices from the Apple server
 extension IAPHelper: SKProductsRequestDelegate {
     
-    public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         if self.DEBUG { print(self.loadedProducts) }
         let products = response.products
         self.completionHandler?(success: true, products: products)
@@ -118,7 +118,7 @@ extension IAPHelper: SKProductsRequestDelegate {
         }
     }
     
-    public func request(request: SKRequest, didFailWithError error: NSError) {
+    public func request(_ request: SKRequest, didFailWithError error: Error) {
         if self.DEBUG { print(self.failed) }
         if self.DEBUG { print(self.errorReport + "\(error)") }
         self.clearRequest()
@@ -134,17 +134,17 @@ extension IAPHelper: SKProductsRequestDelegate {
 
 extension IAPHelper: SKPaymentTransactionObserver {
     /// This is a function called by the payment queue, not to be called directly. For each transaction act accordingly, save in the purchased cache, issue notifications, mark the transaction as complete
-    public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
             case .purchased:
-                self.completeTransaction(transaction)
+                self.completeTransaction(transaction: transaction)
                 break
             case .failed:
-                self.failedTransaction(transaction)
+                self.failedTransaction(transaction: transaction)
                 break
             case .restored:
-                self.restoreTransaction(transaction)
+                self.restoreTransaction(transaction: transaction)
                 break
             case .deferred:
                 break
@@ -156,14 +156,14 @@ extension IAPHelper: SKPaymentTransactionObserver {
     
     private func completeTransaction(transaction: SKPaymentTransaction) {
         if self.DEBUG { print(self.completeTx) }
-        self.provideContentForProductIdentifier(transaction.payment.productIdentifier)
+        self.provideContentForProductIdentifier(productIdentifier: transaction.payment.productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     private func restoreTransaction(transaction: SKPaymentTransaction) {
         let productIdentifier = transaction.original!.payment.productIdentifier
         if self.DEBUG { print(self.restoreTx + "\(productIdentifier)") }
-        self.provideContentForProductIdentifier(productIdentifier)
+        self.provideContentForProductIdentifier(productIdentifier: productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
     
@@ -198,8 +198,8 @@ extension IAPHelper {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
             // When the user clicks the action button segue to the Preferences View Controller. Where the user can perform the In-App Purchase
-            let okAction = UIAlertAction(title: Constants.IAPbuttonTitle , style: UIAlertActionStyle.Default) { UIAlertAction in
-                Theme.segueToTabBarController(vc, tabItemIndex: Constants.preferencesTab)
+            let okAction = UIAlertAction(title: Constants.IAPbuttonTitle , style: UIAlertActionStyle.default) { UIAlertAction in
+                Theme.segueToTabBarController(vc: vc, tabItemIndex: Constants.preferencesTab)
             }
             
             alertController.addAction(okAction)
@@ -211,12 +211,12 @@ extension IAPHelper {
     /// If the user reaches the maximum entries and have not purchased the Unlimited entries take her to the Preferences View Controller
     /// Returns true if granted access, false otherwise
     public class func unlimitedEntriesGuard(vc: UIViewController, entries: Int) -> Bool {
-        let grantAccess: Bool = IAPProducts.store.isProductPurchased(IAPProducts.UnlimitedEnties)
+        let grantAccess: Bool = IAPProducts.store.isProductPurchased(productIdentifier: IAPProducts.UnlimitedEnties)
         let reachedEntriesLimit: Bool = entries >= Constants.maxFreeEntries ? true : false
         if !grantAccess && reachedEntriesLimit {
             let title: String = Constants.IAPtitle
             let message: String = Constants.unlimitedEntriesMsg
-            self.IAPAlertController(vc, title: title, message: message)
+            self.IAPAlertController(vc: vc, title: title, message: message)
             return false
         }
         return true
@@ -225,12 +225,12 @@ extension IAPHelper {
     /// If the sharing option is not yet purchased segue to the Preferences View Controller
     /// Returns true if granted access, false otherwise
     public class func sharingOptionGuard(vc: UIViewController) -> Bool {
-        let grantAccess = IAPProducts.store.isProductPurchased(IAPProducts.SharingOption)
+        let grantAccess = IAPProducts.store.isProductPurchased(productIdentifier: IAPProducts.SharingOption)
         if self.DEBUG_STATIC { print(IAPProducts.SharingOption) }
         if !grantAccess {
             let title: String = Constants.IAPtitle
             let message: String = Constants.sharingOptionMsg
-            self.IAPAlertController(vc, title: title, message: message)
+            self.IAPAlertController(vc: vc, title: title, message: message)
             return false
         }
         return true

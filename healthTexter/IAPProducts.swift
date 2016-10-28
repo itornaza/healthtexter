@@ -30,5 +30,5 @@ public enum IAPProducts {
 
 /// Return the resourcename for the product identifier
 func resourceNameForProductIdentifier(productIdentifier: String) -> String? {
-    return productIdentifier.componentsSeparatedByString(".").last
+    return productIdentifier.components(separatedBy: ".").last
 }

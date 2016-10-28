@@ -22,7 +22,7 @@ class CoreDataStackManager {
 
     // MARK: - Apple's Core Data Stack (moved from AppDelegate)
     
-    lazy var applicationDocumentsDirectory: URL = {
+    lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "gr.polarbear.healthTexter" in the application's documents Application Support directory.
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]

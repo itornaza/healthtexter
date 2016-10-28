@@ -61,7 +61,7 @@ class HistoryEntryViewController: UIViewController {
         self.sleepRank.text = "\((self.entry?.sleepRank)!)"
         self.functionalityRank.text = "\((self.entry?.functionalityRank)!)"
         self.textArea.text = self.entry?.text
-        Theme.tabBarColor(self, color: Theme.historyColor)
+        Theme.tabBarColor(vc: self, color: Theme.historyColor)
 
     }
     
@@ -84,16 +84,16 @@ class HistoryEntryViewController: UIViewController {
     /// If an entry exists get entry to send, prepare data and launch the activity view otherwise report the error
     func shareHistoryEntry() {
         // Check if the user have purchased the sharing option
-        if IAPHelper.sharingOptionGuard(self) == false {
+        if IAPHelper.sharingOptionGuard(vc: self) == false {
             return
         }
         
         if self.entry != nil {
-            let dataToSend = Entry.prepareDataToShare(self.entry!)
-            Theme.activityView(self, textToSend: dataToSend)
+            let dataToSend = Entry.prepareDataToShare(entry: self.entry!)
+            Theme.activityView(vc: self, textToSend: dataToSend)
         } else {
             Theme.alertView(
-                self,
+                vc: self,
                 title: Constants.dataError,
                 message: Constants.dataDoesNotExist
             )

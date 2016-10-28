@@ -32,31 +32,31 @@ final class Date {
     /// Get the current date formatted
     class func getFormatted(formatString: String) -> String {
         // Set up the dateformatter
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = formatString
         
         // Return today in the desired format
         let today: NSDate = self.get()
-        return dateFormatter.stringFromDate(today)
+        return dateFormatter.stringFromDate(today as Date)
     }
     
     // Get a given date formated
     class func getFormatted(date: NSDate, formatString: String) -> String {
         // Set up the dateformatter
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = formatString
         
         // Return the date in the desired format
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.stringFromDate(date as Date)
     }
     
     /// Get the current NSDate shifted on user preference
     class func get() -> NSDate {
         // Get the preference of the user as a delay (negative shift)
-        let shiftInSeconds: NSTimeInterval = (self.shiftDirection * self.getDaySwitchPreference()!)
+        let shiftInSeconds: TimeInterval = (self.shiftDirection * self.getDaySwitchPreference()!)
 
         // Add it to current date
-        let today = NSDate().dateByAddingTimeInterval(shiftInSeconds)
+        let today = NSDate().addingTimeInterval(shiftInSeconds)
         
         // Return the shifted version of today
         return today
@@ -65,37 +65,37 @@ final class Date {
     /// Returns tomorrow 00:00:00 or 12:00AM (ie start of day). This date is not shifted as it does not refer to a diary entry but is used for a reference date to set up notifications
     class func getTomorrowMidnigh() -> NSDate {
         let now = NSDate()
-        let tomorrowSameTime = now.dateByAddingTimeInterval(self.secondsInHour * 24)
-        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let tomorrowMidnight = cal.startOfDayForDate(tomorrowSameTime)
+        let tomorrowSameTime = now.addingTimeInterval(self.secondsInHour * 24)
+        let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let tomorrowMidnight = cal.startOfDayForDate(tomorrowSameTime as Date)
         return tomorrowMidnight
     }
     
     class func getTodayMidnight() -> NSDate {
         let now = NSDate()
-        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let todayMidnight = cal.startOfDayForDate(now)
+        let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let todayMidnight = cal.startOfDayForDate(now as Date)
         return todayMidnight
     }
     
     /// Get the hour and minute from a date
-    class func getTimeComponents(date: NSDate) -> (NSTimeInterval, NSTimeInterval) {
-        let calendar = NSCalendar.currentCalendar()
+    class func getTimeComponents(date: NSDate) -> (TimeInterval, TimeInterval) {
+        let calendar = NSCalendar.current
         let comp = calendar.components([.Hour, .Minute], fromDate: date)
-        let hour = NSTimeInterval(comp.hour)
-        let minute = NSTimeInterval(comp.minute)
+        let hour = TimeInterval(comp.hour)
+        let minute = TimeInterval(comp.minute)
         return (hour, minute)
     }
     
     /// Get the time in seconds from a date picker
-    class func getTimeFromPickerInSeconds(sender: UIDatePicker) -> NSTimeInterval {
+    class func getTimeFromPickerInSeconds(sender: UIDatePicker) -> TimeInterval {
         // Get the time components
-        var hour: NSTimeInterval = 0.0
-        var min: NSTimeInterval = 0.0
+        var hour: TimeInterval = 0.0
+        var min: TimeInterval = 0.0
         (hour, min) = self.getTimeComponents(sender.date)
         
         // Generate the prefered notification time in seconds
-        let timeInSeconds: NSTimeInterval = (hour * 60 + min) * 60
+        let timeInSeconds: TimeInterval = (hour * 60 + min) * 60
         
         // Return the date picker time in seconds
         return timeInSeconds
@@ -103,38 +103,38 @@ final class Date {
     
     // MARK: - NSUserDefaults Getters
     
-    class func getTimePreference() -> NSTimeInterval? {
-        return NSUserDefaults.standardUserDefaults().doubleForKey(Constants.notificationTimePreference) as NSTimeInterval
+    class func getTimePreference() -> TimeInterval? {
+        return UserDefaults.standard.double(forKey: Constants.notificationTimePreference) as TimeInterval
     }
     
-    class func getDaySwitchPreference() -> NSTimeInterval? {
-        return NSUserDefaults.standardUserDefaults().doubleForKey(Constants.daySwitchTimePreference) as NSTimeInterval
+    class func getDaySwitchPreference() -> TimeInterval? {
+        return UserDefaults.standard.double(forKey: Constants.daySwitchTimePreference) as TimeInterval
     }
     
     // MARK: - NSUserDefaults Setters
     
     /// Get the notification time preference in seconds and update the user defaults
-    class func setTimePreference(ti: NSTimeInterval) {
-        NSUserDefaults.standardUserDefaults().setDouble(ti, forKey: Constants.notificationTimePreference)
+    class func setTimePreference(ti: TimeInterval) {
+        UserDefaults.standard.set(ti, forKey: Constants.notificationTimePreference)
     }
     
     /// Get the day switch time preference in seconds and update the user defaults
-    class func setDaySwitchPreference(ti: NSTimeInterval) {
-        NSUserDefaults.standardUserDefaults().setDouble(ti, forKey: Constants.daySwitchTimePreference)
+    class func setDaySwitchPreference(ti: TimeInterval) {
+        UserDefaults.standard.set(ti, forKey: Constants.daySwitchTimePreference)
     }
     
     // MARK: - Methods
     
     /// Is this the first app launch or not?
     class func appHasLaunchedOnce() -> Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(Constants.hasLaunchedOnce)
+        return UserDefaults.standard.bool(forKey: Constants.hasLaunchedOnce)
     }
     
     /// Set the user defaults on the first launch ever
     class func configureDefaults() {
         if self.appHasLaunchedOnce() == false {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.hasLaunchedOnce)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(true, forKey: Constants.hasLaunchedOnce)
+            UserDefaults.standard.synchronize()
             self.setTimePreference(Constants.ninteenHudredHours * self.secondsInHour)
             self.setDaySwitchPreference(Constants.fourHudredHours * self.secondsInHour)
         }

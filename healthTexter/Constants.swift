@@ -90,9 +90,9 @@ final class Constants {
     static let hasIntroducedMic: String =           "HasIntroducedMic"
     
     // Default time preference in hours
-    static let ninteenHudredHours: NSTimeInterval = 19.0
-    static let fourHudredHours: NSTimeInterval = 4.0
-    static let maxSwitchDayDelay: NSTimeInterval = 4.0 * 3600
+    static let ninteenHudredHours: TimeInterval = 19.0
+    static let fourHudredHours: TimeInterval = 4.0
+    static let maxSwitchDayDelay: TimeInterval = 4.0 * 3600
     
     // Messages
     static let notificationMsg_1: String =  "It's about time to write in your diary! 🙄"

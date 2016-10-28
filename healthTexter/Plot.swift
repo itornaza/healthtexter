@@ -57,7 +57,7 @@ public class Plot: UIView {
         // Draw the gradient
         var startPoint = CGPoint.zero
         var endPoint = CGPoint(x: 0, y: self.bounds.height)
-        CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, CGGradientDrawingOptions(rawValue: 0))
+        CGContextDrawLinearGradient(context!, gradient!, startPoint, endPoint, CGGradientDrawingOptions(rawValue: 0))
         
         //------------------------
         // Calculate the x point
@@ -128,7 +128,7 @@ public class Plot: UIView {
         //-----------------------------------------------------
         
         // Save the state of the context
-        CGContextSaveGState(context)
+        CGContextSaveGState(context!)
         
         // Make a copy of the path
         let clippingPath = graphPath.copy() as! UIBezierPath
@@ -145,8 +145,8 @@ public class Plot: UIView {
         startPoint = CGPoint(x: margin, y: highestYPoint)
         endPoint = CGPoint(x: margin, y: self.bounds.height)
         
-        CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, CGGradientDrawingOptions(rawValue: 0))
-        CGContextRestoreGState(context)
+        CGContextDrawLinearGradient(context!, gradient!, startPoint, endPoint, CGGradientDrawingOptions(rawValue: 0))
+        CGContextRestoreGState(context!)
         
         //-------------------------------------------------
         // Draw the line on top of the clipped gradient

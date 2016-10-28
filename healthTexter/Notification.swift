@@ -24,7 +24,7 @@ final class Notification {
     /// Ask the user's permission to send notifications
     class func userConcent(application: UIApplication) {
         application.registerUserNotificationSettings(
-            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         )
     }
     

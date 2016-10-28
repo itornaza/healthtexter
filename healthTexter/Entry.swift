@@ -49,9 +49,9 @@ final class Entry: NSManagedObject {
         // Initialize the properties from a dictionary
         self.date = Date.get()
         self.text = dictionary[Keys.text] as! String
-        self.painRank = NSNumber(dictionary[Keys.painRank] as! Int)
-        self.sleepRank = NSNumber(dictionary[Keys.sleepRank] as! Int)
-        self.functionalityRank = NSNumber(dictionary[Keys.functionalityRank] as! Int)
+        self.painRank = NSNumber(value: dictionary[Keys.painRank] as! Int)
+        self.sleepRank = NSNumber(value: dictionary[Keys.sleepRank] as! Int)
+        self.functionalityRank = NSNumber(value: dictionary[Keys.functionalityRank] as! Int)
     }
     
     /// Default constructor with only requiring the text area
@@ -67,19 +67,19 @@ final class Entry: NSManagedObject {
         self.text = text
         
         // Set the ranks to a sentinel to indicate that they are not yet set
-        self.painRank = NSNumber(Constants.defaultRank)
-        self.sleepRank = NSNumber(Constants.defaultRank)
-        self.functionalityRank = NSNumber(Constants.defaultRank)
+        self.painRank = NSNumber(value: Constants.defaultRank)
+        self.sleepRank = NSNumber(value: Constants.defaultRank)
+        self.functionalityRank = NSNumber(value: Constants.defaultRank)
     }
     
     // MARK: - Class Methods
     
     /// Check if there is already an entry for today and return it
-    class func getEntryIfExists(frc: NSFetchedResultsController<AnyObject>) -> Entry? {
-        let storedEntries = frc.fetchedObjects as! [Entry]
+    class func getEntryIfExists(frc: NSFetchedResultsController<Entry>) -> Entry? {
+        let storedEntries = frc.fetchedObjects! as [Entry]
         let date_1 = Date.getFormatted(date: Date.get(), formatString: Date.dateFormatISO)
         for entry in storedEntries {
-            let date_2 = Date.getFormatted(entry.date, formatString: Date.dateFormatISO)
+            let date_2 = Date.getFormatted(date: entry.date, formatString: Date.dateFormatISO)
             if  date_1 == date_2 {
                 return entry
             }
@@ -88,7 +88,7 @@ final class Entry: NSManagedObject {
     }
     
     /// Get all the entries stored in Core Data. Use self for the originator view controller
-    class func getStoredEntries(vc: UIViewController, frc: NSFetchedResultsController<AnyObject>) {
+    class func getStoredEntries(vc: UIViewController, frc: NSFetchedResultsController<Entry>) {
         // Get the entries or display error
         do {
             try frc.performFetch()
@@ -102,7 +102,7 @@ final class Entry: NSManagedObject {
     }
     
     /// Get the current number of entries
-    class func getStoredEntriesCount(frc: NSFetchedResultsController<AnyObject>) -> Int {
+    class func getStoredEntriesCount(frc: NSFetchedResultsController<Entry>) -> Int {
         let sectionInfo = frc.sections![0]
         let numberOfEntries = sectionInfo.numberOfObjects
         return numberOfEntries

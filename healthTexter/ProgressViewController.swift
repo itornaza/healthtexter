@@ -18,8 +18,10 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest(entityName: "Entry")
+    // See this page for conversion to swift 3.0
+    // http://stackoverflow.com/questions/39816877/lazy-var-nsfetchedresultscontroller-producing-error-in-swift-3-0
+    lazy var fetchedResultsController: NSFetchedResultsController<Entry> = {
+        let fetchRequest = NSFetchRequest<Entry>(entityName: "Entry")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Entry.Keys.date, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,

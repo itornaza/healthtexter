@@ -20,8 +20,10 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest(entityName: "Entry")
+    // See this page for conversion to swift 3.0
+    // http://stackoverflow.com/questions/39816877/lazy-var-nsfetchedresultscontroller-producing-error-in-swift-3-0
+    lazy var fetchedResultsController: NSFetchedResultsController<Entry> = {
+        let fetchRequest = NSFetchRequest<Entry>(entityName: "Entry")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Entry.Keys.date, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -44,7 +46,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         self.configure()
         
         // Get the current number of entries and check against the unlimited entries In-App Purchase rules
-        let numberOfEntries = Entry.getStoredEntriesCount(self.fetchedResultsController)
+        let numberOfEntries = Entry.getStoredEntriesCount(frc: self.fetchedResultsController)
         if IAPHelper.unlimitedEntriesGuard(self, entries: numberOfEntries) == false {
             return
         }
@@ -201,7 +203,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     
     // MARK: - Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Configure the back button for the next view controller to show
         Theme.configureBackButtonForNextVC(vc: self, label: "Back")
         

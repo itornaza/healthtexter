@@ -37,17 +37,17 @@ class HistoryEntryViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func readItToMe(sender: UISwitch) {
-        if (sender.on) {
+        if (sender.isOn) {
             
             // Start narrating the text
             myUtterance = AVSpeechUtterance(string: textArea.text)
             myUtterance.rate = 0.3
-            synth.speakUtterance(myUtterance)
+            synth.speak(myUtterance)
             
         } else {
             
             // Stop after saying the next word
-            synth.stopSpeakingAtBoundary(.Word)
+            synth.stopSpeaking(at: .word)
         }
     }
     
@@ -72,7 +72,7 @@ class HistoryEntryViewController: UIViewController {
     
     func configureActionButton() {
         let action = UIBarButtonItem(
-            barButtonSystemItem: .Action,
+            barButtonSystemItem: .action,
             target: self,
             action: #selector(HistoryEntryViewController.shareHistoryEntry)
         )

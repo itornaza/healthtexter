@@ -47,7 +47,7 @@ extension ProgressViewController {
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.painView.viewWithTag(ix) as? UILabel {
-                labelView.hidden = true
+                labelView.isHidden = true
             }
         }
         
@@ -77,8 +77,8 @@ extension ProgressViewController {
         }
         
         // Reverse the arrays to plot the most recent entry to the right
-        datesArray = datesArray.reverse()
-        painRankArray = painRankArray.reverse()
+        datesArray = datesArray.reversed()
+        painRankArray = painRankArray.reversed()
         
         // Feed the plot data to the PainView class
         self.painView.graphPoints = painRankArray
@@ -87,10 +87,10 @@ extension ProgressViewController {
         self.painView.setNeedsDisplay()
         
         // Max pain label
-        self.maxPain.text = "\(self.painView.graphPoints.maxElement()!)"
+        self.maxPain.text = "\(self.painView.graphPoints.max()!)"
         
         // Average pain label
-        let average = self.painView.graphPoints.reduce(0, combine: +) / self.painView.graphPoints.count
+        let average = self.painView.graphPoints.reduce(0, +) / self.painView.graphPoints.count
         self.averagePain.text = "\(average)"
         
         // Dates to storyboard labels
@@ -100,7 +100,7 @@ extension ProgressViewController {
                 if let labelView = self.painView.viewWithTag(ix) as? UILabel {
                     labelView.text = "\(date)"
                     if ix == 1 || ix == 4 || ix == 7 {
-                        labelView.hidden = false
+                        labelView.isHidden = false
                     }
                 }
                 ix += 1
@@ -119,7 +119,7 @@ extension ProgressViewController {
                         
                         // Show the date label
                         if ix == 1 || ix == 4 || ix == 7 {
-                            labelView.hidden = false
+                            labelView.isHidden = false
                             ix = ix + 3
                         }
                     }
@@ -133,7 +133,7 @@ extension ProgressViewController {
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.sleepView.viewWithTag(ix) as? UILabel {
-                labelView.hidden = true
+                labelView.isHidden = true
             }
         }
         
@@ -163,8 +163,8 @@ extension ProgressViewController {
         }
         
         // Reverse the arrays to plot the most recent entry to the right
-        datesArray = datesArray.reverse()
-        sleepRankArray = sleepRankArray.reverse()
+        datesArray = datesArray.reversed()
+        sleepRankArray = sleepRankArray.reversed()
         
         // Feed the plot data to the PainView class
         self.sleepView.graphPoints = sleepRankArray
@@ -173,10 +173,10 @@ extension ProgressViewController {
         self.sleepView.setNeedsDisplay()
         
         // Max pain label
-        self.maxSleep.text = "\(self.sleepView.graphPoints.maxElement()!)"
+        self.maxSleep.text = "\(self.sleepView.graphPoints.max()!)"
         
         // Average pain label
-        let average = self.sleepView.graphPoints.reduce(0, combine: +) / self.sleepView.graphPoints.count
+        let average = self.sleepView.graphPoints.reduce(0, +) / self.sleepView.graphPoints.count
         self.averageSleep.text = "\(average)"
         
         // Dates to storyboard labels
@@ -186,7 +186,7 @@ extension ProgressViewController {
                 if let labelView = self.sleepView.viewWithTag(ix) as? UILabel {
                     labelView.text = "\(date)"
                     if ix == 1 || ix == 4 || ix == 7 {
-                        labelView.hidden = false
+                        labelView.isHidden = false
                     }
                 }
                 ix += 1
@@ -205,7 +205,7 @@ extension ProgressViewController {
                         
                         // Show the date label
                         if ix == 1 || ix == 4 || ix == 7 {
-                            labelView.hidden = false
+                            labelView.isHidden = false
                             ix = ix + 3
                         }
                     }
@@ -219,7 +219,7 @@ extension ProgressViewController {
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.functionalityView.viewWithTag(ix) as? UILabel {
-                labelView.hidden = true
+                labelView.isHidden = true
             }
         }
         
@@ -249,8 +249,8 @@ extension ProgressViewController {
         }
         
         // Reverse the arrays to plot the most recent entry to the right
-        datesArray = datesArray.reverse()
-        functionalityRankArray = functionalityRankArray.reverse()
+        datesArray = datesArray.reversed()
+        functionalityRankArray = functionalityRankArray.reversed()
         
         // Feed the plot data to the PainView class
         self.functionalityView.graphPoints = functionalityRankArray
@@ -259,10 +259,10 @@ extension ProgressViewController {
         self.functionalityView.setNeedsDisplay()
         
         // Max pain label
-        self.maxFunctionality.text = "\(self.functionalityView.graphPoints.maxElement()!)"
+        self.maxFunctionality.text = "\(self.functionalityView.graphPoints.max()!)"
         
         // Average pain label
-        let average = self.functionalityView.graphPoints.reduce(0, combine: +) / self.functionalityView.graphPoints.count
+        let average = self.functionalityView.graphPoints.reduce(0, +) / self.functionalityView.graphPoints.count
         self.averageFunctionality.text = "\(average)"
         
         // Dates to storyboard labels
@@ -272,7 +272,7 @@ extension ProgressViewController {
                 if let labelView = self.functionalityView.viewWithTag(ix) as? UILabel {
                     labelView.text = "\(date)"
                     if ix == 1 || ix == 4 || ix == 7 {
-                        labelView.hidden = false
+                        labelView.isHidden = false
                     }
                 }
                 ix += 1
@@ -291,7 +291,7 @@ extension ProgressViewController {
                         
                         // Show the date label
                         if ix == 1 || ix == 4 || ix == 7 {
-                            labelView.hidden = false
+                            labelView.isHidden = false
                             ix = ix + 3
                         }
                     }
@@ -305,7 +305,7 @@ extension ProgressViewController {
         // Make sure the date labels are hidden ix is the index for the x-axis labels
         for ix in 1...7 {
             if let labelView = self.progressView.viewWithTag(ix) as? UILabel {
-                labelView.hidden = true
+                labelView.isHidden = true
             }
         }
         
@@ -347,8 +347,8 @@ extension ProgressViewController {
         }
         
         // Reverse the arrays to plot the most recent entry to the right
-        datesArray = datesArray.reverse()
-        progressRankArray = progressRankArray.reverse()
+        datesArray = datesArray.reversed()
+        progressRankArray = progressRankArray.reversed()
         
         // Feed the plot data to the ProgressView class
         self.progressView.graphPoints = progressRankArray
@@ -357,10 +357,10 @@ extension ProgressViewController {
         self.progressView.setNeedsDisplay()
         
         // Max progress label
-        self.maxProgress.text = "\(self.progressView.graphPoints.maxElement()!)"
+        self.maxProgress.text = "\(self.progressView.graphPoints.max()!)"
         
         // Average progress label
-        let average = self.progressView.graphPoints.reduce(0, combine: +) / self.progressView.graphPoints.count
+        let average = self.progressView.graphPoints.reduce(0, +) / self.progressView.graphPoints.count
         self.averageProgress.text = "\(average)"
         
         // Dates to storyboard labels
@@ -370,7 +370,7 @@ extension ProgressViewController {
                 if let labelView = self.progressView.viewWithTag(ix) as? UILabel {
                     labelView.text = "\(date)"
                     if ix == 1 || ix == 4 || ix == 7 {
-                        labelView.hidden = false
+                        labelView.isHidden = false
                     }
                 }
                 ix += 1
@@ -389,7 +389,7 @@ extension ProgressViewController {
                         
                         // Show the date label
                         if ix == 1 || ix == 4 || ix == 7 {
-                            labelView.hidden = false
+                            labelView.isHidden = false
                             ix = ix + 3
                         }
                     }

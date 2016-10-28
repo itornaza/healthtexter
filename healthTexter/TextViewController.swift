@@ -82,20 +82,20 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey]
-        return keyboardSize!.CGRectValue.height
+        return (keyboardSize! as AnyObject).cgRectValue.height
     }
     
     // MARK: - Notification subscriptions
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: #selector(TextViewController.keyboardWillShow(_:)),
             name: UIKeyboardWillShowNotification,
             object: nil
         )
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: #selector(TextViewController.keyboardWillHide(_:)),
             name: UIKeyboardWillHideNotification,
@@ -104,14 +104,14 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     }
     
     func unsubscribeFromKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(
+        NotificationCenter.default.removeObserver(
             self,
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
-        NSNotificationCenter.defaultCenter().removeObserver(
+        NotificationCenter.default.removeObserver(
             self,
-            name: UIKeyboardWillHideNotification,
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
     }
@@ -153,11 +153,11 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
 
         // Progressively alert the user on the remaining characters from black to orange to red
         if (numberOfChars > Constants.redCharsLimit) && (numberOfChars <= Constants.orangeCharsLimit) {
-            self.remainingChars.textColor = UIColor.orangeColor()
+            self.remainingChars.textColor = UIColor.orange
         } else if numberOfChars <= Constants.redCharsLimit {
-            self.remainingChars.textColor = UIColor.redColor()
+            self.remainingChars.textColor = UIColor.red
         } else {
-            self.remainingChars.textColor = UIColor.blackColor()
+            self.remainingChars.textColor = UIColor.black
         }
     }
     

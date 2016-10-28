@@ -68,12 +68,12 @@ class StartViewController: UIViewController {
     
     /// Do not display the start images in devices smaller that iPhone5
     func configureImages() {
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         if screenSize.height < Constants.iPhone5ScreenHeight {
-            self.writeImage.hidden = true
-            self.monitorImage.hidden = true
-            self.historyImage.hidden = true
-            self.preferencesImage.hidden = true
+            self.writeImage.isHidden = true
+            self.monitorImage.isHidden = true
+            self.historyImage.isHidden = true
+            self.preferencesImage.isHidden = true
         }
     }
     
@@ -101,6 +101,6 @@ class StartViewController: UIViewController {
     func configureButton(button: UIButton) {
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.whiteColor().CGColor
+        button.layer.borderColor = UIColor.white.cgColor
     }
 }

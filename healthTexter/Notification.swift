@@ -30,7 +30,7 @@ final class Notification {
     
     /// Clean up previous notifications
     private class func cancelPrevious() {
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
     }
     
     /// Schedules the actual notifications
@@ -50,7 +50,7 @@ final class Notification {
         let notification_30: UILocalNotification = UILocalNotification()
         
         // Set up the time intervals
-        let tiArray: [NSTimeInterval] = Notification.configureTimeIntervals()
+        let tiArray: [TimeInterval] = Notification.configureTimeIntervals()
         
         // Configure the notifications
         self.configure(notification_1,  referenceDate: refDate, ti: tiArray[0], msg: Constants.notificationMsg_1)
@@ -65,25 +65,25 @@ final class Notification {
     }
     
     /// Sets up the atributes of a notification
-    private class func configure(notification: UILocalNotification, referenceDate: NSDate, ti: NSTimeInterval, msg: String) {
+    private class func configure(notification: UILocalNotification, referenceDate: NSDate, ti: TimeInterval, msg: String) {
         // Set up notification
         notification.alertBody = msg
         notification.alertAction = "Open"
         notification.soundName = UILocalNotificationDefaultSoundName
-        notification.fireDate = NSDate(timeInterval: ti, sinceDate: referenceDate)
+        notification.fireDate = NSDate(timeInterval: ti, sinceDate: referenceDate as Date) as Date
         
         // Schedule notification
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.shared.scheduleLocalNotification(notification)
         if self.DEBUG { print(notification.fireDate) }
     }
     
     /// Configure the time and dates that the notifications will show up
-    private class func configureTimeIntervals() -> [NSTimeInterval] {
+    private class func configureTimeIntervals() -> [TimeInterval] {
         // The list here represents the number of days after today that the notifications will fire
-        var tiArray: [NSTimeInterval] = [2, 3, 4, 5, 6, 7, 8, 15, 31]
+        var tiArray: [TimeInterval] = [2, 3, 4, 5, 6, 7, 8, 15, 31]
         
         for ix in 0..<9 { 
-            let numberOfDaysToShift: NSTimeInterval = tiArray[ix] - 1
+            let numberOfDaysToShift: TimeInterval = tiArray[ix] - 1
             
             // Check if the user has ever set the defaults
             if let preference = Date.getTimePreference() {

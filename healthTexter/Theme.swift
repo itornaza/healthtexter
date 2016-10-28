@@ -39,7 +39,7 @@ final class Theme {
     class func configureHookLabels(label: UILabel) {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.numberOfLines = 2
     }
     
@@ -48,12 +48,12 @@ final class Theme {
     /// Navigation bar look and feel
     class func navigationBar(vc: UIViewController, backgroundColor: UIColor) {
         vc.navigationController?.navigationBar.barTintColor = backgroundColor
-        vc.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        vc.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        vc.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        vc.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     /// Set the navigation title to the date provided
-    class func setDateToNavigationTitle(vc vc: UIViewController, date: NSDate) {
+    class func setDateToNavigationTitle(vc: UIViewController, date: NSDate) {
         vc.navigationItem.title = Date.getFormatted(date, formatString: Date.dateFormat4All)
     }
     
@@ -68,13 +68,13 @@ final class Theme {
     
     /// Hide Tab bar
     class func hideTabBar(vc: UIViewController) {
-        vc.tabBarController?.tabBar.hidden = true
+        vc.tabBarController?.tabBar.isHidden = true
     }
     
     /// Set the tab bar color scheme
     class func tabBarColor(vc: UIViewController, color: UIColor) {
         // Tab bar color itself
-        vc.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+        vc.tabBarController?.tabBar.barTintColor = UIColor.white
         
         // Color of the selected tab bar item
         vc.tabBarController?.tabBar.tintColor = color
@@ -86,9 +86,9 @@ final class Theme {
     class func setSliderThumbImage(sender: UISlider) {
         if Int(sender.value) >= 0 && Int(sender.value) <= 10 {
             let imageName = "emoticon_" + "\(Int(sender.value))" + ".png"
-            sender.setThumbImage(UIImage(named: imageName), forState: UIControlState.Normal)
+            sender.setThumbImage(UIImage(named: imageName), for: UIControlState.normal)
         } else {
-            sender.setThumbImage(UIImage(named: "emoticon_5.png"), forState: UIControlState.Normal)
+            sender.setThumbImage(UIImage(named: "emoticon_5.png"), for: UIControlState.normal)
         }
     }
     
@@ -96,39 +96,39 @@ final class Theme {
     class func setSliderThumbImageReversed(sender: UISlider) {
         if Int(sender.value) >= 0 && Int(sender.value) <= 10 {
             let imageName = "emoticon_" + "\(10 - Int(sender.value))" + ".png"
-            sender.setThumbImage(UIImage(named: imageName), forState: UIControlState.Normal)
+            sender.setThumbImage(UIImage(named: imageName), for: UIControlState.normal)
         } else {
-            sender.setThumbImage(UIImage(named: "emoticon_5.png"), forState: UIControlState.Normal)
+            sender.setThumbImage(UIImage(named: "emoticon_5.png"), for: UIControlState.normal)
         }
     }
     
     // MARK: - NSUserDefaults Utility Methods
     
     class func hasIntroducedMic() -> Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(Constants.hasIntroducedMic)
+        return UserDefaults.standard.bool(forKey: Constants.hasIntroducedMic)
     }
     
     class func configureMicIntro() {
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.hasIntroducedMic)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(true, forKey: Constants.hasIntroducedMic)
+        UserDefaults.standard.synchronize()
     }
     
     // MARK: - Alerts and activities
     
     /// Alert
     class func alertView(vc: UIViewController, title: String, message: String) {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            let dismiss = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        OperationQueue.main.addOperation {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let dismiss = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(dismiss)
-            vc.presentViewController(alertController, animated: true, completion: nil)
+            vc.present(alertController, animated: true, completion: nil)
             alertController.view.tintColor = Theme.htDarkGreen
         }
     }
     
     /// Activity View Controller to share entries
     class func activityView(vc: UIViewController, textToSend: String) {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             // Get the activity view controller and pass it the text to send
             let activityViewController = UIActivityViewController(
                 activityItems: [textToSend],
@@ -136,7 +136,7 @@ final class Theme {
             )
             
             // Present the ActivityViewController
-            vc.presentViewController(activityViewController, animated: true, completion: nil)
+            vc.present(activityViewController, animated: true, completion: nil)
             
             // Control flow when the activity controller exits
             activityViewController.completionWithItemsHandler = {
@@ -152,9 +152,9 @@ final class Theme {
     
     /// Segue to tab bar
     class func segueToTabBarController(vc: UIViewController, tabItemIndex: Int) {
-        let tabBarController = vc.storyboard!.instantiateViewControllerWithIdentifier(tabBarId)
+        let tabBarController = vc.storyboard!.instantiateViewController(withIdentifier: tabBarId)
             as! UITabBarController
         tabBarController.selectedIndex = tabItemIndex
-        vc.presentViewController(tabBarController, animated: false, completion: nil)
+        vc.present(tabBarController, animated: false, completion: nil)
     }
 }

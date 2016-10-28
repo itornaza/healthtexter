@@ -4,7 +4,9 @@
 //
 //  Created by Ioannis Tornazakis on 21/10/15.
 //  Copyright © 2015 polarbear.gr. All rights reserved.
-//  Swift 3.0
+//  
+//  Converted to Swift 2.4
+//
 
 import UIKit
 import CoreData

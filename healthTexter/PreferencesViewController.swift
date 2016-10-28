@@ -17,9 +17,9 @@ class PreferencesViewController: UIViewController {
     var products = [SKProduct]()
     
     /// Show proper and localized currency for the In-App Purchases
-    lazy var priceFormatter: NSNumberFormatter = {
-        let pf = NSNumberFormatter()
-        pf.formatterBehavior = .Behavior10_4
+    lazy var priceFormatter: NumberFormatter = {
+        let pf = NumberFormatter()
+        pf.formatterBehavior = .behavior10_4
         pf.numberStyle = .CurrencyStyle
         return pf
     }()
@@ -76,7 +76,7 @@ class PreferencesViewController: UIViewController {
     
     /// Subscribe to a notification that fires when a product is purchased. Removed on the deinit
     func subscribeToIAPNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: #selector(PreferencesViewController.productPurchased(_:)),
             name: IAPHelperProductPurchasedNotification,
@@ -85,7 +85,7 @@ class PreferencesViewController: UIViewController {
     }
     
     func unsubscribeFromIAPNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Configuration
@@ -109,16 +109,16 @@ class PreferencesViewController: UIViewController {
     
     func configureDatePicker() {
         if let preference = Date.getTimePreference() {
-            self.datePicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight())
+            self.datePicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight() as Date) as Date
         }
     }
     
     func configureSwitchDayPicker() {
         if let preference = Date.getDaySwitchPreference() {
-            self.switchDayPicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight())
+            self.switchDayPicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight() as Date) as Date
             self.switchDayPicker.maximumDate = NSDate(
-                timeInterval: Constants.maxSwitchDayDelay, sinceDate: Date.getTodayMidnight()
-            )
+                timeInterval: Constants.maxSwitchDayDelay, sinceDate: Date.getTodayMidnight() as Date
+            ) as Date
         }
     }
 }
@@ -131,7 +131,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Dequeue a reusable cell from the table, using the reuse identifier
-        let cell = tableView.dequeueReusableCellWithIdentifier("iapCell")! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "iapCell")! as UITableViewCell
         
         // Find the model object that corresponds to that row
         let product = products[indexPath.row]
@@ -140,7 +140,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         if IAPProducts.store.isProductPurchased(product.productIdentifier) {
             
             // Item is purchased, show a checkmark
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
             cell.accessoryView = nil
             cell.detailTextLabel?.text = ""
             
@@ -153,21 +153,21 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
             let buyButton = self.createBuyButtonForRow(indexPath.row)
             
             // Display buy button into the row for user to purchase
-            cell.detailTextLabel?.text = priceFormatter.stringFromNumber(product.price)
-            cell.accessoryType = .None
+            cell.detailTextLabel?.text = priceFormatter.string(from: product.price)
+            cell.accessoryType = .none
             cell.accessoryView = buyButton
             
         } else {
             
             // Display in the row that item is not available
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.none
             cell.accessoryView = nil
             cell.detailTextLabel?.text = "Not available"
             
         }
         
         // Set the cell custom labels
-        cell.textLabel?.textColor = UIColor.grayColor()
+        cell.textLabel?.textColor = UIColor.gray
         cell.textLabel?.text = product.localizedTitle
         
         // Set the color of the left checkboxes in editing mode
@@ -180,11 +180,11 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     /// Create a buy button for each of the iapTableViewCells given their index
     func createBuyButtonForRow(buttonTag: Int) -> UIButton {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 72, height: 37))
-        button.setTitleColor(view.tintColor, forState: .Normal)
-        button.setTitle("Buy", forState: .Normal)
+        button.setTitleColor(view.tintColor, for: .normal)
+        button.setTitle("Buy", for: .normal)
         button.tag = buttonTag
         button.addTarget(self, action: #selector(
-            PreferencesViewController.buyButtonTapped(_:)), forControlEvents: .TouchUpInside
+            PreferencesViewController.buyButtonTapped(_:)), for: .TouchUpInside
         )
         return button
     }
@@ -214,7 +214,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     /// When a product is purchased, this notification fires, redraw the correct row
     func productPurchased(notification: NSNotification) {
         let productIdentifier = notification.object as! String
-        for (index, product) in products.enumerate() {
+        for (index, product) in products.enumerated() {
             if product.productIdentifier == productIdentifier {
                 iapTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
                 break
@@ -232,7 +232,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         
         // Configure the refreshControl
         self.refreshControl?.addTarget(self, action: #selector(
-            PreferencesViewController.reloadIAP), forControlEvents: .ValueChanged
+            PreferencesViewController.reloadIAP), for: .valueChanged
         )
         self.reloadIAP()
         self.refreshControl?.beginRefreshing()  // endRefreshing in the reloadIAP method

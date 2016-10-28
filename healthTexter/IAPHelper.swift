@@ -12,7 +12,7 @@ import StoreKit
 public let IAPHelperProductPurchasedNotification = "IAPHelperProductPurchasedNotification"
 
 /// Completion handler called when products are fetched
-public typealias RequestProductsCompletionHandler = (success: Bool, products: [SKProduct]) -> ()
+public typealias RequestProductsCompletionHandler = (_ success: Bool, _ products: [SKProduct]) -> ()
 
 // MARK: - IAPHelper Class
 
@@ -54,7 +54,7 @@ final public class IAPHelper : NSObject  {
     public init(productIdentifiers: Set<String>) {
         self.productIdentifiers = productIdentifiers
         for productIdentifier in productIdentifiers {
-            if NSUserDefaults.standardUserDefaults().boolForKey(productIdentifier) {
+            if UserDefaults.standard.bool(forKey: productIdentifier) {
                 self.purchasedProductIdentifiers.insert(productIdentifier)
                 if self.DEBUG { print(self.purchased + "\(productIdentifier)") }
             }
@@ -63,13 +63,13 @@ final public class IAPHelper : NSObject  {
             }
         }
         super.init()
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.default().add(self)
     }
     
     // MARK: Methods
     
     /// Get the list of SKProducts from the Apple server
-    public func requestProductsWithCompletionHandler(handler: RequestProductsCompletionHandler) {
+    public func requestProductsWithCompletionHandler(handler: @escaping RequestProductsCompletionHandler) {
         self.completionHandler = handler
         
         // Keep a strong reference to the request
@@ -82,7 +82,7 @@ final public class IAPHelper : NSObject  {
     public func purchaseProduct(product: SKProduct) {
         if self.DEBUG { print(self.buying + "\(product.productIdentifier)...") }
         let payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addPayment(payment)
+        SKPaymentQueue.default().add(payment)
     }
     
     /// Given the product identifier, returns true if that product has been purchased
@@ -92,7 +92,7 @@ final public class IAPHelper : NSObject  {
     
     /// If the state of whether purchases have been made is lost  (e.g. the user deletes and reinstalls the app) this will recover the purchases
     public func restoreCompletedTransactions() {
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+        SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
     // MARK: Class Methods
@@ -137,18 +137,18 @@ extension IAPHelper: SKPaymentTransactionObserver {
     public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
-            case .Purchased:
+            case .purchased:
                 self.completeTransaction(transaction)
                 break
-            case .Failed:
+            case .failed:
                 self.failedTransaction(transaction)
                 break
-            case .Restored:
+            case .restored:
                 self.restoreTransaction(transaction)
                 break
-            case .Deferred:
+            case .deferred:
                 break
-            case .Purchasing:
+            case .purchasing:
                 break
             }
         }
@@ -157,23 +157,23 @@ extension IAPHelper: SKPaymentTransactionObserver {
     private func completeTransaction(transaction: SKPaymentTransaction) {
         if self.DEBUG { print(self.completeTx) }
         self.provideContentForProductIdentifier(transaction.payment.productIdentifier)
-        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     private func restoreTransaction(transaction: SKPaymentTransaction) {
-        let productIdentifier = transaction.originalTransaction!.payment.productIdentifier
+        let productIdentifier = transaction.original!.payment.productIdentifier
         if self.DEBUG { print(self.restoreTx + "\(productIdentifier)") }
         self.provideContentForProductIdentifier(productIdentifier)
-        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     // Helper: Saves the fact that the product has been purchased and posts a notification.
     private func provideContentForProductIdentifier(productIdentifier: String) {
         self.purchasedProductIdentifiers.insert(productIdentifier)
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: productIdentifier)
-        NSUserDefaults.standardUserDefaults().synchronize()
-        NSNotificationCenter.defaultCenter().postNotificationName(
-            IAPHelperProductPurchasedNotification,
+        UserDefaults.standard.set(true, forKey: productIdentifier)
+        UserDefaults.standard.synchronize()
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: IAPHelperProductPurchasedNotification),
             object: productIdentifier
         )
     }
@@ -183,7 +183,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
         if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue {
             if self.DEBUG { print( self.errorTx + "\(transaction.error!.localizedDescription)") }
         }
-        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
 }
 
@@ -194,8 +194,8 @@ extension IAPHelper {
     
     /// Alert Controller used from the IAP Guard class methods
     public class func IAPAlertController(vc: UIViewController, title: String, message: String) {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        OperationQueue.main.addOperation {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
             // When the user clicks the action button segue to the Preferences View Controller. Where the user can perform the In-App Purchase
             let okAction = UIAlertAction(title: Constants.IAPbuttonTitle , style: UIAlertActionStyle.Default) { UIAlertAction in
@@ -204,7 +204,7 @@ extension IAPHelper {
             
             alertController.addAction(okAction)
             alertController.view.tintColor = Theme.htDarkGreen
-            vc.presentViewController(alertController, animated: true, completion: nil)
+            vc.present(alertController, animated: true, completion: nil)
         }
     }
     

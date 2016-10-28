@@ -41,7 +41,7 @@ final class Entry: NSManagedObject {
     /// Default constructor if all of the properties are known beforehand
     init(dictionary: [String: AnyObject], context: NSManagedObjectContext) {
         // Get the entity from the Virtual_Tourist.xcdatamodeld
-        let entity = NSEntityDescription.entityForName("Entry", inManagedObjectContext: context)!
+        let entity = NSEntityDescription.entity(forEntityName: "Entry", in: context)!
         
         // Insert the new Entry into the Core Data Stack
         super.init(entity: entity, insertIntoManagedObjectContext: context)
@@ -49,15 +49,15 @@ final class Entry: NSManagedObject {
         // Initialize the properties from a dictionary
         self.date = Date.get()
         self.text = dictionary[Keys.text] as! String
-        self.painRank = dictionary[Keys.painRank] as! Int
-        self.sleepRank = dictionary[Keys.sleepRank] as! Int
-        self.functionalityRank = dictionary[Keys.functionalityRank] as! Int
+        self.painRank = NSNumber(dictionary[Keys.painRank] as! Int)
+        self.sleepRank = NSNumber(dictionary[Keys.sleepRank] as! Int)
+        self.functionalityRank = NSNumber(dictionary[Keys.functionalityRank] as! Int)
     }
     
     /// Default constructor with only requiring the text area
     init(text: String, context: NSManagedObjectContext) {
         // Get the entity from the Virtual_Tourist.xcdatamodeld
-        let entity = NSEntityDescription.entityForName("Entry", inManagedObjectContext: context)!
+        let entity = NSEntityDescription.entity(forEntityName: "Entry", in: context)!
         
         // Insert the new Entry into the Core Data Stack
         super.init(entity: entity, insertIntoManagedObjectContext: context)
@@ -67,15 +67,15 @@ final class Entry: NSManagedObject {
         self.text = text
         
         // Set the ranks to a sentinel to indicate that they are not yet set
-        self.painRank = Constants.defaultRank
-        self.sleepRank = Constants.defaultRank
-        self.functionalityRank = Constants.defaultRank
+        self.painRank = NSNumber(Constants.defaultRank)
+        self.sleepRank = NSNumber(Constants.defaultRank)
+        self.functionalityRank = NSNumber(Constants.defaultRank)
     }
     
     // MARK: - Class Methods
     
     /// Check if there is already an entry for today and return it
-    class func getEntryIfExists(frc frc: NSFetchedResultsController) -> Entry? {
+    class func getEntryIfExists(frc: NSFetchedResultsController<AnyObject>) -> Entry? {
         let storedEntries = frc.fetchedObjects as! [Entry]
         let date_1 = Date.getFormatted(Date.get(), formatString: Date.dateFormatISO)
         for entry in storedEntries {
@@ -88,7 +88,7 @@ final class Entry: NSManagedObject {
     }
     
     /// Get all the entries stored in Core Data. Use self for the originator view controller
-    class func getStoredEntries(vc vc: UIViewController, frc: NSFetchedResultsController) {
+    class func getStoredEntries(vc: UIViewController, frc: NSFetchedResultsController<AnyObject>) {
         // Get the entries or display error
         do {
             try frc.performFetch()
@@ -102,7 +102,7 @@ final class Entry: NSManagedObject {
     }
     
     /// Get the current number of entries
-    class func getStoredEntriesCount(frc: NSFetchedResultsController) -> Int {
+    class func getStoredEntriesCount(frc: NSFetchedResultsController<AnyObject>) -> Int {
         let sectionInfo = frc.sections![0]
         let numberOfEntries = sectionInfo.numberOfObjects
         return numberOfEntries

@@ -107,7 +107,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     func configureUI(){
         Theme.navigationBar(self, backgroundColor: Theme.historyColor)
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "Select"
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.reloadData()
@@ -116,9 +116,9 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     // MARK: - Segues
     
     func navigateToHistoryEntryViewController(indexPath: NSIndexPath) {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             Theme.configureBackButtonForNextVC(self, label: "History")
-            let progressVC = self.storyboard!.instantiateViewControllerWithIdentifier("HistoryEntryViewController")
+            let progressVC = self.storyboard!.instantiateViewController(withIdentifier: "HistoryEntryViewController")
                 as! HistoryEntryViewController
             
             // Send the entry to display
@@ -139,10 +139,10 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Dequeue a reusable cell from the table, using the reuse identifier
-        let cell = tableView.dequeueReusableCellWithIdentifier("historyCell") as! HistoryViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") as! HistoryViewCell
         
         // Show the little arrow on the right hand side of the row
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         // Find the model object that corresponds to that row
         let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
@@ -163,7 +163,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// If the table is in edit mode, do not segue. If in edit mode, get the selected entries indices
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing == false {
+        if tableView.isEditing == false {
             self.navigateToHistoryEntryViewController(indexPath)
         } else {
             self.selectedIndicesArray.append(indexPath)
@@ -175,12 +175,12 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         super.setEditing(true, animated: true)
         
         // Branch on editing state
-        if self.tableView.editing {
+        if self.tableView.isEditing {
             
             // Switch to not editing mode
             self.tableView.setEditing(false, animated: true)
-            self.tableView.editing = false
-            self.editButtonItem().title = "Select"
+            self.tableView.isEditing = false
+            self.editButtonItem.title = "Select"
             
             // Empty the selected entries
             self.selectedIndicesArray = []
@@ -189,8 +189,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Switch to editing mode
             self.tableView.setEditing(true, animated: true)
-            self.tableView.editing = true
-            self.editButtonItem().title = "Done"
+            self.tableView.isEditing = true
+            self.editButtonItem.title = "Done"
         }
     }
 }

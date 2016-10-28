@@ -32,9 +32,9 @@ class healthTexterUITests: XCTestCase {
         let app = XCUIApplication()
         app.buttons["Write"].tap()
         
-        let element = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        element.childrenMatchingType(.TextView).element.tap()
-        element.childrenMatchingType(.TextView).element
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        element.children(matching: .textView).element.tap()
+        element.children(matching: .textView).element
         
         let doneButton = app.navigationBars.element.buttons["Done"]
         doneButton.tap()

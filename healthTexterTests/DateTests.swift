@@ -23,7 +23,7 @@ class DateTests: XCTestCase {
 
     /// Dates are not equal down to small fractions but their strings should be equal
     func test_get() {
-        XCTAssertTrue("\(Date.get())" == "\(NSDate().dateByAddingTimeInterval(-14400))")
+        XCTAssertTrue("\(Date.get())" == "\(NSDate().addingTimeInterval(-14400))")
     }
     
     /// Default notifications are set at 19:00

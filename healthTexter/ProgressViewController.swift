@@ -167,7 +167,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     // MARK: - Notification subscriptions
     
     func subscribeToOrientationChangeNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: #selector(ProgressViewController.orientationDidChange(_:)),
             name: UIDeviceOrientationDidChangeNotification,
@@ -176,9 +176,9 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     }
     
     func unsubscribeToOrientationChangeNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(
+        NotificationCenter.default.removeObserver(
             self,
-            name: UIDeviceOrientationDidChangeNotification,
+            name: NSNotification.Name.UIDeviceOrientationDidChange,
             object: nil
         )
     }
@@ -204,12 +204,12 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     }
     
     /// Control transition between plots
-    func transition(fromView fromView: UIView, toView: UIView) {
-        UIView.transitionFromView(
-            fromView,
-            toView: toView,
+    func transition(fromView: UIView, toView: UIView) {
+        UIView.transition(
+            from: fromView,
+            to: toView,
             duration: 1.0,
-            options: [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.ShowHideTransitionViews],
+            options: [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews],
             completion: nil
         )
     }

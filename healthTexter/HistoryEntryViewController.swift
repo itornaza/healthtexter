@@ -54,7 +54,7 @@ class HistoryEntryViewController: UIViewController {
     // MARK: - Configuration
     
     func configure() {
-        Theme.setDateToNavigationTitle(vc: self, date: (self.entry?.date)!)
+        Theme.setDateToNavigationTitle(vc: self, date: (self.entry?.date)! as NSDate)
         self.configureActionButton()
         self.configureReadSwitch()
         self.painRank.text = "\((self.entry?.painRank)!)"

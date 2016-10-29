@@ -134,16 +134,13 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     @available(iOS 2.0, *)
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
-    private func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue a reusable cell from the table, using the reuse identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") as! HistoryViewCell
         

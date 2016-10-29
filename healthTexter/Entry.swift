@@ -24,7 +24,7 @@ final class Entry: NSManagedObject {
     
     // MARK: - Core Data Attributes
     
-    @NSManaged var date: NSDate
+    @NSManaged var date: Foundation.Date
     @NSManaged var text: String
     
     // The next 3 ranks are defined as Int64 in xcdatamodeld file. In order to run to iPhones 4, 4s, 5 and 5s, and be represented as Int32, we have to use NSNumber for their definition. From there we get their intValue when needed

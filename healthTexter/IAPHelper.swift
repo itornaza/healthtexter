@@ -41,12 +41,12 @@ final public class IAPHelper : NSObject  {
     // MARK: Private Properties
     
     // Used to keep track of the possible products and which ones have been purchased.
-    private let productIdentifiers: Set<String>
-    private var purchasedProductIdentifiers = Set<String>()
+    fileprivate let productIdentifiers: Set<String>
+    fileprivate var purchasedProductIdentifiers = Set<String>()
     
     // Used by SKProductsRequestDelegate
-    private var productsRequest: SKProductsRequest?
-    private var completionHandler: RequestProductsCompletionHandler?
+    fileprivate var productsRequest: SKProductsRequest?
+    fileprivate var completionHandler: RequestProductsCompletionHandler?
     
     // MARK: Constructor
     
@@ -110,7 +110,7 @@ extension IAPHelper: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         if self.DEBUG { print(self.loadedProducts) }
         let products = response.products
-        self.completionHandler?(success: true, products: products)
+        self.completionHandler?(true, products)
         self.clearRequest()
         
         for p in products {
@@ -124,7 +124,7 @@ extension IAPHelper: SKProductsRequestDelegate {
         self.clearRequest()
     }
     
-    private func clearRequest() {
+    fileprivate func clearRequest() {
         self.productsRequest = nil
         self.completionHandler = nil
     }
@@ -154,13 +154,13 @@ extension IAPHelper: SKPaymentTransactionObserver {
         }
     }
     
-    private func completeTransaction(transaction: SKPaymentTransaction) {
+    fileprivate func completeTransaction(transaction: SKPaymentTransaction) {
         if self.DEBUG { print(self.completeTx) }
         self.provideContentForProductIdentifier(productIdentifier: transaction.payment.productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
     
-    private func restoreTransaction(transaction: SKPaymentTransaction) {
+    fileprivate func restoreTransaction(transaction: SKPaymentTransaction) {
         let productIdentifier = transaction.original!.payment.productIdentifier
         if self.DEBUG { print(self.restoreTx + "\(productIdentifier)") }
         self.provideContentForProductIdentifier(productIdentifier: productIdentifier)
@@ -168,7 +168,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     // Helper: Saves the fact that the product has been purchased and posts a notification.
-    private func provideContentForProductIdentifier(productIdentifier: String) {
+    fileprivate func provideContentForProductIdentifier(productIdentifier: String) {
         self.purchasedProductIdentifiers.insert(productIdentifier)
         UserDefaults.standard.set(true, forKey: productIdentifier)
         UserDefaults.standard.synchronize()
@@ -178,9 +178,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
         )
     }
     
-    private func failedTransaction(transaction: SKPaymentTransaction) {
+    fileprivate func failedTransaction(transaction: SKPaymentTransaction) {
         if self.DEBUG { print(self.failedTx) }
-        if transaction.error!.code != SKErrorCode.PaymentCancelled.rawValue {
+        if transaction.error!._code != SKError.Code.paymentCancelled.rawValue {
             if self.DEBUG { print( self.errorTx + "\(transaction.error!.localizedDescription)") }
         }
         SKPaymentQueue.default().finishTransaction(transaction)

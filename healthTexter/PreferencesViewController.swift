@@ -20,7 +20,7 @@ class PreferencesViewController: UIViewController {
     lazy var priceFormatter: NumberFormatter = {
         let pf = NumberFormatter()
         pf.formatterBehavior = .behavior10_4
-        pf.numberStyle = .CurrencyStyle
+        pf.numberStyle = .currency
         return pf
     }()
     
@@ -59,12 +59,12 @@ class PreferencesViewController: UIViewController {
     
     /// Update the notification preference in user defaults
     @IBAction func datePickerChange(sender: UIDatePicker) {
-        Date.setTimePreference(ti: Date.getTimeFromPickerInSeconds(sender))
+        Date.setTimePreference(ti: Date.getTimeFromPickerInSeconds(sender: sender))
     }
     
     /// Update the day change time in user defaults
     @IBAction func switchDayPickerChange(sender: UIDatePicker) {
-        Date.setDaySwitchPreference(ti: Date.getTimeFromPickerInSeconds(sender))
+        Date.setDaySwitchPreference(ti: Date.getTimeFromPickerInSeconds(sender: sender))
     }
     
     /// Restore purchases to this device
@@ -76,10 +76,10 @@ class PreferencesViewController: UIViewController {
     
     /// Subscribe to a notification that fires when a product is purchased. Removed on the deinit
     func subscribeToIAPNotifications() {
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: #selector(PreferencesViewController.productPurchased(_:)),
-            name: IAPHelperProductPurchasedNotification,
+            selector: #selector(PreferencesViewController.productPurchased(notification:)),
+            name: NSNotification.Name(rawValue: IAPHelperProductPurchasedNotification),
             object: nil
         )
     }
@@ -126,15 +126,14 @@ class PreferencesViewController: UIViewController {
 extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource {
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        
     }
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.products.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    private func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         // Dequeue a reusable cell from the table, using the reuse identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: "iapCell")! as UITableViewCell
         
@@ -189,7 +188,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         button.setTitle("Buy", for: .normal)
         button.tag = buttonTag
         button.addTarget(self, action: #selector(
-            PreferencesViewController.buyButtonTapped(_:)), for: .TouchUpInside
+            PreferencesViewController.buyButtonTapped(button:)), for: .touchUpInside
         )
         return button
     }
@@ -221,7 +220,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         let productIdentifier = notification.object as! String
         for (index, product) in products.enumerated() {
             if product.productIdentifier == productIdentifier {
-                iapTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+                iapTableView.reloadRows(at: [NSIndexPath(row: index, section: 0) as IndexPath], with: .Fade)
                 break
             }
         }

@@ -76,7 +76,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        Theme.tabBarColor(self, color: Theme.monitorColor)
+        Theme.tabBarColor(vc: self, color: Theme.monitorColor)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,14 +89,14 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     /// Launch the activity view to share the entry
     @IBAction func action(sender: UIBarButtonItem) {
         // Check if the user have purchased the sharing option
-        if IAPHelper.sharingOptionGuard(self) == false {
+        if IAPHelper.sharingOptionGuard(vc: self) == false {
             return
         }
             
         // Send the entry if it exists, alert the user otherwise
         if let entry = Entry.getEntryIfExists(frc: self.fetchedResultsController) {
-            let dataToSend = Entry.prepareDataToShare(entry)
-            Theme.activityView(self, textToSend: dataToSend)
+            let dataToSend = Entry.prepareDataToShare(entry: entry)
+            Theme.activityView(vc: self, textToSend: dataToSend)
         } else {
             Theme.alertView(
                 vc: self,
@@ -163,16 +163,16 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     /// Controls the week or month plotting
     @IBAction func segmentedDaysToShow(sender: UISegmentedControl) {
-        self.plotForWeekOrMonth(sender.selectedSegmentIndex)
+        self.plotForWeekOrMonth(selector: sender.selectedSegmentIndex)
     }
     
     // MARK: - Notification subscriptions
     
     func subscribeToOrientationChangeNotifications() {
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ProgressViewController.orientationDidChange(_:)),
-            name: UIDeviceOrientationDidChangeNotification,
+            selector: #selector(ProgressViewController.orientationDidChange(notification:)),
+            name: NSNotification.Name.UIDeviceOrientationDidChange,
             object: nil
         )
     }
@@ -190,7 +190,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     /// Handle orientation changes to reconfigure plot appearance
     func orientationDidChange(notification: NSNotification) {
         // Redraw the plot on any orientation change to avoid compression of the plot view from landscape to portrait
-        self.plotForWeekOrMonth(self.segmentedWeekMonth.selectedSegmentIndex)
+        self.plotForWeekOrMonth(selector: self.segmentedWeekMonth.selectedSegmentIndex)
     }
     
     // MARK: - Helpers
@@ -199,9 +199,9 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     func plotForWeekOrMonth(selector: Int) {
         switch selector {
         case Constants.plotMonth:
-            self.configurePlots(Constants.daysInMonth)
+            self.configurePlots(daysToShow: Constants.daysInMonth)
         default:
-            self.configurePlots(Constants.daysInWeek)
+            self.configurePlots(daysToShow: Constants.daysInWeek)
         }
     }
     
@@ -229,17 +229,17 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     }
     
     func configureUI() {
-        Theme.navigationBar(self, backgroundColor: Theme.monitorColor)
+        Theme.navigationBar(vc: self, backgroundColor: Theme.monitorColor)
         self.segmentedWeekMonth.tintColor = Theme.monitorColor
         self.segmentedOptions.tintColor = Theme.monitorColor
         self.segmentedOptions.selectedSegmentIndex = Constants.painSelector
-        self.configurePlots(Constants.daysInWeek)
+        self.configurePlots(daysToShow: Constants.daysInWeek)
     }
     
     func configurePlots(daysToShow: Int) {
-        self.configurePainView(daysToShow)
-        self.configureSleepView(daysToShow)
-        self.configureFunctionalityView(daysToShow)
-        self.configureProgressView(daysToShow)
+        self.configurePainView(numberOfDays: daysToShow)
+        self.configureSleepView(numberOfDays: daysToShow)
+        self.configureFunctionalityView(numberOfDays: daysToShow)
+        self.configureProgressView(numberOfDays: daysToShow)
     }
 }

@@ -52,7 +52,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        Theme.tabBarColor(self, color: Theme.historyColor)
+        Theme.tabBarColor(vc: self, color: Theme.historyColor)
         
         // Reload data to avoid the last selected cell to be highlighted
         self.tableView.reloadData()
@@ -67,7 +67,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     /// Share the selected entries
     @IBAction func action(sender: UIBarButtonItem) {
         // Check if the user have purchased the sharing option
-        if IAPHelper.sharingOptionGuard(self) == false {
+        if IAPHelper.sharingOptionGuard(vc: self) == false {
             return
         }
         
@@ -77,7 +77,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
         
         // Get the data
         for index in self.selectedIndicesArray {
-            entriesToShare.append(self.fetchedResultsController.objectAtIndexPath(index) as! Entry)
+            entriesToShare.append(self.fetchedResultsController.object(at: index as IndexPath) )
         }
 
         // If no entries are selected alert the user. Otherwise send the data
@@ -89,9 +89,9 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
             )
         } else {
             for entry in entriesToShare {
-                textToSend = textToSend + (Entry.prepareDataToShare(entry))
+                textToSend = textToSend + (Entry.prepareDataToShare(entry: entry))
             }
-            Theme.activityView(self, textToSend: textToSend)
+            Theme.activityView(vc: self, textToSend: textToSend)
         }
     }
     
@@ -108,7 +108,7 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     }
     
     func configureUI(){
-        Theme.navigationBar(self, backgroundColor: Theme.historyColor)
+        Theme.navigationBar(vc: self, backgroundColor: Theme.historyColor)
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "Select"
         self.tableView.allowsMultipleSelectionDuringEditing = true
@@ -119,12 +119,12 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     func navigateToHistoryEntryViewController(indexPath: NSIndexPath) {
         OperationQueue.main.addOperation {
-            Theme.configureBackButtonForNextVC(self, label: "History")
+            Theme.configureBackButtonForNextVC(vc: self, label: "History")
             let progressVC = self.storyboard!.instantiateViewController(withIdentifier: "HistoryEntryViewController")
                 as! HistoryEntryViewController
             
             // Send the entry to display
-            progressVC.entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
+            progressVC.entry = self.fetchedResultsController.object(at: indexPath as IndexPath)
             
             // Retain the tab bar in the detail view
             self.navigationController?.pushViewController(progressVC, animated: false)
@@ -133,13 +133,17 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+    }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    private func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         // Dequeue a reusable cell from the table, using the reuse identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") as! HistoryViewCell
         
@@ -147,11 +151,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         // Find the model object that corresponds to that row
-        let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
+        let entry = self.fetchedResultsController.object(at: indexPath as IndexPath) 
         
         // Set the cell custom labels
-        cell.date.text = Date.getFormatted(entry.date, formatString: Date.dateFormat4AllShort)
-        cell.weekDay.text = Date.getFormatted(entry.date, formatString: Date.dateFormatDay)
+        cell.date.text = Date.getFormatted(date: entry.date, formatString: Date.dateFormat4AllShort)
+        cell.weekDay.text = Date.getFormatted(date: entry.date, formatString: Date.dateFormatDay)
         cell.painRank.text = "\(entry.painRank)"
         cell.functionalityRank.text = "\(entry.functionalityRank)"
         cell.sleepRank.text = "\(entry.sleepRank)"
@@ -164,16 +168,16 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     /// If the table is in edit mode, do not segue. If in edit mode, get the selected entries indices
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing == false {
-            self.navigateToHistoryEntryViewController(indexPath)
+            self.navigateToHistoryEntryViewController(indexPath: indexPath as NSIndexPath)
         } else {
-            self.selectedIndicesArray.append(indexPath)
+            self.selectedIndicesArray.append(indexPath as NSIndexPath)
         }
     }
     
     /// Enables the checkboxes on the left of the table cells
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(true, animated: true)
         
         // Branch on editing state

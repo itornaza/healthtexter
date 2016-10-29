@@ -56,9 +56,9 @@ extension ProgressViewController {
         var painRankArray: [Int] = Array()
         
         // Initialize the arrays from Core Data
-        for entry in (self.fetchedResultsController.fetchedObjects! as! [Entry]) {
-            datesArray.append(Date.getFormatted(entry.date, formatString: Date.dateFormatPlot))
-            painRankArray.append(entry.painRank.integerValue)
+        for entry in (self.fetchedResultsController.fetchedObjects! ) {
+            datesArray.append(Date.getFormatted(date: entry.date, formatString: Date.dateFormatPlot))
+            painRankArray.append(entry.painRank.intValue)
         }
         
         // If the arrays are empty, fill them with zeros
@@ -72,7 +72,7 @@ extension ProgressViewController {
         // Keep only the last week or month dates for plotting
         if datesArray.count > numberOfDays {
             (datesArray, painRankArray) = self.getLastEntries(
-                datesArray, storedRanksArray: painRankArray, numberOfDays: numberOfDays
+                storedDatesArray: datesArray, storedRanksArray: painRankArray, numberOfDays: numberOfDays
             )
         }
         

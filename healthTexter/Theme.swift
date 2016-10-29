@@ -54,7 +54,7 @@ final class Theme {
     
     /// Set the navigation title to the date provided
     class func setDateToNavigationTitle(vc: UIViewController, date: NSDate) {
-        vc.navigationItem.title = Date.getFormatted(date, formatString: Date.dateFormat4All)
+        vc.navigationItem.title = Date.getFormatted(date: date, formatString: Date.dateFormat4All)
     }
     
     /// Back button

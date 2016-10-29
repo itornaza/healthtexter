@@ -74,12 +74,12 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
         self.subscribeToOrientationChangeNotifications()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         Theme.tabBarColor(self, color: Theme.monitorColor)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.fetchedResultsController.delegate = nil
         self.unsubscribeToOrientationChangeNotifications()
     }

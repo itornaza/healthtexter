@@ -123,7 +123,7 @@ extension IAPHelper: SKProductsRequestDelegate {
         if self.DEBUG { print(self.errorReport + "\(error)") }
         self.clearRequest()
     }
-    xx
+    
     private func clearRequest() {
         self.productsRequest = nil
         self.completionHandler = nil

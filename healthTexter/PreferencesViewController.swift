@@ -45,9 +45,9 @@ class PreferencesViewController: UIViewController {
         self.subscribeToIAPNotifications()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        Theme.tabBarColor(self, color: Theme.preferencesColor)
+        Theme.tabBarColor(vc: self, color: Theme.preferencesColor)
     }
     
     /// Destructor
@@ -59,12 +59,12 @@ class PreferencesViewController: UIViewController {
     
     /// Update the notification preference in user defaults
     @IBAction func datePickerChange(sender: UIDatePicker) {
-        Date.setTimePreference(Date.getTimeFromPickerInSeconds(sender))
+        Date.setTimePreference(ti: Date.getTimeFromPickerInSeconds(sender))
     }
     
     /// Update the day change time in user defaults
     @IBAction func switchDayPickerChange(sender: UIDatePicker) {
-        Date.setDaySwitchPreference(Date.getTimeFromPickerInSeconds(sender))
+        Date.setDaySwitchPreference(ti: Date.getTimeFromPickerInSeconds(sender))
     }
     
     /// Restore purchases to this device
@@ -97,9 +97,9 @@ class PreferencesViewController: UIViewController {
     
     /// Configure Navigation and DatePickers
     func configureUI() {
-        Theme.navigationBar(self, backgroundColor: Theme.preferencesColor)
-        Theme.configureHookLabels(self.datePickerLabel)
-        Theme.configureHookLabels(self.switchDayPickerLabel)
+        Theme.navigationBar(vc: self, backgroundColor: Theme.preferencesColor)
+        Theme.configureHookLabels(label: self.datePickerLabel)
+        Theme.configureHookLabels(label: self.switchDayPickerLabel)
         self.timePreferencesTitleLabel.textColor = Theme.preferencesColor
         self.inAppPurchasesTitleLabel.textColor = Theme.preferencesColor
         self.restoreLabel.tintColor = Theme.preferencesColor
@@ -124,8 +124,13 @@ class PreferencesViewController: UIViewController {
 }
 
 extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource {
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.products.count
     }
     
@@ -137,7 +142,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         let product = products[indexPath.row]
         
         // Branch on the purchase status of the product
-        if IAPProducts.store.isProductPurchased(product.productIdentifier) {
+        if IAPProducts.store.isProductPurchased(productIdentifier: product.productIdentifier) {
             
             // Item is purchased, show a checkmark
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
@@ -150,7 +155,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
             self.priceFormatter.locale = product.priceLocale
             
             // Set up buy button for the row
-            let buyButton = self.createBuyButtonForRow(indexPath.row)
+            let buyButton = self.createBuyButtonForRow(buttonTag: indexPath.row)
             
             // Display buy button into the row for user to purchase
             cell.detailTextLabel?.text = priceFormatter.string(from: product.price)
@@ -208,7 +213,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     /// Purchase the product
     func buyButtonTapped(button: UIButton) {
         let product = products[button.tag]
-        IAPProducts.store.purchaseProduct(product)
+        IAPProducts.store.purchaseProduct(product: product)
     }
     
     /// When a product is purchased, this notification fires, redraw the correct row

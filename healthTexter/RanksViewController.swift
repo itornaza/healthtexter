@@ -48,7 +48,7 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
         self.configure()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.fetchedResultsController.delegate = nil
     }
     
@@ -56,17 +56,17 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     
     @IBAction func painSlider(sender: UISlider) {
         self.painLevelValue.text = "\(Int(sender.value))"
-        Theme.setSliderThumbImageReversed(sender)
+        Theme.setSliderThumbImageReversed(sender: sender)
     }
     
     @IBAction func sleepQualitySlider(sender: UISlider) {
         self.sleepQualityValue.text = "\(Int(sender.value))"
-        Theme.setSliderThumbImage(sender)
+        Theme.setSliderThumbImage(sender: sender)
     }
     
     @IBAction func functionalitySlider(sender: UISlider) {
         self.functionalityValue.text = "\(Int(sender.value))"
-        Theme.setSliderThumbImage(sender)
+        Theme.setSliderThumbImage(sender: sender)
     }
     
     // MARK: - Helpers
@@ -85,9 +85,9 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
             if entry != nil {
                 
                 // If entry exists update with the rank values
-                entry?.painRank = painRank
-                entry?.sleepRank = sleepRank
-                entry?.functionalityRank = functionalityRank
+                entry?.painRank = NSNumber(painRank)
+                entry?.sleepRank = NSNumber(sleepRank)
+                entry?.functionalityRank = NSNumber(functionalityRank)
                 
             } else {
                 
@@ -97,8 +97,8 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
                     Entry.Keys.painRank : painRank as AnyObject,
                     Entry.Keys.sleepRank : sleepRank as AnyObject,
                     Entry.Keys.functionalityRank : functionalityRank as AnyObject
-                ]
-                _ = Entry(dictionary: dictionary, context: self.sharedContext)
+                ] as [String : Any]
+                _ = Entry(dictionary: dictionary as [String : AnyObject], context: self.sharedContext)
             }
             
             // Save the context
@@ -128,9 +128,9 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     func configureNavigation() {
         let rightButton = UIBarButtonItem(
             title: "Done",
-            style: UIBarButtonItemStyle.Done,
+            style: UIBarButtonItemStyle.done,
             target: self,
-            action: #selector(RanksViewController.segueToNextVC(_:))
+            action: #selector(RanksViewController.segueToNextVC(rightButton:))
         )
         self.navigationItem.rightBarButtonItem = rightButton
     }
@@ -154,9 +154,9 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     
     /// Display the appropriate emoticon on the slider thumb
     func configureSliderImages() {
-        Theme.setSliderThumbImageReversed(self.painSlider)
-        Theme.setSliderThumbImage(self.functionalitySlider)
-        Theme.setSliderThumbImage(self.sleepSlider)
+        Theme.setSliderThumbImageReversed(sender: self.painSlider)
+        Theme.setSliderThumbImage(sender: self.functionalitySlider)
+        Theme.setSliderThumbImage(sender: self.sleepSlider)
     }
     
     // MARK: - Segues
@@ -169,7 +169,7 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
         Entry.getStoredEntries(vc: self, frc: fetchedResultsController)
         
         // Go to the monitor tab
-        Theme.segueToTabBarController(self, tabItemIndex: Constants.monitorTab)
+        Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.monitorTab)
     }
     
 }

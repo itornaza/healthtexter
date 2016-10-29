@@ -220,7 +220,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         let productIdentifier = notification.object as! String
         for (index, product) in products.enumerated() {
             if product.productIdentifier == productIdentifier {
-                iapTableView.reloadRows(at: [NSIndexPath(row: index, section: 0) as IndexPath], with: .Fade)
+                iapTableView.reloadRows(at: [NSIndexPath(row: index, section: 0) as IndexPath], with: .fade)
                 break
             }
         }

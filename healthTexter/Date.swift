@@ -36,54 +36,54 @@ final class Date {
         dateFormatter.dateFormat = formatString
         
         // Return today in the desired format
-        let today: NSDate = self.get()
-        return dateFormatter.stringFromDate(today as Date)
+        let today: Foundation.Date = self.get()
+        return dateFormatter.string(from: today)
     }
     
     // Get a given date formated
-    class func getFormatted(date: NSDate, formatString: String) -> String {
+    class func getFormatted(date: Foundation.Date, formatString: String) -> String {
         // Set up the dateformatter
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = formatString
         
         // Return the date in the desired format
-        return dateFormatter.stringFromDate(date as Date)
+        return dateFormatter.string(from: date)
     }
     
-    /// Get the current NSDate shifted on user preference
-    class func get() -> NSDate {
+    /// Get the current Date shifted on user preference
+    class func get() -> Foundation.Date {
         // Get the preference of the user as a delay (negative shift)
         let shiftInSeconds: TimeInterval = (self.shiftDirection * self.getDaySwitchPreference()!)
 
         // Add it to current date
-        let today = NSDate().addingTimeInterval(shiftInSeconds)
+        let today = Foundation.Date().addingTimeInterval(shiftInSeconds)
         
         // Return the shifted version of today
         return today
     }
     
     /// Returns tomorrow 00:00:00 or 12:00AM (ie start of day). This date is not shifted as it does not refer to a diary entry but is used for a reference date to set up notifications
-    class func getTomorrowMidnigh() -> NSDate {
-        let now = NSDate()
+    class func getTomorrowMidnigh() -> Foundation.Date {
+        let now = Foundation.Date()
         let tomorrowSameTime = now.addingTimeInterval(self.secondsInHour * 24)
         let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        let tomorrowMidnight = cal.startOfDayForDate(tomorrowSameTime as Date)
+        let tomorrowMidnight = cal.startOfDay(for: tomorrowSameTime)
         return tomorrowMidnight
     }
     
-    class func getTodayMidnight() -> NSDate {
-        let now = NSDate()
+    class func getTodayMidnight() -> Foundation.Date {
+        let now = Foundation.Date()
         let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        let todayMidnight = cal.startOfDayForDate(now as Date)
+        let todayMidnight = cal.startOfDay(for: now)
         return todayMidnight
     }
     
     /// Get the hour and minute from a date
-    class func getTimeComponents(date: NSDate) -> (TimeInterval, TimeInterval) {
+    class func getTimeComponents(date: Foundation.Date) -> (TimeInterval, TimeInterval) {
         let calendar = NSCalendar.current
-        let comp = calendar.components([.Hour, .Minute], fromDate: date)
-        let hour = TimeInterval(comp.hour)
-        let minute = TimeInterval(comp.minute)
+        let comp = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from: date)
+        let hour = TimeInterval(comp.hour!)
+        let minute = TimeInterval(comp.minute!)
         return (hour, minute)
     }
     
@@ -92,7 +92,7 @@ final class Date {
         // Get the time components
         var hour: TimeInterval = 0.0
         var min: TimeInterval = 0.0
-        (hour, min) = self.getTimeComponents(date: sender.date as NSDate)
+        (hour, min) = self.getTimeComponents(date: sender.date)
         
         // Generate the prefered notification time in seconds
         let timeInSeconds: TimeInterval = (hour * 60 + min) * 60

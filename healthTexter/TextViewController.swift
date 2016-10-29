@@ -177,7 +177,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     
     func configureUI() {
         Theme.navigationBar(vc: self, backgroundColor: Theme.writeColor)
-        Theme.setDateToNavigationTitle(vc: self, date: Date.get())
+        Theme.setDateToNavigationTitle(vc: self, date: Date.get() as NSDate)
         Theme.hideTabBar(vc: self)
         self.configureTextArea()
     }

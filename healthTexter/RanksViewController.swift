@@ -119,7 +119,7 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     }
     
     func configureUI() {
-        Theme.setDateToNavigationTitle(vc: self, date: Date.get())
+        Theme.setDateToNavigationTitle(vc: self, date: Date.get() as NSDate)
         self.configureNavigation()
         self.configureSliderValues()
         self.configureSliderImages()

@@ -92,7 +92,7 @@ final class Date {
         // Get the time components
         var hour: TimeInterval = 0.0
         var min: TimeInterval = 0.0
-        (hour, min) = self.getTimeComponents(sender.date)
+        (hour, min) = self.getTimeComponents(date: sender.date as NSDate)
         
         // Generate the prefered notification time in seconds
         let timeInSeconds: TimeInterval = (hour * 60 + min) * 60
@@ -135,8 +135,8 @@ final class Date {
         if self.appHasLaunchedOnce() == false {
             UserDefaults.standard.set(true, forKey: Constants.hasLaunchedOnce)
             UserDefaults.standard.synchronize()
-            self.setTimePreference(Constants.ninteenHudredHours * self.secondsInHour)
-            self.setDaySwitchPreference(Constants.fourHudredHours * self.secondsInHour)
+            self.setTimePreference(ti: Constants.ninteenHudredHours * self.secondsInHour)
+            self.setDaySwitchPreference(ti: Constants.fourHudredHours * self.secondsInHour)
         }
     }
 }

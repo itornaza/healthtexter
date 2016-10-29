@@ -85,9 +85,9 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
             if entry != nil {
                 
                 // If entry exists update with the rank values
-                entry?.painRank = NSNumber(painRank)
-                entry?.sleepRank = NSNumber(sleepRank)
-                entry?.functionalityRank = NSNumber(functionalityRank)
+                entry?.painRank = NSNumber(value: painRank)
+                entry?.sleepRank = NSNumber(value: sleepRank)
+                entry?.functionalityRank = NSNumber(value: functionalityRank)
                 
             } else {
                 

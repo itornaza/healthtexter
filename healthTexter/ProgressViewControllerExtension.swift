@@ -142,9 +142,9 @@ extension ProgressViewController {
         var sleepRankArray: [Int] = Array()
         
         // Initialize the arrays from Core Data
-        for entry in (self.fetchedResultsController.fetchedObjects! as! [Entry]) {
-            datesArray.append(Date.getFormatted(entry.date, formatString: Date.dateFormatPlot))
-            sleepRankArray.append(entry.sleepRank.integerValue)
+        for entry in (self.fetchedResultsController.fetchedObjects! ) {
+            datesArray.append(Date.getFormatted(date: entry.date, formatString: Date.dateFormatPlot))
+            sleepRankArray.append(entry.sleepRank.intValue)
         }
         
         // If the arrays are empty, fill them with zeros
@@ -158,7 +158,7 @@ extension ProgressViewController {
         // Keep only the last week or month dates for plotting
         if datesArray.count > numberOfDays {
             (datesArray, sleepRankArray) = self.getLastEntries(
-                datesArray, storedRanksArray: sleepRankArray, numberOfDays: numberOfDays
+                storedDatesArray: datesArray, storedRanksArray: sleepRankArray, numberOfDays: numberOfDays
             )
         }
         
@@ -228,9 +228,9 @@ extension ProgressViewController {
         var functionalityRankArray: [Int] = Array()
         
         // Initialize the arrays from Core Data
-        for entry in (self.fetchedResultsController.fetchedObjects! as! [Entry]) {
-            datesArray.append(Date.getFormatted(entry.date, formatString: Date.dateFormatPlot))
-            functionalityRankArray.append(entry.functionalityRank.integerValue)
+        for entry in (self.fetchedResultsController.fetchedObjects! ) {
+            datesArray.append(Date.getFormatted(date: entry.date, formatString: Date.dateFormatPlot))
+            functionalityRankArray.append(entry.functionalityRank.intValue)
         }
         
         // If the arrays are empty, fill them with zeros
@@ -244,7 +244,7 @@ extension ProgressViewController {
         // Keep only the last week or month dates for plotting
         if datesArray.count > numberOfDays {
             (datesArray, functionalityRankArray) = self.getLastEntries(
-                datesArray, storedRanksArray: functionalityRankArray, numberOfDays: numberOfDays
+                storedDatesArray: datesArray, storedRanksArray: functionalityRankArray, numberOfDays: numberOfDays
             )
         }
         
@@ -314,17 +314,17 @@ extension ProgressViewController {
         var progressRankArray: [Int] = Array()
         
         // Initialize the arrays from Core Data
-        for entry in (self.fetchedResultsController.fetchedObjects! as! [Entry]) {
-            datesArray.append(Date.getFormatted(entry.date, formatString: Date.dateFormatPlot))
+        for entry in (self.fetchedResultsController.fetchedObjects! ) {
+            datesArray.append(Date.getFormatted(date: entry.date, formatString: Date.dateFormatPlot))
             
             // Progress is inversly proportional to pain
-            let reversePain: Int = (10 - entry.painRank.integerValue)
+            let reversePain: Int = (10 - entry.painRank.intValue)
             
             // Progress is the average of all other categories with equal importance
             // and the reverse value of pain
             
             let ranksTotal: Double = Double(
-                reversePain + entry.sleepRank.integerValue + entry.functionalityRank.integerValue
+                reversePain + entry.sleepRank.intValue + entry.functionalityRank.intValue
             )
             let allCategoriesAverage: Double =  ranksTotal / 3.0
             let progressPoint: Int = Int(round(allCategoriesAverage))
@@ -342,7 +342,7 @@ extension ProgressViewController {
         // Keep only the last week or month dates for plotting
         if datesArray.count > numberOfDays {
             (datesArray, progressRankArray) = self.getLastEntries(
-                datesArray, storedRanksArray: progressRankArray, numberOfDays: numberOfDays
+                storedDatesArray: datesArray, storedRanksArray: progressRankArray, numberOfDays: numberOfDays
             )
         }
         

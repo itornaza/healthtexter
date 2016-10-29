@@ -36,6 +36,7 @@ final class Notification {
     /// Schedules the actual notifications
     private class func scheduleNew() {
         // Set up the new notifications
+        
         let refDate: NSDate = Date.getTomorrowMidnigh()
         
         // Declare the notifications
@@ -70,6 +71,7 @@ final class Notification {
         notification.alertBody = msg
         notification.alertAction = "Open"
         notification.soundName = UILocalNotificationDefaultSoundName
+        
         notification.fireDate = NSDate(timeInterval: ti, sinceDate: referenceDate as Date) as Date
         
         // Schedule notification

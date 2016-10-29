@@ -47,7 +47,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         
         // Get the current number of entries and check against the unlimited entries In-App Purchase rules
         let numberOfEntries = Entry.getStoredEntriesCount(frc: self.fetchedResultsController)
-        if IAPHelper.unlimitedEntriesGuard(self, entries: numberOfEntries) == false {
+        if IAPHelper.unlimitedEntriesGuard(vc: self, entries: numberOfEntries) == false {
             return
         }
         
@@ -90,17 +90,17 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     // MARK: - Notification subscriptions
     
     func subscribeToKeyboardNotifications() {
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TextViewController.keyboardWillShow(_:)),
-            name: UIKeyboardWillShowNotification,
+            selector: #selector(TextViewController.keyboardWillShow(notification:)),
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
         
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TextViewController.keyboardWillHide(_:)),
-            name: UIKeyboardWillHideNotification,
+            selector: #selector(TextViewController.keyboardWillHide(notification:)),
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
     }

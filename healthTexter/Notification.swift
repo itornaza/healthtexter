@@ -75,7 +75,7 @@ final class Notification {
         
         // Schedule notification
         UIApplication.shared.scheduleLocalNotification(notification)
-        if self.DEBUG { print(notification.fireDate) }
+        if self.DEBUG { print(notification.fireDate!) }
     }
     
     /// Configure the time and dates that the notifications will show up

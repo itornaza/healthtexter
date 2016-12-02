@@ -109,16 +109,16 @@ class PreferencesViewController: UIViewController {
     
     func configureDatePicker() {
         if let preference = Date.getTimePreference() {
-            self.datePicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight() as Date) as Date
+        self.datePicker.date = Foundation.Date(timeInterval: preference, since: Date.getTodayMidnight())
         }
     }
     
     func configureSwitchDayPicker() {
         if let preference = Date.getDaySwitchPreference() {
-            self.switchDayPicker.date = NSDate(timeInterval: preference, sinceDate: Date.getTodayMidnight() as Date) as Date
-            self.switchDayPicker.maximumDate = NSDate(
-                timeInterval: Constants.maxSwitchDayDelay, sinceDate: Date.getTodayMidnight() as Date
-            ) as Date
+            self.switchDayPicker.date = Foundation.Date(timeInterval: preference, since: Date.getTodayMidnight())
+            self.switchDayPicker.maximumDate = Foundation.Date(
+                timeInterval: Constants.maxSwitchDayDelay, since: Date.getTodayMidnight()
+            )
         }
     }
 }

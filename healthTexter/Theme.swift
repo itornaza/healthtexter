@@ -54,7 +54,7 @@ final class Theme {
     
     /// Set the navigation title to the date provided
     class func setDateToNavigationTitle(vc: UIViewController, date: NSDate) {
-        vc.navigationItem.title = Date.getFormatted(date: date as Date, formatString: Date.dateFormat4All)
+        vc.navigationItem.title = Date.getFormatted(date: date as Foundation.Date, formatString: Date.dateFormat4All)
     }
     
     /// Back button
@@ -140,9 +140,9 @@ final class Theme {
             
             // Control flow when the activity controller exits
             activityViewController.completionWithItemsHandler = {
-                (s: String?, ok: Bool, items: [AnyObject]?, err:NSError?) -> Void in
+                (s: UIActivityType?, ok: Bool, items: [Any]?, err:Error?) -> Void in
                 if ok {
-                    vc.dismissViewControllerAnimated(true, completion: nil)
+                    vc.dismiss(animated: true, completion: nil)
                 }
             }
         }

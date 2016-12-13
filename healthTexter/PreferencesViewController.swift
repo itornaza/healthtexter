@@ -58,17 +58,17 @@ class PreferencesViewController: UIViewController {
     // MARK: - Actions
     
     /// Update the notification preference in user defaults
-    @IBAction func datePickerChange(sender: UIDatePicker) {
+    @IBAction func datePickerChange(_ sender: UIDatePicker) {
         Date.setTimePreference(ti: Date.getTimeFromPickerInSeconds(sender: sender))
     }
     
     /// Update the day change time in user defaults
-    @IBAction func switchDayPickerChange(sender: UIDatePicker) {
+    @IBAction func switchDayPickerChange(_ sender: UIDatePicker) {
         Date.setDaySwitchPreference(ti: Date.getTimeFromPickerInSeconds(sender: sender))
     }
     
     /// Restore purchases to this device
-    @IBAction func restoreTouchUp(sender: UIButton) {
+    @IBAction func restoreTouchUp(_ sender: UIButton) {
         IAPProducts.store.restoreCompletedTransactions()
     }
     

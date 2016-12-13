@@ -36,7 +36,7 @@ class HistoryEntryViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func readItToMe(sender: UISwitch) {
+    @IBAction func readItToMe(_ sender: UISwitch) {
         if (sender.isOn) {
             
             // Start narrating the text
@@ -50,6 +50,7 @@ class HistoryEntryViewController: UIViewController {
             synth.stopSpeaking(at: .word)
         }
     }
+    
     
     // MARK: - Configuration
     

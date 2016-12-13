@@ -495,13 +495,13 @@
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="i7h-hY-BTm">
                                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
-                                                    <action selector="painSlider:" destination="27K-zY-aOp" eventType="valueChanged" id="3mz-MJ-tie"/>
+                                                    <action selector="painSliderWithSender:" destination="27K-zY-aOp" eventType="valueChanged" id="REG-6f-eo4"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="RU9-rX-kTB">
                                                 <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
-                                                    <action selector="functionalitySlider:" destination="27K-zY-aOp" eventType="valueChanged" id="Sc6-oj-TBV"/>
+                                                    <action selector="functionalitySliderWithSender:" destination="27K-zY-aOp" eventType="valueChanged" id="h2X-lb-e30"/>
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecj-Qg-zTd">
@@ -546,7 +546,7 @@
                                                     <constraint firstAttribute="height" constant="30" identifier="sleepSliderHeight" id="VZO-X4-7rR"/>
                                                 </constraints>
                                                 <connections>
-                                                    <action selector="sleepQualitySlider:" destination="27K-zY-aOp" eventType="valueChanged" id="1aC-8V-AGg"/>
+                                                    <action selector="sleepQualitySliderWithSender:" destination="27K-zY-aOp" eventType="valueChanged" id="HU2-vN-70S"/>
                                                 </connections>
                                             </slider>
                                         </subviews>
@@ -1022,7 +1022,7 @@
                                 </segments>
                                 <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="segmentedDaysToShow:" destination="Ujw-vj-rQD" eventType="valueChanged" id="d6e-Re-WId"/>
+                                    <action selector="segmentedDaysToShowWithSender:" destination="Ujw-vj-rQD" eventType="valueChanged" id="Oux-af-UW1"/>
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LHK-dd-oeC">
@@ -1037,7 +1037,7 @@
                                 </segments>
                                 <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="segmentedControl:" destination="Ujw-vj-rQD" eventType="valueChanged" id="deu-mk-TfQ"/>
+                                    <action selector="segmentedControlWithSender:" destination="Ujw-vj-rQD" eventType="valueChanged" id="eXH-Vh-3bq"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
@@ -1060,11 +1060,7 @@
                                 <segue destination="Q7n-CA-tEc" kind="presentation" modalTransitionStyle="crossDissolve" id="hhi-zn-Qfu"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="5ZQ-kZ-hvB">
-                            <connections>
-                                <action selector="action:" destination="Ujw-vj-rQD" id="QCg-z5-OMU"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="5ZQ-kZ-hvB"/>
                     </navigationItem>
                     <connections>
                         <outlet property="averageFunctionality" destination="J1Y-LX-swU" id="dnD-g1-jYY"/>
@@ -1089,11 +1085,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8af-s9-eEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="yha-Of-QQh">
-                    <connections>
-                        <action selector="tapTransition:" destination="Ujw-vj-rQD" id="HB6-hQ-yez"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yha-Of-QQh"/>
             </objects>
             <point key="canvasLocation" x="2204" y="-438"/>
         </scene>
@@ -1235,7 +1227,7 @@
                                                     <!--2016-01-22 02:00:00 +0000-->
                                                 </date>
                                                 <connections>
-                                                    <action selector="switchDayPickerChange:" destination="bTQ-kv-3ek" eventType="valueChanged" id="tAY-zt-S0E"/>
+                                                    <action selector="switchDayPickerChange:" destination="bTQ-kv-3ek" eventType="valueChanged" id="hlU-B0-LRW"/>
                                                 </connections>
                                             </datePicker>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KU2-N3-l28">
@@ -1280,7 +1272,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Restore"/>
                                                 <connections>
-                                                    <action selector="restoreTouchUp:" destination="bTQ-kv-3ek" eventType="touchUpInside" id="54D-Xi-YXC"/>
+                                                    <action selector="restoreTouchUp:" destination="bTQ-kv-3ek" eventType="touchUpInside" id="laQ-wi-w71"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVF-Vn-SGr">
@@ -1297,7 +1289,7 @@
                                                     <!--2016-01-22 17:00:00 +0000-->
                                                 </date>
                                                 <connections>
-                                                    <action selector="datePickerChange:" destination="bTQ-kv-3ek" eventType="valueChanged" id="hqg-My-FuI"/>
+                                                    <action selector="datePickerChange:" destination="bTQ-kv-3ek" eventType="valueChanged" id="RQl-dB-gAN"/>
                                                 </connections>
                                             </datePicker>
                                         </subviews>
@@ -1464,7 +1456,7 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNI-cx-Y67">
                                 <connections>
-                                    <action selector="readItToMe:" destination="ggv-Fo-yPk" eventType="valueChanged" id="XWs-cD-SV0"/>
+                                    <action selector="readItToMe:" destination="ggv-Fo-yPk" eventType="valueChanged" id="yAF-bd-seT"/>
                                     <action selector="talkerSwitchValueChanged:" destination="abs-B7-9s6" eventType="valueChanged" id="IWk-3p-ofS"/>
                                 </connections>
                             </switch>

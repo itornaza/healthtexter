@@ -41,19 +41,19 @@ class StartViewController: UIViewController {
 
     // MARK: - Actions
     
-    @IBAction func write(sender: UIButton) {
+    @IBAction func write(_ sender: UIButton) {
         Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.textTab)
     }
     
-    @IBAction func monitor(sender: UIButton) {
+    @IBAction func monitor(_ sender: UIButton) {
         Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.monitorTab)
     }
     
-    @IBAction func history(sender: UIButton) {
+    @IBAction func history(_ sender: UIButton) {
         Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.historyTab)
     }
     
-    @IBAction func preferences(sender: UIButton) {
+    @IBAction func preferences(_ sender: UIButton) {
         Theme.segueToTabBarController(vc: self, tabItemIndex: Constants.preferencesTab)
     }
     

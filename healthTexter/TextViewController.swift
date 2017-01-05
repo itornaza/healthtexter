@@ -45,10 +45,12 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         super.viewDidLoad()
         self.configure()
         
-        // Get the current number of entries and check against the unlimited entries In-App Purchase rules
-        let numberOfEntries = Entry.getStoredEntriesCount(frc: self.fetchedResultsController)
-        if IAPHelper.unlimitedEntriesGuard(vc: self, entries: numberOfEntries) == false {
-            return
+        if Constants.IAPIsEnabled == true {
+            // Get the current number of entries and check against the unlimited entries In-App Purchase rules
+            let numberOfEntries = Entry.getStoredEntriesCount(frc: self.fetchedResultsController)
+            if IAPHelper.unlimitedEntriesGuard(vc: self, entries: numberOfEntries) == false {
+                return
+            }
         }
         
         self.subscribeToKeyboardNotifications()

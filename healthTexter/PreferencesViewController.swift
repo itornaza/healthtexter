@@ -36,13 +36,16 @@ class PreferencesViewController: UIViewController {
     @IBOutlet weak var switchDayPicker: UIDatePicker!
     @IBOutlet weak var iapTableView: UITableView!
     @IBOutlet weak var restoreLabel: UIButton!
+    @IBOutlet weak var iapPurchaseLabel: UILabel!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configure()
-        self.subscribeToIAPNotifications()
+        if Constants.IAPIsEnabled == true {
+            self.subscribeToIAPNotifications()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +55,9 @@ class PreferencesViewController: UIViewController {
     
     /// Destructor
     deinit {
-        self.unsubscribeFromIAPNotifications()
+        if Constants.IAPIsEnabled == true {
+            self.unsubscribeFromIAPNotifications()
+        }
     }
 
     // MARK: - Actions
@@ -69,29 +74,37 @@ class PreferencesViewController: UIViewController {
     
     /// Restore purchases to this device
     @IBAction func restoreTouchUp(_ sender: UIButton) {
-        IAPProducts.store.restoreCompletedTransactions()
+        if Constants.IAPIsEnabled == true {
+            IAPProducts.store.restoreCompletedTransactions()
+        }
     }
     
     // MARK: - In-App Purchases Notifications
     
     /// Subscribe to a notification that fires when a product is purchased. Removed on the deinit
     func subscribeToIAPNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(PreferencesViewController.productPurchased(notification:)),
-            name: NSNotification.Name(rawValue: IAPHelperProductPurchasedNotification),
-            object: nil
-        )
+        if Constants.IAPIsEnabled == true {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(PreferencesViewController.productPurchased(notification:)),
+                name: NSNotification.Name(rawValue: IAPHelperProductPurchasedNotification),
+                object: nil
+            )
+        }
     }
     
     func unsubscribeFromIAPNotifications() {
-        NotificationCenter.default.removeObserver(self)
+        if Constants.IAPIsEnabled == true {
+            NotificationCenter.default.removeObserver(self)
+        }
     }
     
     // MARK: - Configuration
     
     func configure() {
-        self.configureRefreshControl()
+        if Constants.IAPIsEnabled == true {
+            self.configureRefreshControl()
+        }
         self.configureUI()
     }
     
@@ -105,6 +118,11 @@ class PreferencesViewController: UIViewController {
         self.restoreLabel.tintColor = Theme.preferencesColor
         self.configureDatePicker()
         self.configureSwitchDayPicker()
+        if Constants.IAPIsEnabled == false {
+            self.iapPurchaseLabel.isHidden = true
+            self.restoreLabel.isHidden = true
+            self.iapTableView.isHidden = true
+        }
     }
     
     func configureDatePicker() {

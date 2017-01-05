@@ -66,9 +66,11 @@ class HistoryViewController: UIViewController, NSFetchedResultsControllerDelegat
     
     /// Share the selected entries
     @IBAction func action(sender: UIBarButtonItem) {
-        // Check if the user have purchased the sharing option
-        if IAPHelper.sharingOptionGuard(vc: self) == false {
-            return
+        if Constants.IAPIsEnabled == true {
+            // Check if the user have purchased the sharing option
+            if IAPHelper.sharingOptionGuard(vc: self) == false {
+                return
+            }
         }
         
         // Local variables

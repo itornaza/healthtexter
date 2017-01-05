@@ -88,9 +88,11 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     
     /// Launch the activity view to share the entry
     @IBAction func action(sender: UIBarButtonItem) {
-        // Check if the user have purchased the sharing option
-        if IAPHelper.sharingOptionGuard(vc: self) == false {
-            return
+        if Constants.IAPIsEnabled == true {
+            // Check if the user have purchased the sharing option
+            if IAPHelper.sharingOptionGuard(vc: self) == false {
+                return
+            }
         }
             
         // Send the entry if it exists, alert the user otherwise

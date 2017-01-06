@@ -19,7 +19,7 @@ class healthTexterTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        self.textVC = storyboard.instantiateViewControllerWithIdentifier("TextViewController")
+        self.textVC = storyboard.instantiateViewController(withIdentifier: "TextViewController")
             as! healthTexter.TextViewController
     }
     

@@ -37,19 +37,19 @@ class DateTests: XCTestCase {
     }
     
     func test_setTimePreference() {
-        Date.setTimePreference(3600)
+        Date.setTimePreference(ti: 3600)
         XCTAssertTrue(Date.getTimePreference() == 3600)
         
         // Set it back to 19:00 for next tests
-        Date.setTimePreference(68400)
+        Date.setTimePreference(ti: 68400)
     }
     
     func test_setDaySwitchPreference() {
-        Date.setDaySwitchPreference(3600)
+        Date.setDaySwitchPreference(ti: 3600)
         XCTAssertTrue(Date.getDaySwitchPreference() == 3600)
         
         // Set it back to 04:00 for nex tests
-         Date.setDaySwitchPreference(14400)
+         Date.setDaySwitchPreference(ti: 14400)
     }
     
     /// The appDelegate has already marked that the app has launched once

@@ -7,6 +7,8 @@
 //  
 //  Converted to swift 3.0
 //
+//  Free version with roll back capabilities 
+//
 
 import UIKit
 import CoreData

@@ -72,7 +72,9 @@ final class Constants {
     
     // MARK: - In-App Purchases
     
-    static let IAPIsEnabled: Bool = false   // Determines if the app is for free or under in-app purchases
+    /// Determines if the app is for free or under in-app purchases, check with itunesconnect app features in-app 
+    /// purchases status
+    static let IAPIsEnabled: Bool = false
     static let maxFreeEntries: Int = 6
     static let IAPtitle: String =           "In-app purchases"
     static let IAPbuttonTitle: String =     "Go to preferences"

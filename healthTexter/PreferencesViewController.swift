@@ -159,7 +159,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         if IAPProducts.store.isProductPurchased(productIdentifier: product.productIdentifier) {
             
             // Item is purchased, show a checkmark
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
             cell.accessoryView = nil
             cell.detailTextLabel?.text = ""
             
@@ -179,7 +179,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             
             // Display in the row that item is not available
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
             cell.accessoryView = nil
             cell.detailTextLabel?.text = "Not available"
             
@@ -209,7 +209,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     /// Reload the Inn-App Purchase table with the available app products
-    func reloadIAP() {
+    @objc func reloadIAP() {
         // Flush any current products from the iapTableView
         self.products = []
         self.iapTableView.reloadData()
@@ -225,13 +225,13 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     /// Purchase the product
-    func buyButtonTapped(button: UIButton) {
+    @objc func buyButtonTapped(button: UIButton) {
         let product = products[button.tag]
         IAPProducts.store.purchaseProduct(product: product)
     }
     
     /// When a product is purchased, this notification fires, redraw the correct row
-    func productPurchased(notification: NSNotification) {
+    @objc func productPurchased(notification: NSNotification) {
         let productIdentifier = notification.object as! String
         for (index, product) in products.enumerated() {
             if product.productIdentifier == productIdentifier {

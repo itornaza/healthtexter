@@ -198,7 +198,7 @@ extension IAPHelper {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
             // When the user clicks the action button segue to the Preferences View Controller. Where the user can perform the In-App Purchase
-            let okAction = UIAlertAction(title: Constants.IAPbuttonTitle , style: UIAlertActionStyle.default) { UIAlertAction in
+            let okAction = UIAlertAction(title: Constants.IAPbuttonTitle , style: UIAlertAction.Style.default) { UIAlertAction in
                 Theme.segueToTabBarController(vc: vc, tabItemIndex: Constants.preferencesTab)
             }
             

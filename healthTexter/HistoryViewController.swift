@@ -147,7 +147,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") as! HistoryViewCell
         
         // Show the little arrow on the right hand side of the row
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         // Find the model object that corresponds to that row
         let entry = self.fetchedResultsController.object(at: indexPath as IndexPath) 

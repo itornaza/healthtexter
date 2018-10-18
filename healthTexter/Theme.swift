@@ -86,9 +86,9 @@ final class Theme {
     class func setSliderThumbImage(sender: UISlider) {
         if Int(sender.value) >= 0 && Int(sender.value) <= 10 {
             let imageName = "emoticon_" + "\(Int(sender.value))" + ".png"
-            sender.setThumbImage(UIImage(named: imageName), for: UIControlState.normal)
+            sender.setThumbImage(UIImage(named: imageName), for: UIControl.State.normal)
         } else {
-            sender.setThumbImage(UIImage(named: "emoticon_5.png"), for: UIControlState.normal)
+            sender.setThumbImage(UIImage(named: "emoticon_5.png"), for: UIControl.State.normal)
         }
     }
     
@@ -96,9 +96,9 @@ final class Theme {
     class func setSliderThumbImageReversed(sender: UISlider) {
         if Int(sender.value) >= 0 && Int(sender.value) <= 10 {
             let imageName = "emoticon_" + "\(10 - Int(sender.value))" + ".png"
-            sender.setThumbImage(UIImage(named: imageName), for: UIControlState.normal)
+            sender.setThumbImage(UIImage(named: imageName), for: UIControl.State.normal)
         } else {
-            sender.setThumbImage(UIImage(named: "emoticon_5.png"), for: UIControlState.normal)
+            sender.setThumbImage(UIImage(named: "emoticon_5.png"), for: UIControl.State.normal)
         }
     }
     
@@ -140,7 +140,7 @@ final class Theme {
             
             // Control flow when the activity controller exits
             activityViewController.completionWithItemsHandler = {
-                (s: UIActivityType?, ok: Bool, items: [Any]?, err:Error?) -> Void in
+                (s: UIActivity.ActivityType?, ok: Bool, items: [Any]?, err:Error?) -> Void in
                 if ok {
                     vc.dismiss(animated: true, completion: nil)
                 }

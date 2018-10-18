@@ -83,7 +83,7 @@ class HistoryEntryViewController: UIViewController {
     // MARK: - Segues
     
     /// If an entry exists get entry to send, prepare data and launch the activity view otherwise report the error
-    func shareHistoryEntry() {
+    @objc func shareHistoryEntry() {
         if Constants.IAPIsEnabled == true {
             // Check if the user have purchased the sharing option
             if IAPHelper.sharingOptionGuard(vc: self) == false {

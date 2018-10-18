@@ -128,7 +128,7 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     func configureNavigation() {
         let rightButton = UIBarButtonItem(
             title: "Done",
-            style: UIBarButtonItemStyle.done,
+            style: UIBarButtonItem.Style.done,
             target: self,
             action: #selector(RanksViewController.segueToNextVC(rightButton:))
         )
@@ -139,16 +139,16 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     func configureSliderValues() {
         if let entry = Entry.getEntryIfExists(frc: fetchedResultsController) {
             // Pain
-            self.painSlider.value = Float((entry.painRank))
-            self.painLevelValue.text = "\(Int(entry.painRank))"
+            self.painSlider.value = Float(exactly: entry.painRank)!
+            self.painLevelValue.text = String(entry.painRank.intValue)
             
             // Sleep quality
-            self.sleepSlider.value = Float(entry.sleepRank)
-            self.sleepQualityValue.text = "\(Int(entry.sleepRank))"
+            self.sleepSlider.value = Float(exactly: entry.sleepRank)!
+            self.sleepQualityValue.text = String(entry.sleepRank.intValue)
             
             // Functionality
-            self.functionalitySlider.value = Float(entry.functionalityRank)
-            self.functionalityValue.text = "\(Int(entry.functionalityRank))"
+            self.functionalitySlider.value = Float(exactly: entry.functionalityRank)!
+            self.functionalityValue.text = String(entry.functionalityRank.intValue)
         }
     }
     
@@ -161,7 +161,7 @@ class RanksViewController:  UIViewController, NSFetchedResultsControllerDelegate
     
     // MARK: - Segues
     
-    func segueToNextVC(rightButton : UIBarButtonItem) {
+    @objc func segueToNextVC(rightButton : UIBarButtonItem) {
         // Update the ranks to Core Data
         self.saveRanks()
         

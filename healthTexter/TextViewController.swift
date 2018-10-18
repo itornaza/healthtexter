@@ -73,19 +73,19 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     
     // MARK: - Keyboard functions
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         self.textArea.contentInset.bottom = getKeyboardHeight(notification: notification)
     }
     
     /// Reset the text area to it's original state
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         self.textArea.contentInset.bottom = 0.0
     }
     
     /// Get keyboard height from the notification service
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey]
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey]
         return (keyboardSize! as AnyObject).cgRectValue.height
     }
     
@@ -95,14 +95,14 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TextViewController.keyboardWillShow(notification:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TextViewController.keyboardWillHide(notification:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -110,12 +110,12 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -150,7 +150,7 @@ class TextViewController:   UIViewController, NSFetchedResultsControllerDelegate
     /// Update the remaining characters
     func setRemainingCharacters() {
         // Get the number of characters that remain until text area is full
-        let numberOfChars: Int = Constants.maxChars - self.textArea.text.characters.count
+        let numberOfChars: Int = Constants.maxChars - self.textArea.text.count
         
         // Update the number of characters as the user types
         self.remainingChars.text = "\(numberOfChars)"
@@ -240,11 +240,11 @@ extension TextViewController: UITextViewDelegate {
     
     /// Limit to a maximum number of characters
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentCharacterCount = textView.text?.characters.count ?? 0
+        let currentCharacterCount = textView.text?.count ?? 0
         if (range.length + range.location > currentCharacterCount){
             return false
         }
-        let newLength = currentCharacterCount + text.characters.count - range.length
+        let newLength = currentCharacterCount + text.count - range.length
         return newLength <= Constants.maxChars
     }
     

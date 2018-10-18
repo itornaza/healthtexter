@@ -28,6 +28,7 @@ class DateTests: XCTestCase {
     
     /// Default notifications are set at 19:00
     func test_getTimePreference() {
+        // Note: You should have opted to allow notifications on the simulator in the first place
         XCTAssertTrue(Date.getTimePreference() == 68400)
     }
     

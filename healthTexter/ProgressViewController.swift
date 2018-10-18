@@ -174,7 +174,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(ProgressViewController.orientationDidChange(notification:)),
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil
         )
     }
@@ -182,7 +182,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     func unsubscribeToOrientationChangeNotifications() {
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil
         )
     }
@@ -190,7 +190,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
     // MARK: - Orientation Change Handling
     
     /// Handle orientation changes to reconfigure plot appearance
-    func orientationDidChange(notification: NSNotification) {
+    @objc func orientationDidChange(notification: NSNotification) {
         // Redraw the plot on any orientation change to avoid compression of the plot view from landscape to portrait
         self.plotForWeekOrMonth(selector: self.segmentedWeekMonth.selectedSegmentIndex)
     }
@@ -213,7 +213,7 @@ class ProgressViewController:   UIViewController, NSFetchedResultsControllerDele
             from: fromView,
             to: toView,
             duration: 1.0,
-            options: [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews],
+            options: [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews],
             completion: nil
         )
     }

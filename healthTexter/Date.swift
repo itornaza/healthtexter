@@ -62,7 +62,10 @@ final class Date {
         return today
     }
     
-    /// Returns tomorrow 00:00:00 or 12:00AM (ie start of day). This date is not shifted as it does not refer to a diary entry but is used for a reference date to set up notifications
+    /**
+     * Returns tomorrow 00:00:00 or 12:00AM (ie start of day). This date is not shifted as it does not refer to a diary
+     * entrybut is used for a reference date to set up notifications
+     */
     class func getTomorrowMidnigh() -> Foundation.Date {
         let now = Foundation.Date()
         let tomorrowSameTime = now.addingTimeInterval(self.secondsInHour * 24)

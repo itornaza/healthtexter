@@ -16,7 +16,10 @@ public typealias RequestProductsCompletionHandler = (_ success: Bool, _ products
 
 // MARK: - IAPHelper Class
 
-/// A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased, purchase products, and restore purchases. Uses NSUserDefaults to cache if a product has been purchased.
+/**
+ * A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased, purchase
+ * products, and restore purchases. Uses NSUserDefaults to cache if a product has been purchased.
+ */
 final public class IAPHelper : NSObject  {
     
     // MARK: - Debug Properties
@@ -90,7 +93,10 @@ final public class IAPHelper : NSObject  {
         return self.purchasedProductIdentifiers.contains(productIdentifier)
     }
     
-    /// If the state of whether purchases have been made is lost  (e.g. the user deletes and reinstalls the app) this will recover the purchases
+    /**
+     * If the state of whether purchases have been made is lost  (e.g. the user deletes and reinstalls the app) this
+     * will recover the purchases
+     */
     public func restoreCompletedTransactions() {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
@@ -133,7 +139,10 @@ extension IAPHelper: SKProductsRequestDelegate {
 // MARK: - SKPaymentTransactionObserver Extension
 
 extension IAPHelper: SKPaymentTransactionObserver {
-    /// This is a function called by the payment queue, not to be called directly. For each transaction act accordingly, save in the purchased cache, issue notifications, mark the transaction as complete
+    /**
+     * This is a function called by the payment queue, not to be called directly. For each transaction act accordingly,
+     * save in the purchased cache, issue notifications, mark the transaction as complete
+     */
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
@@ -199,7 +208,8 @@ extension IAPHelper {
         OperationQueue.main.addOperation {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
-            // When the user clicks the action button segue to the Preferences View Controller. Where the user can perform the In-App Purchase
+            /* When the user clicks the action button segue to the Preferences View Controller. Where the user can
+            perform the In-App Purchase */
             let okAction = UIAlertAction(title: Constants.IAPbuttonTitle , style: UIAlertAction.Style.default) { UIAlertAction in
                 Theme.segueToTabBarController(vc: vc, tabItemIndex: Constants.preferencesTab)
             }
@@ -210,8 +220,11 @@ extension IAPHelper {
         }
     }
     
-    /// If the user reaches the maximum entries and have not purchased the Unlimited entries take her to the Preferences View Controller
-    /// Returns true if granted access, false otherwise
+    /**
+     * If the user reaches the maximum entries and have not purchased the Unlimited entries take her to the Preferences
+     * View Controller
+     * Returns true if granted access, false otherwise
+     */
     public class func unlimitedEntriesGuard(vc: UIViewController, entries: Int) -> Bool {
         let grantAccess: Bool = IAPProducts.store.isProductPurchased(productIdentifier: IAPProducts.UnlimitedEnties)
         let reachedEntriesLimit: Bool = entries >= Constants.maxFreeEntries ? true : false
@@ -224,8 +237,10 @@ extension IAPHelper {
         return true
     }
     
-    /// If the sharing option is not yet purchased segue to the Preferences View Controller
-    /// Returns true if granted access, false otherwise
+    /**
+     * If the sharing option is not yet purchased segue to the Preferences View Controller
+     * Returns true if granted access, false otherwise
+     */
     public class func sharingOptionGuard(vc: UIViewController) -> Bool {
         let grantAccess = IAPProducts.store.isProductPurchased(productIdentifier: IAPProducts.SharingOption)
         if self.DEBUG_STATIC { print(IAPProducts.SharingOption) }

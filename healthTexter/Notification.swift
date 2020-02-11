@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
-/// The notification scheduler shall calculate notifications when the app resigns active state. The scheduler sets up notifications to fire the second day after the app has resigned the active state. In this way if a user uses the app every day will never get a notification and will not be annoyed. Daily notifications follow for every day for a week one at the 2 week mark and a last one at the month mark
+/**
+ * The notification scheduler shall calculate notifications when the app resigns active state. The scheduler sets up
+ * notifications to fire the second day after the app has resigned the active state. In this way if a user uses the app
+ * every day will never get a notification and will not be annoyed. Daily notifications follow for every day for a week
+ * one at the 2 week mark and a last one at the month mark
+ */
 final class Notification {
     
     private static let DEBUG: Bool = false

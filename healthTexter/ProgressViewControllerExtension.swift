@@ -12,14 +12,18 @@ import UIKit
 /// Holds the configuration methods for the UIViews
 extension ProgressViewController {
     
-    /// Returns the last number of entries from the arrays indicated by the numberOfDays desired. The resulting arrays are a subset of their parents
+    /**
+     * Returns the last number of entries from the arrays indicated by the numberOfDays desired. The resulting arrays
+     * are a subset of their parents
+     */
     func getLastEntries(storedDatesArray: [String], storedRanksArray: [Int], numberOfDays: Int) -> ([String], [Int]) {
         var lastDatesArray = [String]()
         var lastRanksArray = [Int]()
         
         var ix: Int = 0
         
-        // The most recent date lies at index 0 since the array is not yet reversed. Just push the 7 first dates to the weekArray
+        /* The most recent date lies at index 0 since the array is not yet reversed. Just push the 7 first dates to
+        the weekArray */
         for date in storedDatesArray {
             if ix < numberOfDays {
                 lastDatesArray.append(date)

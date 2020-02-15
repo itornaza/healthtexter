@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Using enum as a simple namespace. (It has no cases so you can't instantiate it.)
+/// Using enum as a simple namespace. (It has no cases so you can't instantiate it.)
 public enum IAPProducts {
     
     // Prefix with the App Bundle ID

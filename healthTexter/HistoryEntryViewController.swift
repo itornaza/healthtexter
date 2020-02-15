@@ -38,14 +38,12 @@ class HistoryEntryViewController: UIViewController {
     
     @IBAction func readItToMe(_ sender: UISwitch) {
         if (sender.isOn) {
-            
             // Start narrating the text
             myUtterance = AVSpeechUtterance(string: textArea.text)
             myUtterance.rate = 0.3
             synth.speak(myUtterance)
             
         } else {
-            
             // Stop after saying the next word
             synth.stopSpeaking(at: .word)
         }

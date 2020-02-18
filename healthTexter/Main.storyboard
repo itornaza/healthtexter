@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mnh-CX-CYA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IRP-7D-qjr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="healthTexter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjB-4h-Eb2">
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFK-Ul-4Oo" userLabel="Write View">
-                                <rect key="frame" x="-4" y="59" width="188.5" height="289.5"/>
+                                <rect key="frame" x="-4" y="59" width="188.5" height="299.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write in your health diary everyday!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drM-qM-nTo">
                                         <rect key="frame" x="15" y="8" width="157.5" height="20"/>
@@ -49,7 +49,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8N-LO-5L9">
-                                        <rect key="frame" x="20" y="211.5" width="147.5" height="56"/>
+                                        <rect key="frame" x="20" y="221.5" width="147.5" height="56"/>
                                         <color key="backgroundColor" red="0.34509803919999998" green="0.73333333329999995" blue="0.72156862749999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="189" identifier="writeButtonWidth" id="EcN-O0-41o"/>
@@ -71,7 +71,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartWrite" translatesAutoresizingMaskIntoConstraints="NO" id="Dnt-cv-Tza">
-                                        <rect key="frame" x="52" y="102.5" width="85" height="85"/>
+                                        <rect key="frame" x="52" y="107.5" width="85" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" identifier="writeImageHeight" id="B4b-DW-QP0"/>
                                             <constraint firstAttribute="width" constant="128" identifier="writeImageWidth" id="Fja-5S-39Z"/>
@@ -133,7 +133,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="763-k2-Dgi" userLabel="Monitor View">
-                                <rect key="frame" x="183.5" y="59" width="195.5" height="289.5"/>
+                                <rect key="frame" x="183.5" y="59" width="195.5" height="299.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your daily progress!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnm-ha-ICN">
                                         <rect key="frame" x="19" y="8" width="157.5" height="20"/>
@@ -142,7 +142,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEa-Io-mv8">
-                                        <rect key="frame" x="24" y="211.5" width="147.5" height="56"/>
+                                        <rect key="frame" x="24" y="221.5" width="147.5" height="56"/>
                                         <color key="backgroundColor" red="0.81176470590000005" green="0.31764705879999999" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" identifier="monitorButtonHeight" id="VgB-kn-4C6"/>
@@ -156,7 +156,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartMonitor" translatesAutoresizingMaskIntoConstraints="NO" id="bcn-OV-YhA">
-                                        <rect key="frame" x="55.5" y="102.5" width="85" height="85"/>
+                                        <rect key="frame" x="55.5" y="107.5" width="85" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" identifier="monitorImageWidth" id="Csy-0r-XCP"/>
                                             <constraint firstAttribute="height" constant="128" identifier="monitorImageHeight" id="znv-G4-FM7"/>
@@ -206,7 +206,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oeH-To-YUs" userLabel="History View">
-                                <rect key="frame" x="-4" y="348.5" width="188.5" height="298.5"/>
+                                <rect key="frame" x="-4" y="358.5" width="188.5" height="308.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View your diary history!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMU-XD-kwd">
                                         <rect key="frame" x="15" y="8" width="157.5" height="20"/>
@@ -215,7 +215,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8M-1b-xgK">
-                                        <rect key="frame" x="20" y="221.5" width="147.5" height="55"/>
+                                        <rect key="frame" x="20" y="231.5" width="147.5" height="55"/>
                                         <color key="backgroundColor" red="0.92941176469999998" green="0.57254901960000004" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" identifier="historyButtonHeight" id="Q8t-yg-uLW"/>
@@ -229,7 +229,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartHistory" translatesAutoresizingMaskIntoConstraints="NO" id="md2-fA-kgx">
-                                        <rect key="frame" x="52" y="107" width="85" height="85"/>
+                                        <rect key="frame" x="52" y="112" width="85" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" identifier="historyImageWidth" id="Q61-mQ-2Hs"/>
                                             <constraint firstAttribute="height" constant="128" identifier="historyImageHeight" id="ZUb-gL-PKn"/>
@@ -279,7 +279,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Tg-4t-Nzb" userLabel="Preferences View">
-                                <rect key="frame" x="183.5" y="348.5" width="195.5" height="298.5"/>
+                                <rect key="frame" x="183.5" y="358.5" width="195.5" height="308.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get notifications when it matters!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHk-oh-f1R">
                                         <rect key="frame" x="19" y="8" width="157.5" height="20"/>
@@ -288,7 +288,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C58-Ee-GTa">
-                                        <rect key="frame" x="24" y="220.5" width="147.5" height="56"/>
+                                        <rect key="frame" x="24" y="230.5" width="147.5" height="56"/>
                                         <color key="backgroundColor" red="0.4823529412" green="0.40000000000000002" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" identifier="preferencesButtonHeight" id="Xlc-R4-xWj"/>
@@ -302,7 +302,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartPreferences" translatesAutoresizingMaskIntoConstraints="NO" id="UMa-Hf-xuz">
-                                        <rect key="frame" x="55.5" y="107" width="85" height="85"/>
+                                        <rect key="frame" x="55.5" y="112" width="85" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" identifier="preferencesImageWidth" id="Tyb-HF-aa8"/>
                                             <constraint firstAttribute="height" constant="128" identifier="preferencesImageHeight" id="hNI-Ch-OoN"/>
@@ -469,7 +469,7 @@
                     <navigationItem key="navigationItem" title="Date" id="sJ5-Cm-C39">
                         <barButtonItem key="leftBarButtonItem" title="Home" id="u1F-kN-OBU">
                             <connections>
-                                <segue destination="Q7n-CA-tEc" kind="presentation" modalTransitionStyle="crossDissolve" id="f3n-Im-IX9"/>
+                                <segue destination="Q7n-CA-tEc" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="f3n-Im-IX9"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="1" style="done" systemItem="done" id="Tnd-8X-gP7">
@@ -1129,7 +1129,7 @@
                     <navigationItem key="navigationItem" title="Share today's entry" id="wLx-F4-UXG">
                         <barButtonItem key="leftBarButtonItem" title="Home" id="raA-ge-gUb">
                             <connections>
-                                <segue destination="Q7n-CA-tEc" kind="presentation" modalTransitionStyle="crossDissolve" id="hhi-zn-Qfu"/>
+                                <segue destination="Q7n-CA-tEc" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="hhi-zn-Qfu"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="5ZQ-kZ-hvB">
@@ -1443,7 +1443,7 @@
                     <navigationItem key="navigationItem" title="Preferences" id="Tbt-K6-To5">
                         <barButtonItem key="leftBarButtonItem" title="Home" id="6BR-uk-VBz">
                             <connections>
-                                <segue destination="Q7n-CA-tEc" kind="presentation" modalTransitionStyle="crossDissolve" id="DdG-Oh-hUb"/>
+                                <segue destination="Q7n-CA-tEc" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="DdG-Oh-hUb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1807,6 +1807,6 @@
         <image name="Write" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f3n-Im-IX9"/>
+        <segue reference="DdG-Oh-hUb"/>
     </inferredMetricsTieBreakers>
 </document>

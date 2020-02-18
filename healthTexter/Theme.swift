@@ -155,6 +155,10 @@ final class Theme {
         let tabBarController = vc.storyboard!.instantiateViewController(withIdentifier: tabBarId)
             as! UITabBarController
         tabBarController.selectedIndex = tabItemIndex
+      
+        /* Override iOS 13 default card presentation
+        https://stackoverflow.com/questions/56435510/presenting-modal-in-ios-13-fullscreen */
+        tabBarController.modalPresentationStyle = .fullScreen
         vc.present(tabBarController, animated: false, completion: nil)
     }
 }

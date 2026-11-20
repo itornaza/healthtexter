@@ -2,7 +2,7 @@
 //  IAPHelper.swift
 //  healthTexter
 //
-//  Created by Ioannis Tornazakis on 4/3/16.
+//  Created by ion- on 4/3/16.
 //  Copyright © 2016 polarbear.gr. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  StartViewController.swift
 //  healthTexter
 //
-//  Created by Ioannis Tornazakis on 7/11/15.
+//  Created by ion- on 7/11/15.
 //  Copyright © 2015 polarbear.gr. All rights reserved.
 //
 
